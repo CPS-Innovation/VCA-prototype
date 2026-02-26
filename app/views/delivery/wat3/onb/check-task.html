@@ -65,9 +65,9 @@
                         <dt class="govuk-summary-list__key">
                             Due date
                         </dt>
-                        {% if data['nextTaskDueDate'] %}
+                        {% if data['taskDueDate'] %}
                             <dd class="govuk-summary-list__value">
-                                {{ data['nextTaskDueDate'] | formatDate }}
+                                {{ data['taskDueDate'] | formatDate }}
                             </dd>
                             <dd class="govuk-summary-list__actions">
                                 <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat3/onb/manual-task">
@@ -104,9 +104,9 @@
                         <dt class="govuk-summary-list__key">
                             Due date
                         </dt>
-                        {% if data['nextTaskDueDate'] %}
+                        {% if data['taskDueDate'] %}
                             <dd class="govuk-summary-list__value">
-                                {{ data['nextTaskDueDate'] | formatDate }}
+                                {{ data['taskDueDate'] | formatDate }}
                             </dd>
                             <dd class="govuk-summary-list__actions">
                                 <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat3/onb/next-task-due-date">

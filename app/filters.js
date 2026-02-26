@@ -38,12 +38,14 @@ addFilter('formatDate', dateString => {
     return dateString
   }
   
-  // Format as 'D MMMM YYYY' (e.g., '6 February 2026')
-  const day = date.getDate()
+  // Format as 'Day, D MMMM YYYY' (e.g., 'Thursday, 26 February 2026')
+  const dayOfMonth = date.getDate()
+  const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const dayOfWeek = dayNames[date.getDay()]
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December']
   const month = monthNames[date.getMonth()]
   const year = date.getFullYear()
   
-  return `${day} ${month} ${year}`
+  return `${dayOfWeek}, ${dayOfMonth} ${month} ${year}`
 })

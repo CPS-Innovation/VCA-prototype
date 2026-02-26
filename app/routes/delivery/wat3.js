@@ -4,7 +4,7 @@ module.exports = router => {
 
     router.post('/delivery/wat3/sign-in-answer', function(request, response) {
 
-        response.redirect("/delivery/wat3/overview")
+        response.redirect("/delivery/wat3/tasks")
     })
 
     router.post('/delivery/wat3/onb/service-lead-answer', function(request, response) {
@@ -105,7 +105,15 @@ module.exports = router => {
 
         var nextTask = request.session.data['nextTask']
 
-        if (nextTask == "Other") {
+        if (nextTask == "Inform of a decision to charge") {
+            response.redirect("/delivery/wat3/victim/new-task/task-due-date?pcdType=dtc")
+        } else if (nextTask == "Inform of a no further action decision") {
+            response.redirect("/delivery/wat3/victim/new-task/task-due-date?pcdType=nfa")
+        } else if (nextTask == "Inform of a stopped charge") {
+            response.redirect("/delivery/wat3/victim/new-task/task-due-date?vclType=stopped-charge")
+        } else if (nextTask == "Inform of a substantially altered charge") {
+            response.redirect("/delivery/wat3/victim/new-task/task-due-date?vclType=altered-charge")
+        } else if (nextTask == "Other") {
             response.redirect("/delivery/wat3/victim/new-task/manual-task")
         } else if (nextTask == "No task at this time") {
             response.redirect("/delivery/wat3/victim/new-task/check-task")

@@ -3,8 +3,8 @@ module.exports = {
   'caseUrn': '42MZ1139323/1',
   'pmoc': 'mobile',
   'onboardedStatus': 'No',
-  'vclStatus': 'check-details',
-  'pcdStatus': 'check-details',
+  'vclStatus': 'log-not-started',
+  'pcdStatus': 'log-not-started',
   'recipient': 'victim',
   'area': 'London',
 

@@ -25,7 +25,7 @@
     </div>
 
     <p class="govuk-body">
-      You also confirmed known details for {{ data['victimForename'] }} {{ data['victimSurname'] }}{% if data['nextTask'] == "No task at this time" %} but no task was created{% else %} and created a task {% if data['manualTask'] == "yes" %}of '{{ data['manualTaskName'] }}'{% else %}to {{ data['nextTask'] | lower }}{% endif %} due {{ data['nextTaskDueDate'] | formatDate }}{% endif %}.
+      You also confirmed known details for {{ data['victimForename'] }} {{ data['victimSurname'] }}{% if data['nextTask'] == "No task at this time" %} but no task was created{% else %} and created a task {% if data['manualTask'] == "yes" %}of '{{ data['manualTaskName'] }}'{% else %}to {{ data['nextTask'] | lower }}{% endif %} due {{ data['taskDueDate'] | formatDate }}{% endif %}.
     </p>
 
     <h2 class="govuk-heading-m">What happens next</h2>

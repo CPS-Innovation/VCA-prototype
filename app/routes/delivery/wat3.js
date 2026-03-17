@@ -1,3 +1,11 @@
+// Convert DD/MM/YYYY to YYYY-MM-DD for sorting
+function toSortDate(dateString) {
+    if (!dateString || !dateString.includes('/')) return ''
+    var parts = dateString.split('/')
+    if (parts.length === 3) return parts[2] + '-' + parts[1] + '-' + parts[0]
+    return ''
+}
+
 module.exports = router => {
 
     //onb
@@ -155,6 +163,14 @@ module.exports = router => {
         response.redirect("/delivery/wat3/tasks?success=yes&successReason=due-date-updated")
     })
 
+    router.post('/delivery/wat3/update-manual-task-answer', function(request, response) {
+
+        // Store task action in session
+        request.session.data['taskAction'] = request.body['taskAction'] || ''
+
+        response.redirect("/delivery/wat3/task-updated")
+    })
+
     //pcd
 
     router.post('/delivery/wat3/pcd/sign-in-answer', function(request, response) {
@@ -257,29 +273,29 @@ module.exports = router => {
 
         if (pcdFumoc == "Email"){
             if (pcdCallAttempt == "1") {
-                response.redirect("/delivery/wat3/pcd/send/email-details?pcdStatus=informed-after-call-1&pcdFumoc=email&secondaryNav=pcd")
+                response.redirect("/delivery/wat3/pcd/send/email-details?pcdStatus=informed-after-call-1&pcdFumoc=Email&secondaryNav=pcd")
             } else if (pcdCallAttempt == "2") {
-                response.redirect("/delivery/wat3/pcd/send/email-details?pcdStatus=informed-after-call-2&pcdFumoc=email&secondaryNav=pcd")
+                response.redirect("/delivery/wat3/pcd/send/email-details?pcdStatus=informed-after-call-2&pcdFumoc=Email&secondaryNav=pcd")
             } else {
-                response.redirect("/delivery/wat3/pcd/send/email-details?pcdStatus=informed-after-call-3&pcdFumoc=email&secondaryNav=pcd")
+                response.redirect("/delivery/wat3/pcd/send/email-details?pcdStatus=informed-after-call-3&pcdFumoc=Email&secondaryNav=pcd")
             }
 
         } else if (pcdFumoc == "Post") {
             if (pcdCallAttempt == "1") {
-                response.redirect("/delivery/wat3/pcd/send/letter-details?pcdStatus=informed-after-call-1&pcdFumoc=post&secondaryNav=pcd")
+                response.redirect("/delivery/wat3/pcd/send/letter-details?pcdStatus=informed-after-call-1&pcdFumoc=Post&secondaryNav=pcd")
             } else if (pcdCallAttempt == "2") {
-                response.redirect("/delivery/wat3/pcd/send/letter-details?pcdStatus=informed-after-call-2&pcdFumoc=post&secondaryNav=pcd")
+                response.redirect("/delivery/wat3/pcd/send/letter-details?pcdStatus=informed-after-call-2&pcdFumoc=Post&secondaryNav=pcd")
             } else {
-                response.redirect("/delivery/wat3/pcd/send/letter-details?pcdStatus=informed-after-call-3&pcdFumoc=post&secondaryNav=pcd")
+                response.redirect("/delivery/wat3/pcd/send/letter-details?pcdStatus=informed-after-call-3&pcdFumoc=Post&secondaryNav=pcd")
             }
 
         } else {
             if (pcdCallAttempt == "1") {
-                response.redirect("/delivery/wat3/victim?pcdStatus=informed-after-call-1&pcdFumoc=none&secondaryNav=pcd")
+                response.redirect("/delivery/wat3/victim?pcdStatus=informed-after-call-1&pcdFumoc=None&secondaryNav=pcd")
             } else if (pcdCallAttempt == "2") {
-                response.redirect("/delivery/wat3/victim?pcdStatus=informed-after-call-2&pcdFumoc=none&secondaryNav=pcd")
+                response.redirect("/delivery/wat3/victim?pcdStatus=informed-after-call-2&pcdFumoc=None&secondaryNav=pcd")
             } else {
-                response.redirect("/delivery/wat3/victim?pcdStatus=informed-after-call-3&pcdFumoc=none&secondaryNav=pcd")
+                response.redirect("/delivery/wat3/victim?pcdStatus=informed-after-call-3&pcdFumoc=None&secondaryNav=pcd")
             }
         }
     })
@@ -312,6 +328,21 @@ module.exports = router => {
 
     //vcl
 
+    router.post('/delivery/wat3/vcl/pre-draft/contacted-by-answer', function(request, response) {
+
+        var contactedBy = request.session.data['contactedBy']
+
+        if (contactedBy == "call") {
+            response.redirect("/delivery/wat3/vcl/call/phone-call-1")
+        } else if (contactedBy == "email") {
+            response.redirect("/delivery/wat3/vcl/send/email-details")
+        } else if (contactedBy == "post") {
+            response.redirect("/delivery/wat3/vcl/send/letter-details")
+        } else {
+            response.redirect("/delivery/wat3/vcl/pre-draft/contact-details?contactMethod=other")
+        }
+    })
+
     router.get('/delivery/wat3/vcl/pre-draft/check-details-answer', function(request, response) {
 
         var vclType = request.session.data['vclType']
@@ -343,9 +374,9 @@ module.exports = router => {
         var vclVictimInformed1 = request.session.data['vclVictimInformed1']
 
         if (vclVictimInformed1 == "Yes"){
-            response.redirect("/delivery/wat3/vcl/call/follow-up-moc?vclCallAttempt=1&success=yes&successReason=informed-after-call-1")
+            response.redirect("/delivery/wat3/vcl/call/follow-up-moc?vclStatus=select-fumoc&vclCallAttempt=1&success=yes&successReason=informed-after-call-1")
         } else {
-            response.redirect("/delivery/wat3/vcl/call/was-text-message-sent?vclCallAttempt=1&success=yes&successReason=not-informed-after-call-1")
+            response.redirect("/delivery/wat3/vcl/call/was-text-message-sent?vclStatus=before-text-logged&vclCallAttempt=1&success=yes&successReason=not-informed-after-call-1")
         }
     })
 
@@ -396,7 +427,7 @@ module.exports = router => {
         var vclVictimInformed2 = request.session.data['vclVictimInformed2']
 
         if (vclVictimInformed2 == "Yes"){
-            response.redirect("/delivery/wat3/vcl/call/follow-up-moc?vclCallAttempt=2&success=yes&successReason=informed-after-call-2")
+            response.redirect("/delivery/wat3/vcl/call/follow-up-moc?vclStatus=select-fumoc&vclCallAttempt=2&success=yes&successReason=informed-after-call-2")
         } else {
             response.redirect("/delivery/wat3/victim?vclStatus=after-call-attempt-2&vclCallAttempt=2&success=yes&successReason=not-informed-after-call-2&secondaryNav=vcl")
         }
@@ -407,31 +438,31 @@ module.exports = router => {
         var vclFumoc = request.session.data['vclFumoc']
         var vclCallAttempt = request.session.data['vclCallAttempt']
 
-        if (vclFumoc == "email"){
+        if (vclFumoc == "Email"){
             if (vclCallAttempt == "1") {
-                response.redirect("/delivery/wat3/victim?vclStatus=informed-after-call-1&vclFumoc=email&secondaryNav=vcl")
+                response.redirect("/delivery/wat3/vcl/send/email-details?vclStatus=informed-after-call-1&vclFumoc=Email&secondaryNav=vcl")
             } else if (vclCallAttempt == "2") {
-                response.redirect("/delivery/wat3/victim?vclStatus=informed-after-call-2&vclFumoc=email&secondaryNav=vcl")
+                response.redirect("/delivery/wat3/vcl/send/email-details?vclStatus=informed-after-call-2&vclFumoc=Email&secondaryNav=vcl")
             } else {
-                response.redirect("/delivery/wat3/victim?vclStatus=informed-after-call-3&vclFumoc=email&secondaryNav=vcl")
+                response.redirect("/delivery/wat3/vcl/send/email-details?vclStatus=informed-after-call-3&vclFumoc=Email&secondaryNav=vcl")
             }
 
-        } else if (vclFumoc == "post") {
+        } else if (vclFumoc == "Post") {
             if (vclCallAttempt == "1") {
-                response.redirect("/delivery/wat3/victim?vclStatus=informed-after-call-1&vclFumoc=post&secondaryNav=vcl")
+                response.redirect("/delivery/wat3/vcl/send/letter-details?vclStatus=informed-after-call-1&vclFumoc=Post&secondaryNav=vcl")
             } else if (vclCallAttempt == "2") {
-                response.redirect("/delivery/wat3/victim?vclStatus=informed-after-call-2&vclFumoc=post&secondaryNav=vcl")
+                response.redirect("/delivery/wat3/vcl/send/letter-details?vclStatus=informed-after-call-2&vclFumoc=Post&secondaryNav=vcl")
             } else {
-                response.redirect("/delivery/wat3/victim?vclStatus=informed-after-call-3&vclFumoc=post&secondaryNav=vcl")
+                response.redirect("/delivery/wat3/vcl/send/letter-details?vclStatus=informed-after-call-3&vclFumoc=Post&secondaryNav=vcl")
             }
 
         } else {
             if (vclCallAttempt == "1") {
-                response.redirect("/delivery/wat3/victim?vclStatus=informed-after-call-1&vclFumoc=none&secondaryNav=vcl")
+                response.redirect("/delivery/wat3/victim?vclStatus=informed-after-call-1&vclFumoc=None&secondaryNav=vcl")
             } else if (vclCallAttempt == "2") {
-                response.redirect("/delivery/wat3/victim?vclStatus=informed-after-call-2&vclFumoc=none&secondaryNav=vcl")
+                response.redirect("/delivery/wat3/victim?vclStatus=informed-after-call-2&vclFumoc=None&secondaryNav=vcl")
             } else {
-                response.redirect("/delivery/wat3/victim?vclStatus=informed-after-call-3&vclFumoc=none&secondaryNav=vcl")
+                response.redirect("/delivery/wat3/victim?vclStatus=informed-after-call-3&vclFumoc=None&secondaryNav=vcl")
             }
         }
     })
@@ -463,6 +494,11 @@ module.exports = router => {
         response.redirect("/delivery/wat3/vcl/send/letter-added-to-print-queue")
     })
 
+    router.post('/delivery/wat3/vcl/send/email-details-answer', function(request, response) {
+
+        response.redirect("/delivery/wat3/vcl/send/email-logged")
+    })
+
     router.post('/delivery/wat3/vcl/send/letter-details-answer', function(request, response) {
 
         response.redirect("/delivery/wat3/vcl/send/letter-logged")
@@ -473,8 +509,90 @@ module.exports = router => {
         response.redirect("/delivery/wat3/victim?success=yes&successReason=pmoc-updated#victim-details")
     })
 
+    // Other
 
-     router.post('/delivery/wat3/wft-meetings/new-task/next-task-answer', function(request, response) {
+    router.post('/delivery/wat3/other/contacted-by-answer', function(request, response) {
+
+        var contactedBy = request.session.data['contactedBy']
+
+        if (contactedBy == "call") {
+            response.redirect("/delivery/wat3/other/telephone-call")
+        } else if (contactedBy == "email") {
+            response.redirect("/delivery/wat3/other/email-details")
+        } else if (contactedBy == "post") {
+            response.redirect("/delivery/wat3/other/letter-details")
+        } else {
+            response.redirect("/delivery/wat3/other/contact-details?contactMethod=other")
+        }
+    })
+
+    router.post('/delivery/wat3/other/telephone-call-answer', function(request, response) {
+
+        if (!Array.isArray(request.session.data['otherCommunications'])) {
+            request.session.data['otherCommunications'] = []
+        }
+        request.session.data['otherCommunications'].push({
+            contactedBy: 'call',
+            sortDate: toSortDate(request.session.data['otherCallDate']),
+            otherCallDate: request.session.data['otherCallDate'],
+            otherCallHour: request.session.data['otherCallHour'],
+            otherCallMinutes: request.session.data['otherCallMinutes'],
+            otherCallType: request.session.data['otherCallType'],
+            otherIndividual: request.session.data['otherIndividual'],
+            otherIndividualName: request.session.data['otherIndividualName'],
+            otherIndividualRole: request.session.data['otherIndividualRole'],
+            purposeOfCommunication: request.session.data['purposeOfCommunication'],
+            victimForename: request.session.data['victimForename'],
+            victimSurname: request.session.data['victimSurname']
+        })
+
+        response.redirect("/delivery/wat3/other/call-logged")
+    })
+
+    router.post('/delivery/wat3/other/email-details-answer', function(request, response) {
+
+        if (!Array.isArray(request.session.data['otherCommunications'])) {
+            request.session.data['otherCommunications'] = []
+        }
+        request.session.data['otherCommunications'].push({
+            contactedBy: 'email',
+            sortDate: toSortDate(request.session.data['otherEmailDate']),
+            otherEmailDate: request.session.data['otherEmailDate'],
+            otherIndividual: request.session.data['otherIndividual'],
+            otherIndividualName: request.session.data['otherIndividualName'],
+            otherIndividualRole: request.session.data['otherIndividualRole'],
+            purposeOfCommunication: request.session.data['purposeOfCommunication'],
+            victimForename: request.session.data['victimForename'],
+            victimSurname: request.session.data['victimSurname']
+        })
+
+        response.redirect("/delivery/wat3/other/email-logged")
+    })
+
+    router.post('/delivery/wat3/other/letter-details-answer', function(request, response) {
+
+        if (!Array.isArray(request.session.data['otherCommunications'])) {
+            request.session.data['otherCommunications'] = []
+        }
+        request.session.data['otherCommunications'].push({
+            contactedBy: 'post',
+            sortDate: toSortDate(request.session.data['otherLetterDate']),
+            otherLetterDate: request.session.data['otherLetterDate'],
+            otherIndividual: request.session.data['otherIndividual'],
+            otherIndividualName: request.session.data['otherIndividualName'],
+            otherIndividualRole: request.session.data['otherIndividualRole'],
+            purposeOfCommunication: request.session.data['purposeOfCommunication'],
+            victimForename: request.session.data['victimForename'],
+            victimSurname: request.session.data['victimSurname']
+        })
+
+        response.redirect("/delivery/wat3/other/letter-logged")
+    })
+
+
+    // meetings
+
+    router.post('/delivery/wat3/wft-meetings/new-task/next-task-answer', function(request, response) {
 
         var nextTask = request.session.data['nextTask']
 
@@ -488,15 +606,15 @@ module.exports = router => {
     })
 
    
-router.post('/delivery/wat3/wft-meetings/new-task/purposet-answer', function(request, response) {
+    router.post('/delivery/wat3/wft-meetings/new-task/purposet-answer', function(request, response) {
 
-	var purposet = request.session.data['purposet']
-	if (purposet == "yes"){
-		response.redirect("/delivery/wat3/wft-meetings/new-task/task-due-date")
-	} else {
-		response.redirect("/delivery/wat3/wft-meetings/new-task/task-due-date")
-	}
-})
+        var purposet = request.session.data['purposet']
+        if (purposet == "yes"){
+            response.redirect("/delivery/wat3/wft-meetings/new-task/task-due-date")
+        } else {
+            response.redirect("/delivery/wat3/wft-meetings/new-task/task-due-date")
+        }
+    })
 
   router.post('/delivery/wat3/wft-meetings/new-task/task-due-date-answer', function(request, response) {
 

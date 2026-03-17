@@ -41,18 +41,24 @@
     {% endif %} -->
 
     {% if (data['vclType'] == 'stopped-charge') or (data['vclType'] == 'altered-charge') %}
-    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-one-half">
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
                 <h2 class="govuk-summary-card__title">
-                    {% if (data['vclType'] == "stopped-charge") %}Stopped charge{% elif (data['vclType'] == "altered-charge") %}Substantially altered charge{% else %}VCL decision{% endif %}
+                    {% if (data['vclType'] == "stopped-charge") %}
+                    Stopped charge
+                    {% elif (data['vclType'] == "altered-charge") %}
+                    Substantially altered charge
+                    {% else %}
+                    VCL decision
+                    {% endif %}
                 </h2>
             </div>
             <div class="govuk-summary-card__content">
                 <div class="govuk-grid-row">
-                    <div class="govuk-grid-column-one-half">
+                    <div class="govuk-grid-column-full">
 
-                        <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Current status and next action</h3>
+                        <!-- <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Current status and next action</h3> -->
 
                         <!-- Pre-draft -->
                         {% if (data['vclStatus'] == "check-details") %}
@@ -186,9 +192,9 @@
                         {% endif %}
 
                     </div>
-                    <div class="govuk-grid-column-one-half">
+                    <!-- <div class="govuk-grid-column-one-half">
                         {% include "/delivery/wat3/victim/vcl/progress-tracker.html" %}
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

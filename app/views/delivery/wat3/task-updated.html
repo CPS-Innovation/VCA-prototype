@@ -20,12 +20,12 @@
         {% if data['nextTask'] == "No task at this time" %}Onboarding complete{% else %}Task created{% endif %}
       </h1> -->
       <h1 class="govuk-panel__title">
-        Task created
+        Task updated
       </h1>
     </div>
 
     <p class="govuk-body">
-      You created a task {% if data['manualTask'] == "yes" %}of '{{ data['manualTaskName'] }}'{% else %}to {{ data['nextTask'] | lower }}{% endif %} due {{ data['taskDueDate'] | formatDate }}.
+      You updated a task '{{ data['taskName'] }}' due {{ data['taskDueDate'] | formatDate }}.
     </p>
 
     <h2 class="govuk-heading-m">What happens next</h2>

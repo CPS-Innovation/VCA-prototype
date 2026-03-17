@@ -670,7 +670,20 @@
               Task
             </dt>
             <dd class="govuk-summary-list__value">
-              <span class="govuk-!-font-weight-bold">{{ data['nextTask'] }}</span>
+              <span class="govuk-!-font-weight-bold">
+                {% if (data['nextTask'] == "dtc") %}
+                  Inform of a decision to charge
+                {% elif (data['nextTask'] == "nfa") %}
+                  Inform of a no further action decision
+                {% elif (data['nextTask'] == "stopped-charge") %}
+                  Inform of a stopped charge
+                {% elif (data['nextTask'] == "altered-charge") %}
+                  Inform of a substantially altered charge
+                {% elif (data['nextTask'] == "Other") %}
+                  {{ data['manualTaskName'] }}
+                {% else %}
+                  {{ data['nextTask'] }}
+                {% endif %}</span>
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -719,24 +732,45 @@
               Next action
             </dt>
             <dd class="govuk-summary-list__value">
-              {% if (data['pcdStatus'] == "check-details") %}
-                <a href="/delivery/wat3/pcd/pre-draft/check-details" class="govuk-link govuk-link--no-visited-state">Check details</a>
-              {% elif (data['pcdStatus'] == "log-not-started") %}
-                <a href="/delivery/wat3/pcd/pre-draft/contacted-by" class="govuk-link govuk-link--no-visited-state">Log a communication</a>
-              {% elif (data['pcdStatus'] == "before-text-logged") %}
-                <a href="/delivery/wat3/pcd/call/was-text-message-sent" class="govuk-link govuk-link--no-visited-state">Log text message details</a>
-              {% elif (data['pcdStatus'] == "after-call-attempt-1") or (data['pcdStatus'] == "after-call-attempt-2") %}
-                <a href="/delivery/wat3/pcd/call/next-attempt-moc" class="govuk-link govuk-link--no-visited-state">Log another communication</a>
-              {% elif (data['pcdStatus'] == "after-call-attempt-3") %}
-                <a href="/delivery/wat3/pcd/call/next-attempt-moc" class="govuk-link govuk-link--no-visited-state">Log another communication</a>
-              {% elif (data['pcdStatus'] == "select-fumoc") %}
-                <a href="/delivery/wat3/pcd/call/follow-up-moc" class="govuk-link govuk-link--no-visited-state">Select letter dispatch method</a>
-              {% elif (data['pcdStatus'] == "informed-after-call-1") or (data['pcdStatus'] == "informed-after-call-2") or (data['pcdStatus'] == "informed-after-call-3") %}
-                {% if (data['pcdFumoc'] == "email") %}
-                  <a href="/delivery/wat3/pcd/send/email-details" class="govuk-link govuk-link--no-visited-state">Log email details</a>
-                {% elif (data['pcdFumoc'] == "post") %}
-                  <a href="/delivery/wat3/pcd/send/letter-details" class="govuk-link govuk-link--no-visited-state">Log letter details</a>
+              {% if (data['nextTask'] == "dtc") or (data['nextTask'] == "nfa") %}
+                {% if (data['pcdStatus'] == "log-not-started") %}
+                  <a href="/delivery/wat3/pcd/pre-draft/contacted-by" class="govuk-link govuk-link--no-visited-state">Log a communication</a>
+                {% elif (data['pcdStatus'] == "before-text-logged") %}
+                  <a href="/delivery/wat3/pcd/call/was-text-message-sent" class="govuk-link govuk-link--no-visited-state">Log text message details</a>
+                {% elif (data['pcdStatus'] == "after-call-attempt-1") or (data['pcdStatus'] == "after-call-attempt-2") %}
+                  <a href="/delivery/wat3/pcd/call/next-attempt-moc" class="govuk-link govuk-link--no-visited-state">Log another communication</a>
+                {% elif (data['pcdStatus'] == "after-call-attempt-3") %}
+                  <a href="/delivery/wat3/pcd/call/next-attempt-moc" class="govuk-link govuk-link--no-visited-state">Log another communication</a>
+                {% elif (data['pcdStatus'] == "select-fumoc") %}
+                  <a href="/delivery/wat3/pcd/call/follow-up-moc" class="govuk-link govuk-link--no-visited-state">Select letter dispatch method</a>
+                {% elif (data['pcdStatus'] == "informed-after-call-1") or (data['pcdStatus'] == "informed-after-call-2") or (data['pcdStatus'] == "informed-after-call-3") %}
+                  {% if (data['pcdFumoc'] == "email") %}
+                    <a href="/delivery/wat3/pcd/send/email-details" class="govuk-link govuk-link--no-visited-state">Log email details</a>
+                  {% elif (data['pcdFumoc'] == "post") %}
+                    <a href="/delivery/wat3/pcd/send/letter-details" class="govuk-link govuk-link--no-visited-state">Log letter details</a>
+                  {% endif %}
                 {% endif %}
+
+              {% elif (data['nextTask'] == "stopped-charge") or (data['nextTask'] == "altered-charge") %}
+                {% if (data['vclStatus'] == "log-not-started") %}
+                  <a href="/delivery/wat3/vcl/pre-draft/contacted-by" class="govuk-link govuk-link--no-visited-state">Log a communication</a>
+                {% elif (data['vclStatus'] == "before-text-logged") %}
+                  <a href="/delivery/wat3/vcl/call/was-text-message-sent" class="govuk-link govuk-link--no-visited-state">Log text message details</a>
+                {% elif (data['vclStatus'] == "after-call-attempt-1") or (data['vclStatus'] == "after-call-attempt-2") %}
+                  <a href="/delivery/wat3/vcl/call/next-attempt-moc" class="govuk-link govuk-link--no-visited-state">Log another communication</a>
+                {% elif (data['vclStatus'] == "after-call-attempt-3") %}
+                  <a href="/delivery/wat3/vcl/call/next-attempt-moc" class="govuk-link govuk-link--no-visited-state">Log another communication</a>
+                {% elif (data['vclStatus'] == "select-fumoc") %}
+                  <a href="/delivery/wat3/vcl/call/follow-up-moc" class="govuk-link govuk-link--no-visited-state">Select letter dispatch method</a>
+                {% elif (data['vclStatus'] == "informed-after-call-1") or (data['vclStatus'] == "informed-after-call-2") or (data['vclStatus'] == "informed-after-call-3") %}
+                  {% if (data['vclFumoc'] == "email") %}
+                    <a href="/delivery/wat3/vcl/send/email-details" class="govuk-link govuk-link--no-visited-state">Log email details</a>
+                  {% elif (data['vclFumoc'] == "post") %}
+                    <a href="/delivery/wat3/vcl/send/letter-details" class="govuk-link govuk-link--no-visited-state">Log letter details</a>
+                  {% endif %}
+                {% endif %}
+              {% elif (data['nextTask'] == "Other") %}
+                <a href="/delivery/wat3/update-manual-task" class="govuk-link govuk-link--no-visited-state">Update task</a>
               {% endif %}
             </dd>
           </div>

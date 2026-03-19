@@ -1,5 +1,5 @@
 {% extends "layouts/main.html" %}
-{% set pageName="Letter details" %}
+{% set pageName="Log a letter" %}
 
 {% block header %}
 {% include "/delivery/wat3/partials/header/none-selected.html" %}
@@ -16,7 +16,7 @@
 
         <form action="/delivery/wat3/other/letter-details-answer" method="post" accept-charset="UTF-8" id="myForm" name="myForm" onsubmit="return validateForm()">
 
-            <h1 class="govuk-heading-l">Letter details</h1>
+            <h1 class="govuk-heading-l">Log a letter</h1>
 
             <!-- <div class="govuk-warning-text">
                 <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
@@ -45,20 +45,54 @@
                 </div>
             </div>
 
+            <div class="govuk-form-group" id="error-form-group-3">
+                <fieldset class="govuk-fieldset">
+
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Direction of letter
+                    </legend>
+
+                    <div class="govuk-radios" data-module="govuk-radios" id="other-letter-type-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="other-letter-type-outbound" name="otherLetterType" type="radio" value="Yes" aria-describedby="other-letter-outbound-hint">
+                            <label class="govuk-label govuk-radios__label" for="other-letter-type-outbound">
+                                Outbound
+                            </label>
+                            <div id="other-letter-outbound-hint" class="govuk-hint govuk-radios__hint">
+                                I sent a letter to them
+                            </div>
+                        </div>
+                        
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="other-letter-type-inbound" name="otherLetterType" type="radio" value="No" aria-describedby="other-letter-inbound-hint">
+                            <label class="govuk-label govuk-radios__label" for="other-letter-type-inbound">
+                                Inbound
+                            </label>
+                            <div id="other-letter-inbound-hint" class="govuk-hint govuk-radios__hint">
+                                They sent a letter to victim services
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                        Contacted individual
+                        Person contacted
                     </legend>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="other-individual-victim" name="otherIndividual" type="radio" value="Victim" {{ checked('otherIndividual','Victim') }}>
+                            <input class="govuk-radios__input" id="other-individual-victim" name="otherIndividual" type="radio" value="Victim">
                             <label class="govuk-label govuk-radios__label" for="other-individual-victim">
                                 Victim
                             </label>
+                            <div id="other-individual-victim-hint" class="govuk-hint govuk-radios__hint">
+                                {{ data['victimSurname'] | upper }}, {{ data['victimForename'] }}
+                            </div>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="other-individual-other" name="otherIndividual" type="radio" value="Other" data-aria-controls="conditional-other-individual" {{ checked('otherIndividual','Other') }}>
+                            <input class="govuk-radios__input" id="other-individual-other" name="otherIndividual" type="radio" value="Other" data-aria-controls="conditional-other-individual">
                             <label class="govuk-label govuk-radios__label" for="other-individual-other">
                                 Other
                             </label>
@@ -68,14 +102,14 @@
                                 <label class="govuk-label" for="other-individual-name">
                                     Name
                                 </label>
-                                <input class="govuk-input" id="other-individual-name" name="otherIndividualName" type="text" value="{{ data['otherIndividualName'] }}">
+                                <input class="govuk-input" id="other-individual-name" name="otherIndividualName" type="text">
                             </div>
 
                             <div class="govuk-form-group">
                                 <label class="govuk-label" for="other-individual-role">
                                     Role
                                 </label>
-                                <input class="govuk-input" id="other-individual-role" name="otherIndividualRole" type="text" value="{{ data['otherIndividualRole'] }}">
+                                <input class="govuk-input" id="other-individual-role" name="otherIndividualRole" type="text">
                             </div>
                         </div>
                     </div>
@@ -86,7 +120,7 @@
                 <label class="govuk-label govuk-label--m" for="purpose-of-communication">
                     Purpose of letter
                 </label>
-                <textarea class="govuk-textarea" id="purpose-of-communication" name="purposeOfCommunication" rows="4">{{ data['purposeOfCommunication'] }}</textarea>
+                <textarea class="govuk-textarea" id="purpose-of-communication" name="purposeOfCommunication" rows="4"></textarea>
             </div>
 
             <button type="submit" class="govuk-button" data-module="govuk-button">

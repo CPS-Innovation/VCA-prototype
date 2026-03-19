@@ -25,27 +25,56 @@
             </h1>
           </legend>
 
-          <div class="govuk-radios" id="radio-group">
+          <div class="govuk-radios" data-module="govuk-radios" id="radio-group">
 
             <div class="govuk-radios__item">
-              <input type="radio" class="govuk-radios__input" id="contacted-by-telephone" name="contactedBy" value="call" {{ checked('contactedBy','call') }}>
+              <input type="radio" class="govuk-radios__input" id="contacted-by-telephone" name="contactedBy" value="call">
               <label class="govuk-label govuk-radios__label" for="contacted-by-telephone">
                 Telephone call
               </label>
             </div>
 
             <div class="govuk-radios__item">
-              <input type="radio" class="govuk-radios__input" id="contacted-by-email" name="contactedBy" value="email" {{ checked('contactedBy','email') }}>
+              <input type="radio" class="govuk-radios__input" id="contacted-by-email" name="contactedBy" value="email">
               <label class="govuk-label govuk-radios__label" for="contacted-by-email">
                 Email
               </label>
             </div>
 
             <div class="govuk-radios__item">
-              <input type="radio" class="govuk-radios__input" id="contacted-by-post" name="contactedBy" value="post" {{ checked('contactedBy','post') }}>
+              <input type="radio" class="govuk-radios__input" id="contacted-by-post" name="contactedBy" value="post">
               <label class="govuk-label govuk-radios__label" for="contacted-by-post">
                 Post
               </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input type="radio" class="govuk-radios__input" id="contacted-by-text" name="contactedBy" value="text">
+              <label class="govuk-label govuk-radios__label" for="contacted-by-text">
+                Text message
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input type="radio" class="govuk-radios__input" id="contacted-by-in-person" name="contactedBy" value="in-person">
+              <label class="govuk-label govuk-radios__label" for="contacted-by-in-person">
+                In person
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input type="radio" class="govuk-radios__input" id="contacted-by-other" name="contactedBy" value="other" data-aria-controls="conditional-other-method">
+              <label class="govuk-label govuk-radios__label" for="contacted-by-other">
+                Other
+              </label>
+            </div>
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-other-method">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="other-contact-method">
+                  Contact method
+                </label>
+                <input class="govuk-input govuk-input--width-20" id="other-contact-method" name="otherContactMethod" type="text" value="{{ data['otherContactMethod'] }}">
+              </div>
             </div>
 
           </div>

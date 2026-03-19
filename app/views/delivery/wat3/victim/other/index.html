@@ -1,5 +1,5 @@
 {% block content %}
-<h2 class="govuk-heading-l govuk-!-margin-top-6">Other communications</h2>
+<h2 class="govuk-heading-l govuk-!-margin-top-6">Other communication</h2>
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
@@ -13,7 +13,7 @@
             <hr class="govuk-section-break govuk-section-break--m">
 
             <ul class="govuk-list">
-                {% for communication in data['otherCommunications'] | sort(false, true, 'sortDate') %}
+                {% for communication in data['otherCommunications'] | sort(true, false, 'sortDate') %}
                     <li>
                         <!-- <div class="govuk-summary-card">
                             <div class="govuk-summary-card__title-wrapper">
@@ -40,7 +40,24 @@
                         <div class="govuk-summary-card">
                             <div class="govuk-summary-card__title-wrapper">
                                 <h2 class="govuk-summary-card__title">
-                                    Communication logged
+                                    {% if communication.contactedBy == "call" %}
+                                        {{ communication.contactedBy | capitalize }} logged
+                                    {% elif communication.contactedBy == "email" %}
+                                        {{ communication.contactedBy | capitalize }} logged
+                                    {% elif communication.contactedBy == "post" %}
+                                        Letter logged
+                                    {% elif communication.contactedBy == "text" %}
+                                        Text message logged
+                                    {% elif communication.contactedBy == "in-person" %}
+                                        In person conversation logged
+                                    {% elif communication.contactedBy == "other" %}
+                                        {{ communication.otherContactMethod | capitalize }} logged
+                                    {% else %}
+                                        <p class="govuk-body">
+                                            Fail!
+                                        </p>
+                                    {% endif %}
+                                    
                                 </h2>
                             </div>
                             <div class="govuk-summary-card__content">
@@ -53,6 +70,12 @@
                                             {% include "/delivery/wat3/victim/other/details/email.html" %}
                                         {% elif communication.contactedBy == "post" %}
                                             {% include "/delivery/wat3/victim/other/details/letter.html" %}
+                                        {% elif communication.contactedBy == "text" %}
+                                            {% include "/delivery/wat3/victim/other/details/text-message.html" %}
+                                        {% elif communication.contactedBy == "in-person" %}
+                                            {% include "/delivery/wat3/victim/other/details/in-person.html" %}
+                                        {% elif communication.contactedBy == "other" %}
+                                            {% include "/delivery/wat3/victim/other/details/other.html" %}
                                         {% else %}
                                             <p class="govuk-body">
                                                 Fail!
@@ -70,7 +93,7 @@
             </ul>
         {% else %}
             <p class="govuk-body">
-                You have not logged any other communications.
+                You have not logged any other communication.
             </p>
 
             <a href="/delivery/wat3/other/contacted-by" role="button" draggable="false" class="govuk-button govuk-!-margin-bottom-2" data-module="govuk-button">

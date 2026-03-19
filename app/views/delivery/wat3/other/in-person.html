@@ -1,5 +1,5 @@
 {% extends "layouts/main.html" %}
-{% set pageName="Log an email" %}
+{% set pageName="Log an in-person conversation" %}
 
 {% block header %}
 {% include "/delivery/wat3/partials/header/none-selected.html" %}
@@ -14,9 +14,9 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
 
-        <form action="/delivery/wat3/other/email-details-answer" method="post" accept-charset="UTF-8" id="myForm" name="myForm" onsubmit="return validateForm()">
+        <form action="/delivery/wat3/other/in-person-answer" method="post" accept-charset="UTF-8" id="myForm" name="myForm" onsubmit="return validateForm()">
 
-            <h1 class="govuk-heading-l">Log an email</h1>
+            <h1 class="govuk-heading-l">Log an in-person conversation</h1>
 
             <!-- <div class="govuk-warning-text">
                 <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
@@ -27,52 +27,21 @@
             </div> -->
 
             <div class="govuk-form-group" id="error-form-group-1">
-                <label class="govuk-label govuk-label--m" for="other-email-date">
-                    Date of email
+                <label class="govuk-label govuk-label--m" for="other-in-person-date">
+                    Date of conversation
                 </label>
 
-                <div class="govuk-hint" id="other-email-date-hint">
+                <div class="govuk-hint" id="other-in-person-date-hint">
                     Use the date picker or enter a date. For example, 17/05/2025
                 </div>
 
-                <div class="moj-datepicker" id="other-email-date-picker" data-module="moj-date-picker" data-excluded-days="saturday sunday">
+                <div class="moj-datepicker" id="other-in-person-date-picker" data-module="moj-date-picker" data-excluded-days="saturday sunday">
         
-                    <input type="text" class="govuk-input moj-js-datepicker-input" id="other-email-date"
-                        name="otherEmailDate"
+                    <input type="text" class="govuk-input moj-js-datepicker-input" id="other-in-person-date"
+                        name="otherInPersonDate"
                         autocomplete="off"
-                        aria-describedby="other-email-date-hint" />
+                        aria-describedby="other-in-person-date-hint" />
                 </div>
-            </div>
-
-            <div class="govuk-form-group" id="error-form-group-3">
-                <fieldset class="govuk-fieldset">
-
-                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                        Direction of email
-                    </legend>
-
-                    <div class="govuk-radios" data-module="govuk-radios" id="other-email-type-radios">
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="other-email-type-outbound" name="otherEmailType" type="radio" value="Yes" aria-describedby="other-email-outbound-hint">
-                            <label class="govuk-label govuk-radios__label" for="other-email-type-outbound">
-                                Outbound
-                            </label>
-                            <div id="other-email-outbound-hint" class="govuk-hint govuk-radios__hint">
-                                I sent an email to them
-                            </div>
-                        </div>
-                        
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="other-email-type-inbound" name="otherEmailType" type="radio" value="No" aria-describedby="other-email-inbound-hint">
-                            <label class="govuk-label govuk-radios__label" for="other-email-type-inbound">
-                                Inbound
-                            </label>
-                            <div id="other-email-inbound-hint" class="govuk-hint govuk-radios__hint">
-                                They sent an email to victim services
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
             </div>
 
             <div class="govuk-form-group">
@@ -117,7 +86,7 @@
 
             <div class="govuk-form-group">
                 <label class="govuk-label govuk-label--m" for="purpose-of-communication">
-                    Purpose of email
+                    Purpose of conversation
                 </label>
                 <textarea class="govuk-textarea" id="purpose-of-communication" name="purposeOfCommunication" rows="4"></textarea>
             </div>
@@ -131,5 +100,5 @@
 {% endblock %}
 
 {% block pageScripts %}
-<script src="/public/javascripts/delivery/wat3/other/email.js"></script>
+<script src="/public/javascripts/delivery/wat3/other/in-person.js"></script>
 {% endblock %}

@@ -52,10 +52,6 @@
             <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=other">Other communication</a>
           </li>
 
-          <li class="x-govuk-secondary-navigation__list-item">
-            <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=other">Other</a>
-          </li>
-
         {% elif (data['secondaryNav'] == "case-contacts") %}
           <li class="x-govuk-secondary-navigation__list-item">
             <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=overview">Case overview</a>
@@ -83,10 +79,6 @@
 
           <li class="x-govuk-secondary-navigation__list-item">
             <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=other">Other communication</a>
-          </li>
-
-          <li class="x-govuk-secondary-navigation__list-item">
-            <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=other">Other</a>
           </li>
 
         {% elif (data['secondaryNav'] == "pcd") %}
@@ -118,10 +110,6 @@
             <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=other">Other communication</a>
           </li>
 
-          <li class="x-govuk-secondary-navigation__list-item">
-            <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=other">Other</a>
-          </li>
-
         {% elif (data['secondaryNav'] == "ptm") %}
           <li class="x-govuk-secondary-navigation__list-item">
             <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=overview">Case overview</a>
@@ -149,10 +137,6 @@
 
           <li class="x-govuk-secondary-navigation__list-item">
             <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=other">Other communication</a>
-          </li>
-
-          <li class="x-govuk-secondary-navigation__list-item">
-            <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=other">Other</a>
           </li>
 
         {% elif (data['secondaryNav'] == "vcl") %}
@@ -213,10 +197,6 @@
             <a class="x-govuk-secondary-navigation__link" aria-current="page" href="/delivery/wat3/victim?secondaryNav=other">Other communication</a>
           </li>
 
-          <li class="x-govuk-secondary-navigation__list-item">
-            <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=other">Other</a>
-          </li>
-
         {% elif (data['secondaryNav'] == "other") %}
           <li class="x-govuk-secondary-navigation__list-item">
             <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=overview">Case overview</a>
@@ -234,19 +214,16 @@
             <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=pcd">Charging decision</a>
           </li>
 
-          {% if (data['nextTask'] == "dtc") or (data['nextTask'] == "nfa") or data['nextTask'] == "No task at this time" %}
-          {% else %}
-            <li class="x-govuk-secondary-navigation__list-item">
-              <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=vcl">VCL Scheme</a>
-            </li>
+          <li class="x-govuk-secondary-navigation__list-item">
+            <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=vcl">VCL Scheme</a>
+          </li>
 
-            <li class="x-govuk-secondary-navigation__list-item">
-              <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=ptm">Meetings</a>
-            </li>
-          {% endif %}
+          <li class="x-govuk-secondary-navigation__list-item">
+            <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=ptm">Meetings</a>
+          </li>
 
           <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
-            <a class="x-govuk-secondary-navigation__link" aria-current="page" href="/delivery/wat3/victim?secondaryNav=other">Other</a>
+            <a class="x-govuk-secondary-navigation__link" aria-current="page" href="/delivery/wat3/victim?secondaryNav=other">Other communication</a>
           </li>
 
         {% else %}
@@ -276,10 +253,6 @@
 
           <li class="x-govuk-secondary-navigation__list-item">
             <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=other">Other communication</a>
-          </li>
-
-          <li class="x-govuk-secondary-navigation__list-item">
-            <a class="x-govuk-secondary-navigation__link" href="/delivery/wat3/victim?secondaryNav=other">Other</a>
           </li>
 
         {% endif %}

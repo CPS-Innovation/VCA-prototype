@@ -521,6 +521,12 @@ module.exports = router => {
             response.redirect("/delivery/wat3/other/email-details")
         } else if (contactedBy == "post") {
             response.redirect("/delivery/wat3/other/letter-details")
+        } else if (contactedBy == "text") {
+            response.redirect("/delivery/wat3/other/text-message")
+        } else if (contactedBy == "in-person") {
+            response.redirect("/delivery/wat3/other/in-person")
+        } else if (contactedBy == "other") {
+            response.redirect("/delivery/wat3/other/other")
         } else {
             response.redirect("/delivery/wat3/other/contact-details?contactMethod=other")
         }
@@ -587,6 +593,67 @@ module.exports = router => {
         })
 
         response.redirect("/delivery/wat3/other/letter-logged")
+    })
+    
+    router.post('/delivery/wat3/other/text-message-answer', function(request, response) {
+
+        if (!Array.isArray(request.session.data['otherCommunications'])) {
+            request.session.data['otherCommunications'] = []
+        }
+        request.session.data['otherCommunications'].push({
+            contactedBy: 'text',
+            sortDate: toSortDate(request.session.data['otherTextMessageDate']),
+            otherTextMessageDate: request.session.data['otherTextMessageDate'],
+            otherIndividual: request.session.data['otherIndividual'],
+            otherIndividualName: request.session.data['otherIndividualName'],
+            otherIndividualRole: request.session.data['otherIndividualRole'],
+            purposeOfCommunication: request.session.data['purposeOfCommunication'],
+            victimForename: request.session.data['victimForename'],
+            victimSurname: request.session.data['victimSurname']
+        })
+
+        response.redirect("/delivery/wat3/other/text-message-logged")
+    })
+
+    router.post('/delivery/wat3/other/in-person-answer', function(request, response) {
+
+        if (!Array.isArray(request.session.data['otherCommunications'])) {
+            request.session.data['otherCommunications'] = []
+        }
+        request.session.data['otherCommunications'].push({
+            contactedBy: 'in-person',
+            sortDate: toSortDate(request.session.data['otherInPersonDate']),
+            otherInPersonDate: request.session.data['otherInPersonDate'],
+            otherIndividual: request.session.data['otherIndividual'],
+            otherIndividualName: request.session.data['otherIndividualName'],
+            otherIndividualRole: request.session.data['otherIndividualRole'],
+            purposeOfCommunication: request.session.data['purposeOfCommunication'],
+            victimForename: request.session.data['victimForename'],
+            victimSurname: request.session.data['victimSurname']
+        })
+
+        response.redirect("/delivery/wat3/other/in-person-logged")
+    })
+
+    router.post('/delivery/wat3/other/other-details-answer', function(request, response) {
+
+        if (!Array.isArray(request.session.data['otherCommunications'])) {
+            request.session.data['otherCommunications'] = []
+        }
+        request.session.data['otherCommunications'].push({
+            contactedBy: 'other',
+            otherContactMethod: request.session.data['otherContactMethod'],
+            sortDate: toSortDate(request.session.data['otherCommsDate']),
+            otherCommsDate: request.session.data['otherCommsDate'],
+            otherIndividual: request.session.data['otherIndividual'],
+            otherIndividualName: request.session.data['otherIndividualName'],
+            otherIndividualRole: request.session.data['otherIndividualRole'],
+            purposeOfCommunication: request.session.data['purposeOfCommunication'],
+            victimForename: request.session.data['victimForename'],
+            victimSurname: request.session.data['victimSurname']
+        })
+
+        response.redirect("/delivery/wat3/other/other-logged")
     })
 
 

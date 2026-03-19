@@ -2,18 +2,10 @@
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            Date of telephone call
+            Date of conversation
         </dt>
         <dd class="govuk-summary-list__value">
-            {{ communication.otherCallDate | formatDate }} at {{ communication.otherCallHour }}:{{ communication.otherCallMinutes }}
-        </dd>
-    </div>
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Direction of call
-        </dt>
-        <dd class="govuk-summary-list__value">
-            {% if (communication.otherCallType == "Yes") %}Outbound{% else %}Inbound{% endif %}
+            {{ communication.otherInPersonDate | formatDate }}
         </dd>
     </div>
     <div class="govuk-summary-list__row">
@@ -30,7 +22,7 @@
     </div>
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            Purpose of call
+            Purpose of conversation
         </dt>
         <dd class="govuk-summary-list__value">
             {{ communication.purposeOfCommunication }}

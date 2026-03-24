@@ -45,6 +45,43 @@
                 </div>
             </div>
 
+            <div class="govuk-form-group" id="error-form-group-2">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="other-letter-time-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Time of letter
+                    </legend>
+
+                    <div id="other-letter-time-hint" class="govuk-hint">
+                        Enter a time in 24-hour format. For example, 14:30
+                    </div>
+
+                    <div class="govuk-date-input" id="other-letter-time">
+
+                        <div class="govuk-date-input__item" style="margin-right: 10px;">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="other-letter-hour">
+                                    Hour
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="other-letter-hour" name="otherLetterHour" type="text" inputmode="numeric">
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item" style="margin-right: 10px;">
+                            <span class="govuk-body">:</span>
+                        </div>
+                        
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="other-letter-minutes">
+                                    Minutes
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="other-letter-minutes" name="otherLetterMinutes" type="text" inputmode="numeric">
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </div>
+
             <div class="govuk-form-group" id="error-form-group-3">
                 <fieldset class="govuk-fieldset">
 
@@ -76,12 +113,12 @@
                 </fieldset>
             </div>
 
-            <div class="govuk-form-group">
+            <div class="govuk-form-group" id="error-form-group-4">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                         Person contacted
                     </legend>
-                    <div class="govuk-radios" data-module="govuk-radios">
+                    <div class="govuk-radios" data-module="govuk-radios" id="other-individual-radios">
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="other-individual-victim" name="otherIndividual" type="radio" value="Victim">
                             <label class="govuk-label govuk-radios__label" for="other-individual-victim">
@@ -98,14 +135,14 @@
                             </label>
                         </div>
                         <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-other-individual">
-                            <div class="govuk-form-group">
+                            <div class="govuk-form-group" id="error-form-group-6">
                                 <label class="govuk-label" for="other-individual-name">
                                     Name
                                 </label>
                                 <input class="govuk-input" id="other-individual-name" name="otherIndividualName" type="text">
                             </div>
 
-                            <div class="govuk-form-group">
+                            <div class="govuk-form-group" id="error-form-group-7">
                                 <label class="govuk-label" for="other-individual-role">
                                     Role
                                 </label>
@@ -116,7 +153,7 @@
                 </fieldset>
             </div>
 
-            <div class="govuk-form-group">
+            <div class="govuk-form-group" id="error-form-group-5">
                 <label class="govuk-label govuk-label--m" for="purpose-of-communication">
                     Purpose of letter
                 </label>

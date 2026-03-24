@@ -1,9 +1,11 @@
-// Convert DD/MM/YYYY to YYYY-MM-DD for sorting
-function toSortDate(dateString) {
+// Convert DD/MM/YYYY + optional HH:MM to YYYY-MM-DDTHH:MM for sorting
+function toSortDate(dateString, hour, minutes) {
     if (!dateString || !dateString.includes('/')) return ''
     var parts = dateString.split('/')
-    if (parts.length === 3) return parts[2] + '-' + parts[1] + '-' + parts[0]
-    return ''
+    if (parts.length !== 3) return ''
+    var h = (hour || '00').toString().padStart(2, '0')
+    var m = (minutes || '00').toString().padStart(2, '0')
+    return parts[2] + '-' + parts[1] + '-' + parts[0] + 'T' + h + ':' + m
 }
 
 module.exports = router => {
@@ -539,7 +541,7 @@ module.exports = router => {
         }
         request.session.data['otherCommunications'].push({
             contactedBy: 'call',
-            sortDate: toSortDate(request.session.data['otherCallDate']),
+            sortDate: toSortDate(request.session.data['otherCallDate'], request.session.data['otherCallHour'], request.session.data['otherCallMinutes']),
             otherCallDate: request.session.data['otherCallDate'],
             otherCallHour: request.session.data['otherCallHour'],
             otherCallMinutes: request.session.data['otherCallMinutes'],
@@ -562,8 +564,10 @@ module.exports = router => {
         }
         request.session.data['otherCommunications'].push({
             contactedBy: 'email',
-            sortDate: toSortDate(request.session.data['otherEmailDate']),
+            sortDate: toSortDate(request.session.data['otherEmailDate'], request.session.data['otherEmailHour'], request.session.data['otherEmailMinutes']),
             otherEmailDate: request.session.data['otherEmailDate'],
+            otherEmailHour: request.session.data['otherEmailHour'],
+            otherEmailMinutes: request.session.data['otherEmailMinutes'],
             otherIndividual: request.session.data['otherIndividual'],
             otherIndividualName: request.session.data['otherIndividualName'],
             otherIndividualRole: request.session.data['otherIndividualRole'],
@@ -582,8 +586,10 @@ module.exports = router => {
         }
         request.session.data['otherCommunications'].push({
             contactedBy: 'post',
-            sortDate: toSortDate(request.session.data['otherLetterDate']),
+            sortDate: toSortDate(request.session.data['otherLetterDate'], request.session.data['otherLetterHour'], request.session.data['otherLetterMinutes']),
             otherLetterDate: request.session.data['otherLetterDate'],
+            otherLetterHour: request.session.data['otherLetterHour'],
+            otherLetterMinutes: request.session.data['otherLetterMinutes'],
             otherIndividual: request.session.data['otherIndividual'],
             otherIndividualName: request.session.data['otherIndividualName'],
             otherIndividualRole: request.session.data['otherIndividualRole'],
@@ -602,8 +608,10 @@ module.exports = router => {
         }
         request.session.data['otherCommunications'].push({
             contactedBy: 'text',
-            sortDate: toSortDate(request.session.data['otherTextMessageDate']),
+            sortDate: toSortDate(request.session.data['otherTextMessageDate'], request.session.data['otherTextMessageHour'], request.session.data['otherTextMessageMinutes']),
             otherTextMessageDate: request.session.data['otherTextMessageDate'],
+            otherTextMessageHour: request.session.data['otherTextMessageHour'],
+            otherTextMessageMinutes: request.session.data['otherTextMessageMinutes'],
             otherIndividual: request.session.data['otherIndividual'],
             otherIndividualName: request.session.data['otherIndividualName'],
             otherIndividualRole: request.session.data['otherIndividualRole'],
@@ -622,8 +630,10 @@ module.exports = router => {
         }
         request.session.data['otherCommunications'].push({
             contactedBy: 'in-person',
-            sortDate: toSortDate(request.session.data['otherInPersonDate']),
+            sortDate: toSortDate(request.session.data['otherInPersonDate'], request.session.data['otherInPersonHour'], request.session.data['otherInPersonMinutes']),
             otherInPersonDate: request.session.data['otherInPersonDate'],
+            otherInPersonHour: request.session.data['otherInPersonHour'],
+            otherInPersonMinutes: request.session.data['otherInPersonMinutes'],
             otherIndividual: request.session.data['otherIndividual'],
             otherIndividualName: request.session.data['otherIndividualName'],
             otherIndividualRole: request.session.data['otherIndividualRole'],
@@ -643,8 +653,10 @@ module.exports = router => {
         request.session.data['otherCommunications'].push({
             contactedBy: 'other',
             otherContactMethod: request.session.data['otherContactMethod'],
-            sortDate: toSortDate(request.session.data['otherCommsDate']),
+            sortDate: toSortDate(request.session.data['otherCommsDate'], request.session.data['otherCommsHour'], request.session.data['otherCommsMinutes']),
             otherCommsDate: request.session.data['otherCommsDate'],
+            otherCommsHour: request.session.data['otherCommsHour'],
+            otherCommsMinutes: request.session.data['otherCommsMinutes'],
             otherIndividual: request.session.data['otherIndividual'],
             otherIndividualName: request.session.data['otherIndividualName'],
             otherIndividualRole: request.session.data['otherIndividualRole'],

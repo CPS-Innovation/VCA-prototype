@@ -32,6 +32,19 @@
   </div>
 </div>
 
+<div id="service-success-banner" class="govuk-notification-banner govuk-notification-banner--success govuk-!-margin-bottom-4" role="alert" aria-labelledby="govuk-notification-banner-title-service" data-module="govuk-notification-banner" style="display: none;">
+  <div class="govuk-notification-banner__header">
+    <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title-service">
+      Success
+    </h2>
+  </div>
+  <div class="govuk-notification-banner__content">
+    <h3 class="govuk-notification-banner__heading">
+      You changed the service to {{ data['taskService'] }}.
+    </h3>
+  </div>
+</div>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
 
@@ -1316,9 +1329,13 @@
                 Service
               </dt>
               <dd class="govuk-summary-list__value">
-                {% if data['onboardedStatus'] == 'Yes' %}{{ data['serviceLead'] }}{% else %}Not onboarded{% endif %}
+                {% if data['onboardedStatus'] == 'Yes' %}{{ data['taskService'] or data['serviceLead'] }}{% else %}Not onboarded{% endif %}
               </dd>
-              {% if data['onboardedStatus'] != 'Yes' %}
+              {% if data['onboardedStatus'] == 'Yes' %}
+              <dd class="govuk-summary-list__actions">
+                <a href="/delivery/wat3/change-service" class="govuk-link govuk-link--no-visited-state">Change<span class="govuk-visually-hidden"> service</span></a>
+              </dd>
+              {% elif data['onboardedStatus'] != 'Yes' %}
               <dd class="govuk-summary-list__actions">
                 <a href="/delivery/wat3/onb/service-lead?detailChange=no" class="govuk-link">Onboard<span class="govuk-visually-hidden"> {{ data['victimSurname'] | upper }}, {{ data['victimForename'] }}</span></a>
               </dd>

@@ -25,13 +25,13 @@
             Task name
         </dt>
         <dd class="govuk-summary-list__value">
-            {{ data['taskName'] }}
+            {{ data['manualTaskName'] }}
         </dd>
-        <dd class="govuk-summary-list__actions">
+        <!-- <dd class="govuk-summary-list__actions">
             <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat3/victim/new-task/manual-task">
                 Change<span class="govuk-visually-hidden"> task name</span>
             </a>
-        </dd>
+        </dd> -->
       </div>
       <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
@@ -41,14 +41,15 @@
             <dd class="govuk-summary-list__value">
                 {{ data['taskDueDate'] | formatDate }}
             </dd>
-            <dd class="govuk-summary-list__actions">
+            <!-- <dd class="govuk-summary-list__actions">
                 <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat3/victim/new-task/manual-task">
                     Change<span class="govuk-visually-hidden"> task due date</span>
                 </a>
-            </dd>
+            </dd> -->
           {% else %}
             <dd class="govuk-summary-list__value">
-                <a href="/delivery/wat3/victim/new-task/manual-task" class="govuk-link govuk-link--no-visited-state">Enter due date</a>
+                <!-- <a href="/delivery/wat3/victim/new-task/manual-task" class="govuk-link govuk-link--no-visited-state">Enter due date</a> -->
+                Not set
             </dd>
           {% endif %}
       </div>
@@ -58,38 +59,48 @@
         </dt>
         {% if data['taskNote'] == "" %}
           <dd class="govuk-summary-list__value">
-              <a href="/delivery/wat3/victim/new-task/manual-task" class="govuk-link govuk-link--no-visited-state">Enter note</a>
+              <!-- <a href="/delivery/wat3/victim/new-task/manual-task" class="govuk-link govuk-link--no-visited-state">Enter note</a> -->
+              No note added
           </dd>
         {% else %}
           <dd class="govuk-summary-list__value">
               {{ data['taskNote'] | nl2br }}
           </dd>
-          <dd class="govuk-summary-list__actions">
+          <!-- <dd class="govuk-summary-list__actions">
               <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat3/victim/new-task/manual-task">
                   Change<span class="govuk-visually-hidden"> task note</span>
               </a>
-          </dd>
+          </dd> -->
         {% endif %}
       </div>
     </dl>
 
     <form action="/delivery/wat3/update-manual-task-answer" method="post" accept-charset="UTF-8" id="myForm" name="myForm" onsubmit="return validateForm()">
 
-      <div class="govuk-form-group">
+      <div class="govuk-form-group" id="error-form-group-1">
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
             <h2 class="govuk-fieldset__heading">
-              What do you want to do?
+              <!-- What do you want to do? -->
+              Do you want to mark the task as complete?
             </h2>
           </legend>
-          <div class="govuk-radios" data-module="govuk-radios">
+          <div class="govuk-radios" data-module="govuk-radios" id="radio-group">
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="task-action-complete" name="taskAction" type="radio" value="complete" {% if data['taskAction'] == 'complete' %}checked{% endif %}>
+              <input class="govuk-radios__input" id="task-action-complete" name="taskAction" type="radio" value="complete">
               <label class="govuk-label govuk-radios__label" for="task-action-complete">
-                Mark task as complete
+                <!-- Mark task as complete -->
+                Yes
               </label>
             </div>
             <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="task-action-incomplete" name="taskAction" type="radio" value="incomplete">
+              <label class="govuk-label govuk-radios__label" for="task-action-incomplete">
+                <!-- Keep task as incomplete -->
+                No
+              </label>
+            </div>
+            <!-- <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="task-action-save" name="taskAction" type="radio" value="save" {% if data['taskAction'] == 'save' %}checked{% endif %}>
               <label class="govuk-label govuk-radios__label" for="task-action-save">
                 Save changes
@@ -100,7 +111,7 @@
               <label class="govuk-label govuk-radios__label" for="task-action-delete">
                 Delete task
               </label>
-            </div>
+            </div> -->
           </div>
         </fieldset>
       </div>
@@ -117,4 +128,5 @@
 {% block pageScripts %}
 <script src="/public/javascripts/accessible-autocomplete.min.js"></script>
 <script src="/public/javascripts/delivery/wat3/task-assignee.js"></script>
+<script src="/public/javascripts/delivery/wat3/update-manual-task.js"></script>
 {% endblock %}

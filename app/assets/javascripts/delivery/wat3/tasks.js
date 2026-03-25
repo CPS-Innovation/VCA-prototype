@@ -1116,6 +1116,12 @@ initialSetupComplete = true;
             banner = document.getElementById('due-date-success-banner');
         } else if (successReason === 'assignee-updated') {
             banner = document.getElementById('assignee-success-banner');
+        } else if (successReason === 'manual-task-completed') {
+            banner = document.getElementById('manual-task-completed-banner');
+            var taskContainer = document.getElementById('manual-task-container');
+            if (taskContainer) {
+                taskContainer.style.display = 'none';
+            }
         }
         
         if (banner) {

@@ -165,12 +165,23 @@ module.exports = router => {
         response.redirect("/delivery/wat3/tasks?success=yes&successReason=due-date-updated")
     })
 
+    router.post('/delivery/wat3/change-service-answer', function(request, response) {
+
+        request.session.data['taskService'] = request.body['taskService'] || ''
+
+        response.redirect("/delivery/wat3/victims?success=yes&successReason=service-updated")
+    })
+
     router.post('/delivery/wat3/update-manual-task-answer', function(request, response) {
 
         // Store task action in session
         request.session.data['taskAction'] = request.body['taskAction'] || ''
 
-        response.redirect("/delivery/wat3/task-updated")
+        if (request.body['taskAction'] === 'complete') {
+            response.redirect("/delivery/wat3/tasks?success=yes&successReason=manual-task-completed")
+        } else {
+            response.redirect("/delivery/wat3/tasks")
+        }
     })
 
     //pcd

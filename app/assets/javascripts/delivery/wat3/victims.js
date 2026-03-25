@@ -6,8 +6,16 @@ var radios = new GOVUKFrontend.Radios(document.querySelector('[data-module="govu
 // Show success banner if URL has success params, then remove them
 (function() {
     var url = new URL(window.location.href);
-    if (url.searchParams.get('success') === 'yes' && url.searchParams.get('successReason') === 'vlo-updated') {
-        var banner = document.getElementById('vlo-success-banner');
+    if (url.searchParams.get('success') === 'yes') {
+        var successReason = url.searchParams.get('successReason');
+        var banner = null;
+
+        if (successReason === 'vlo-updated') {
+            banner = document.getElementById('vlo-success-banner');
+        } else if (successReason === 'service-updated') {
+            banner = document.getElementById('service-success-banner');
+        }
+
         if (banner) {
             banner.style.display = 'block';
         }

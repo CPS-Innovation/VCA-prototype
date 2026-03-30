@@ -6,6 +6,15 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
+const victimRecords = require('./data/victim-records')
+const taskRecords = require('./data/task-records')
+
+router.use(function (req, res, next) {
+  res.locals.victimRecords = victimRecords
+  res.locals.taskRecords = taskRecords
+  next()
+})
+
 require('./routes/ur/pcd/dtc1')(router)
 require('./routes/ur/pcd/dtc2')(router)
 require('./routes/delivery/pcd/dtc')(router)

@@ -26,7 +26,27 @@
                 </dt>
                 {% if data['nextTask'] %}
                     <dd class="govuk-summary-list__value">
-                        {% if data['nextTask'] == "No task at this time" %}No task set{% else %}{{ data['nextTask'] }}{% endif %}
+                        {% if data['nextTask'] == "dtc" %}
+                            Inform of a decision to charge
+                        {% elif data['nextTask'] == "nfa" %}
+                            Inform of a no further action decision
+                        {% elif data['nextTask'] == "stopped-charge" %}
+                            Inform of a stopped charge
+                        {% elif data['nextTask'] == "altered-charge" %}
+                            Inform of a substantially altered charge
+                        {% elif data['nextTask'] == "meeting-offer" %}
+                            Log offered meeting
+                        {% elif data['nextTask'] == "meeting-arranged" %}
+                            Log arranged meeting
+                        {% elif data['nextTask'] == "meeting-outcome" %}
+                            Log meeting outcome
+                        {% elif data['nextTask'] == "other" %}
+                            {{ data['manualTaskName'] }}
+                        {% elif data['nextTask'] == "no-task" %}
+                            No task set
+                        {% else %}
+                            {{ data['nextTask'] }}
+                        {% endif %}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat3/onb/next-task">
@@ -39,7 +59,7 @@
                     </dd>
                 {% endif %}
             </div>
-            {% if data['nextTask'] == "No task at this time" %}
+            {% if data['nextTask'] == "no-task" %}
             {% else %}
                 {% if data['manualTask'] == "yes" %}
                     <div class="govuk-summary-list__row">

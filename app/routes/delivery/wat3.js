@@ -167,7 +167,7 @@ module.exports = router => {
 
     router.post('/delivery/wat3/change-service-answer', function(request, response) {
 
-        request.session.data['taskService'] = request.body['taskService'] || ''
+        request.session.data['serviceLead'] = request.body['serviceLead'] || ''
 
         response.redirect("/delivery/wat3/victims?success=yes&successReason=service-updated")
     })

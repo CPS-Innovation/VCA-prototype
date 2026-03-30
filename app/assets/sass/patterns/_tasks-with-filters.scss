@@ -1,5 +1,23 @@
 // Tasks with filters stylesheet
 
+.due-date-value {
+  @media (min-width: 641px) {
+    white-space: nowrap;
+  }
+}
+
+.due-date-break {
+  @media (min-width: 641px) {
+    display: none;
+  }
+}
+
+.due-date-tag {
+  @media (max-width: 640px) {
+    margin-bottom: govuk-spacing(1);
+  }
+}
+
 .tasks-filters {
   background-color: govuk-colour("light-grey");
   padding: 1.5rem;

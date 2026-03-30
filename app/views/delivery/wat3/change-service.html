@@ -20,34 +20,34 @@
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            Which service should this task be assigned to?
+                            Which is the service lead for {{ data['victimForename'] }} {{ data['victimSurname'] }}?
                         </h1>
                     </legend>
 
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="taskService" name="taskService" type="radio" value="Universal" {{ "checked" if (data['taskService'] or data['service'] or 'Universal') == 'Universal' }}>
-                            <label class="govuk-label govuk-radios__label" for="taskService">
+                            <input class="govuk-radios__input" id="service-lead-1" name="serviceLead" type="radio" value="Universal" {{ "checked" if (data['serviceLead'] or data['service'] or 'Universal') == 'Universal' }}>
+                            <label class="govuk-label govuk-radios__label" for="service-lead-1">
                                 Universal
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="taskService-2" name="taskService" type="radio" value="Enhanced" {{ "checked" if (data['taskService'] or data['service']) == 'Enhanced' }}>
-                            <label class="govuk-label govuk-radios__label" for="taskService-2">
+                            <input class="govuk-radios__input" id="service-lead-2" name="serviceLead" type="radio" value="Enhanced" {{ "checked" if (data['serviceLead'] or data['service']) == 'Enhanced' }}>
+                            <label class="govuk-label govuk-radios__label" for="service-lead-2">
                                 Enhanced
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="taskService-3" name="taskService" type="radio" value="RASSO" {{ "checked" if (data['taskService'] or data['service']) == 'RASSO' }}>
-                            <label class="govuk-label govuk-radios__label" for="taskService-3">
+                            <input class="govuk-radios__input" id="service-lead-3" name="serviceLead" type="radio" value="RASSO" {{ "checked" if (data['serviceLead'] or data['service']) == 'RASSO' }}>
+                            <label class="govuk-label govuk-radios__label" for="service-lead-3">
                                 RASSO
                             </label>
                         </div>
                         <div class="govuk-radios__divider">or</div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="taskService-4" name="taskService" type="radio" value="None" {{ "checked" if (data['taskService'] or data['service']) == 'None' }}>
-                            <label class="govuk-label govuk-radios__label" for="taskService-4">
-                                No service at present
+                            <input class="govuk-radios__input" id="service-lead-4" name="serviceLead" type="radio" value="None" {{ "checked" if (data['serviceLead'] or data['service']) == 'None' }}>
+                            <label class="govuk-label govuk-radios__label" for="service-lead-4">
+                                Not aligned to a service
                             </label>
                         </div>
                     </div>

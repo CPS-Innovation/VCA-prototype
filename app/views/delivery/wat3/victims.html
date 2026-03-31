@@ -595,6 +595,7 @@
               <dd class="govuk-summary-list__value">
                 {{ data['vlo'] or "Unassigned" }}
               </dd>
+              {% elif data['onboardedStatus'] != 'Yes' %}
               <dd class="govuk-summary-list__actions">
                 <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat3/vlo">Change<span class="govuk-visually-hidden"> vlo</span></a>
               </dd>

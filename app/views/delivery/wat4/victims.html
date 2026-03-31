@@ -40,11 +40,7 @@
   </div>
   <div class="govuk-notification-banner__content">
     <h3 class="govuk-notification-banner__heading">
-      {% if data['serviceLead'] == 'None' %}
-        You changed the service to not aligned.
-      {% else %}
-        You changed the service to {{ data['serviceLead'] }}.
-      {% endif %}
+      You changed the service for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {% if data['serviceLead'] == "None" %}not aligned{% else %}the {{ data['serviceLead'] }} service{% endif %}.
     </h3>
   </div>
 </div>
@@ -533,7 +529,7 @@
         <div class="govuk-!-margin-bottom-9">
           {% if data['onboardedStatus'] == 'Yes' %}
           <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
-            <a href="/delivery/wat4/victim" class="govuk-link govuk-link--no-visited-state">{{ data['victimSurname'] | upper }}, {{ data['victimForename'] }}</a>
+            <a href="/delivery/wat4/victim?success=no" class="govuk-link govuk-link--no-visited-state">{{ data['victimSurname'] | upper }}, {{ data['victimForename'] }}</a>
           </h2>
           {% else %}
           <h2 class="govuk-heading-m govuk-!-margin-bottom-2">{{ data['victimSurname'] | upper }}, {{ data['victimForename'] }}</h2>

@@ -35,6 +35,7 @@ require('./routes/delivery/wat/onb')(router)
 
 require('./routes/delivery/wat2')(router)
 require('./routes/delivery/wat3')(router)
+require('./routes/delivery/wat4')(router)
 
 
 // meetings

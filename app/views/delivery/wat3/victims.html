@@ -243,11 +243,6 @@
                 <input class="govuk-radios__input service-radio" id="service-3" name="service" type="radio" value="rasso" data-label="RASSO">
                 <label class="govuk-label govuk-radios__label" for="service-3">RASSO</label>
               </div>
-              <div class="govuk-radios__divider">or</div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input service-radio" id="service-4" name="service" type="radio" value="none" data-label="Not aligned to a service">
-                <label class="govuk-label govuk-radios__label" for="service-4">Not aligned</label>
-              </div>
               <!-- <div class="govuk-radios__item">
                 <input class="govuk-radios__input service-radio" id="service-4" name="service" type="radio" value="not-onboarded" data-label="Not onboarded">
                 <label class="govuk-label govuk-radios__label" for="service-4">Not onboarded</label>
@@ -586,11 +581,7 @@
                   Not onboarded
                 {% endif %}
               </dd>
-              {% if data['onboardedStatus'] == 'Yes' %}
-              <dd class="govuk-summary-list__actions">
-                <a href="/delivery/wat3/change-service" class="govuk-link govuk-link--no-visited-state">Change<span class="govuk-visually-hidden"> service</span></a>
-              </dd>
-              {% elif data['onboardedStatus'] != 'Yes' %}
+              {% if data['onboardedStatus'] != 'Yes' %}
               <dd class="govuk-summary-list__actions">
                 <a href="/delivery/wat3/onb/service-lead?detailChange=no" class="govuk-link">Onboard<span class="govuk-visually-hidden"> {{ data['victimSurname'] | upper }}, {{ data['victimForename'] }}</span></a>
               </dd>

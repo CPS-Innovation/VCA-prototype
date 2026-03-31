@@ -25,11 +25,15 @@
                 <div class="govuk-notification-banner__content">
                     {% if data['detailChange'] == "no" %}
                     <h3 class="govuk-notification-banner__heading">
-                        You onboarded {{ data['victimForename'] }} {{ data['victimSurname'] }} and allocated them to the {{ data['serviceLead'] }} service. 
+                        {% if data['serviceLead'] == 'None' %}
+                            You onboarded {{ data['victimForename'] }} {{ data['victimSurname'] }} but did not align them to a service.
+                        {% else %}
+                            You onboarded {{ data['victimForename'] }} {{ data['victimSurname'] }} and allocated them to the {{ data['serviceLead'] }} service.
+                        {% endif %}
                     </h3>
                     {% elif data['detailChange'] == "service-lead" %}
                     <h3 class="govuk-notification-banner__heading">
-                        You changed the service lead for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {% if data['serviceLead'] == "None" %}no service at present{% else %}the {{ data['serviceLead'] }} service{% endif %}.
+                        You changed the service lead for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {% if data['serviceLead'] == "None" %}not aligned{% else %}the {{ data['serviceLead'] }} service{% endif %}.
                     </h3>
                     {% elif data['detailChange'] == "case-type" %}
                     <h3 class="govuk-notification-banner__heading">
@@ -78,7 +82,11 @@
                     Service lead
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data['serviceLead'] }}
+                    {% if data['serviceLead'] == 'None' %}
+                        Not aligned
+                    {% else %}
+                        {{ data['serviceLead'] }}
+                    {% endif %}
                 </dd>
                 <dd class="govuk-summary-list__actions">
                     <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat4/onb/service-lead?successNotification&detailChange=service-lead">

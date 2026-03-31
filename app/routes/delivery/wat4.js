@@ -71,9 +71,9 @@ module.exports = router => {
 
         var nextTask = request.session.data['nextTask']
 
-        if (nextTask == "Other") {
+        if (nextTask == "other") {
             response.redirect("/delivery/wat4/onb/manual-task")
-        } else if (nextTask == "No task at this time") {
+        } else if (nextTask == "no-task") {
             response.redirect("/delivery/wat4/onb/check-task?manualTask=no")
         } else {
             response.redirect("/delivery/wat4/onb/next-task-due-date")

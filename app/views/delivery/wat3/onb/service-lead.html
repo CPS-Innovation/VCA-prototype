@@ -53,7 +53,7 @@
                     <div class="govuk-radios__item">
                         <input type="radio" class="govuk-radios__input" id="service-lead-none" name="serviceLead" value="None" {{ checked('serviceLead','None') }}>
                         <label class="govuk-label govuk-radios__label" for="service-lead-none">
-                            No service at present
+                            Not aligned to a service
                         </label>
                     </div>
 
@@ -85,5 +85,5 @@
 {% endblock %}
 
 {% block pageScripts %}
-<script src="/public/javascripts/delivery/wat3/onb/service-lead.js"></script>
+<script src="/public/javascripts/delivery/shared/onb/service-lead.js"></script>
 {% endblock %}

@@ -6,7 +6,7 @@ module.exports = [
     leadDefendant: 'THOMAS, Kenneth',
     victim: 'Yes',
     area: 'Merseyside',
-    dob: '12 May 1978',
+    dob: '12/5/1978',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -17,10 +17,10 @@ module.exports = [
     leadDefendant: 'PEARSON, Lisa',
     victim: 'Yes',
     area: 'Norfolk',
-    dob: '3 September 1982',
+    dob: '3/9/1982',
     service: 'Universal',
     onboarded: true,
-    vlo: 'THOMPSON, Sarah'
+    vlo: 'THOMPSON, Sarah (you)'
   },
   {
     surname: 'CLARK',
@@ -29,7 +29,7 @@ module.exports = [
     leadDefendant: 'BROWN, Andrew',
     victim: 'Yes',
     area: 'Warwickshire',
-    dob: '27 January 1975',
+    dob: '27/1/1975',
     service: 'Enhanced',
     onboarded: true,
     vlo: 'KUMAR, Priya'
@@ -41,10 +41,10 @@ module.exports = [
     leadDefendant: 'JONES, Charles',
     victim: 'Yes',
     area: 'Cleveland',
-    dob: '15 August 1990',
+    dob: '15/8/1990',
     service: 'Universal',
     onboarded: true,
-    vlo: 'THOMPSON, Sarah'
+    vlo: 'THOMPSON, Sarah (you)'
   },
   {
     surname: 'GREEN',
@@ -53,10 +53,10 @@ module.exports = [
     leadDefendant: 'MARTIN, Sandra',
     victim: 'Yes',
     area: 'Sussex',
-    dob: '8 November 1988',
+    dob: '8/11/1988',
     service: 'Universal',
     onboarded: true,
-    vlo: 'THOMPSON, Sarah'
+    vlo: 'THOMPSON, Sarah (you)'
   },
   {
     surname: 'HARRIS',
@@ -65,10 +65,10 @@ module.exports = [
     leadDefendant: 'HAYES, Michael',
     victim: 'Yes',
     area: 'Northumbria',
-    dob: '21 March 1973',
+    dob: '21/3/1973',
     service: 'Universal',
     onboarded: true,
-    vlo: 'THOMPSON, Sarah'
+    vlo: 'THOMPSON, Sarah (you)'
   },
   {
     surname: 'KELLY',
@@ -77,7 +77,7 @@ module.exports = [
     leadDefendant: 'HALL, Virginia',
     victim: 'Yes',
     area: 'Nottinghamshire',
-    dob: '14 June 1985',
+    dob: '14/6/1985',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -88,10 +88,10 @@ module.exports = [
     leadDefendant: 'NEWSOME, Gavin',
     victim: 'Yes',
     area: 'London',
-    dob: '30 October 1992',
+    dob: '30/10/1992',
     service: 'Universal',
     onboarded: true,
-    vlo: 'THOMPSON, Sarah'
+    vlo: 'THOMPSON, Sarah (you)'
   },
   {
     surname: 'LEWIS',
@@ -100,7 +100,7 @@ module.exports = [
     leadDefendant: 'PEREZ, Luis',
     victim: 'Yes',
     area: 'Cumbria',
-    dob: '2 February 1980',
+    dob: '2/2/1980',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -111,7 +111,7 @@ module.exports = [
     leadDefendant: 'WILSON, Christopher',
     victim: 'Yes',
     area: 'Bedfordshire',
-    dob: '19 July 1987',
+    dob: '19/7/1987',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -122,7 +122,7 @@ module.exports = [
     leadDefendant: 'DAVIS, Walter',
     victim: 'Yes',
     area: 'Leicestershire',
-    dob: '5 December 1970',
+    dob: '5/12/1970',
     service: 'Bereaved Family Service',
     onboarded: true,
     vlo: 'MORRISON, Claire'
@@ -134,7 +134,7 @@ module.exports = [
     leadDefendant: 'BLAKE, Marcus',
     victim: 'Yes',
     area: 'Kent',
-    dob: '28 April 1983',
+    dob: '28/4/1983',
     service: 'RASSO',
     onboarded: true,
     vlo: 'BISHOP, James'
@@ -146,7 +146,7 @@ module.exports = [
     leadDefendant: 'SUMMER, Yasmin',
     victim: 'Yes',
     area: 'Greater Manchester',
-    dob: '11 September 1995',
+    dob: '11/9/1995',
     service: 'Enhanced',
     onboarded: true,
     vlo: 'KUMAR, Priya'
@@ -157,7 +157,7 @@ module.exports = [
     caseRef: '44RG9895418',
     leadDefendant: 'LUCAS, Timothy',
     victim: 'Yes',
-    dob: '23 March 1977',
+    dob: '23/3/1977',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -168,7 +168,7 @@ module.exports = [
     leadDefendant: 'BAKER, Edward',
     victim: 'Yes',
     area: 'Avon and Somerset',
-    dob: '6 January 1991',
+    dob: '6/1/1991',
     service: 'Enhanced',
     onboarded: true,
     vlo: 'KUMAR, Priya'
@@ -180,7 +180,7 @@ module.exports = [
     leadDefendant: 'GREGORY, Steven',
     victim: 'No',
     area: 'Lancashire',
-    dob: '17 August 1984',
+    dob: '17/8/1984',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -191,7 +191,7 @@ module.exports = [
     leadDefendant: 'VERNON, Eugene',
     victim: 'No',
     area: 'Essex',
-    dob: '29 November 1979',
+    dob: '29/11/1979',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -202,7 +202,7 @@ module.exports = [
     leadDefendant: 'DE FREITAS, Jhon',
     victim: 'No',
     area: 'West Mercia',
-    dob: '4 June 1986',
+    dob: '4/6/1986',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -213,7 +213,7 @@ module.exports = [
     leadDefendant: 'DE FREITAS, Jhon',
     victim: 'No',
     area: 'South Wales',
-    dob: '16 October 1981',
+    dob: '16/10/1981',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -224,7 +224,7 @@ module.exports = [
     leadDefendant: 'SHEARON, Abigail',
     victim: 'No',
     area: 'Surrey',
-    dob: '22 February 1993',
+    dob: '22/2/1993',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -235,7 +235,7 @@ module.exports = [
     leadDefendant: 'MURPHY, Robert',
     victim: 'No',
     area: 'North Yorkshire',
-    dob: '9 May 1976',
+    dob: '9/5/1976',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -246,7 +246,7 @@ module.exports = [
     leadDefendant: 'STEWART, Patricia',
     victim: 'No',
     area: 'Hampshire and Isle of Wight',
-    dob: '13 July 1989',
+    dob: '13/7/1989',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -257,7 +257,7 @@ module.exports = [
     leadDefendant: 'KING, Jonathan',
     victim: 'No',
     area: 'Cambridgeshire',
-    dob: '25 September 1974',
+    dob: '25/9/1974',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -268,7 +268,7 @@ module.exports = [
     leadDefendant: 'WASHINGTON, James',
     victim: 'No',
     area: 'Lincolnshire',
-    dob: '1 December 1988',
+    dob: '1/12/1988',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -279,7 +279,7 @@ module.exports = [
     leadDefendant: 'ROBINSON, Diane',
     victim: 'No',
     area: 'Thames Valley',
-    dob: '18 April 1982',
+    dob: '18/4/1982',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -290,7 +290,7 @@ module.exports = [
     leadDefendant: 'MASON, George',
     victim: 'No',
     area: 'Durham',
-    dob: '7 March 1971',
+    dob: '7/3/1971',
     service: 'Not onboarded',
     onboarded: false
   },
@@ -301,7 +301,7 @@ module.exports = [
     leadDefendant: 'PICKERTON, Gary',
     victim: 'No',
     area: 'Cheshire',
-    dob: '20 August 1994',
+    dob: '20/8/1994',
     service: 'Not onboarded',
     onboarded: false
   }

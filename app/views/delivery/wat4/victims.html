@@ -65,7 +65,7 @@
             <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="search-by-vlo" name="searchBy" type="radio" value="vlo-only" data-label="Victim liaison officer">
-                <label class="govuk-label govuk-radios__label" for="search-by-vlo">Victim liaison officer (VLO)</label>
+                <label class="govuk-label govuk-radios__label" for="search-by-vlo">Victims allocated to you</label>
               </div>
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="search-by-case-ref" name="searchBy" type="radio" value="case-reference" data-label="Case reference">
@@ -77,7 +77,7 @@
               </div>
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="search-by-service-area" name="searchBy" type="radio" value="service-area" data-label="Service and area">
-                <label class="govuk-label govuk-radios__label" for="search-by-service-area">Service, area and VLO</label>
+                <label class="govuk-label govuk-radios__label" for="search-by-service-area">Service, area and victim liaison officer</label>
               </div>
             </div>
           </fieldset>
@@ -120,18 +120,34 @@
         </div>
 
         <div class="govuk-form-group">
-          <label class="govuk-label govuk-label--s" for="dob-search-date">
-            Date of birth
-          </label>
-          <div class="govuk-hint" id="dob-search-date-hint">
-            Use the date picker or enter a date. For example, 17/05/2025
-          </div>
-          <div class="moj-datepicker" id="dob-search-date-picker" data-module="moj-date-picker">
-            <input type="text" class="govuk-input moj-js-datepicker-input" id="dob-search-date"
-              name="dob-search-date"
-              autocomplete="off"
-              aria-describedby="dob-search-date-hint" />
-          </div>
+          <fieldset class="govuk-fieldset" role="group" aria-describedby="dob-search-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              Date of birth
+            </legend>
+            <!-- <div id="dob-search-hint" class="govuk-hint">
+              For example, 27 3 2007
+            </div> -->
+            <div class="govuk-date-input" id="dob-search" style="white-space: nowrap;">
+              <div class="govuk-date-input__item" style="margin-right: 10px;">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="dob-search-day">Day</label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-search-day" name="dob-search-day" type="text" inputmode="numeric">
+                </div>
+              </div>
+              <div class="govuk-date-input__item" style="margin-right: 10px;">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="dob-search-month">Month</label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-search-month" name="dob-search-month" type="text" inputmode="numeric">
+                </div>
+              </div>
+              <div class="govuk-date-input__item" style="margin-right: 0;">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="dob-search-year">Year</label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="dob-search-year" name="dob-search-year" type="text" inputmode="numeric">
+                </div>
+              </div>
+            </div>
+          </fieldset>
         </div>
 
         <button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button">
@@ -147,13 +163,12 @@
 
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-        <div class="govuk-form-group">
+        <!-- <div class="govuk-form-group">
           <fieldset class="govuk-fieldset">
             <legend id="vlo-only-legend" class="govuk-fieldset__legend govuk-fieldset__legend--s">
               Victim liaison officer
             </legend>
             <div class="govuk-form-group govuk-!-margin-bottom-2">
-              <!-- <label class="govuk-label" for="vlo-only-autocomplete">Find Victim liaison officer</label> -->
               <div id="vlo-only-autocomplete"></div>
             </div>
             <ul id="vlo-only-chips-container" class="app-filter-tags govuk-!-margin-bottom-0 govuk-!-margin-top-2">
@@ -163,10 +178,10 @@
                 <input class="govuk-checkboxes__input vlo-checkbox" id="vlo-only-1" name="vlo" type="checkbox" value="thompson-sarah" data-label="THOMPSON, Sarah (you)">
                 <label class="govuk-label govuk-checkboxes__label" for="vlo-only-1">THOMPSON, Sarah (you)</label>
               </div>
-              <!-- <div class="govuk-checkboxes__item">
+              <div class="govuk-checkboxes__item">
                 <input class="govuk-checkboxes__input vlo-checkbox" id="vlo-only-21" name="vlo" type="checkbox" value="unassigned" data-label="Unassigned">
                 <label class="govuk-label govuk-checkboxes__label" for="vlo-only-21">Unassigned</label>
-              </div> -->
+              </div>
               <div class="govuk-checkboxes__item">
                 <input class="govuk-checkboxes__input vlo-checkbox" id="vlo-only-2" name="vlo" type="checkbox" value="kumar-priya" data-label="KUMAR, Priya">
                 <label class="govuk-label govuk-checkboxes__label" for="vlo-only-2">KUMAR, Priya</label>
@@ -245,7 +260,7 @@
               </div>
             </div>
           </fieldset>
-        </div>
+        </div> -->
 
         <button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button">
           Search
@@ -579,7 +594,7 @@
                 Date of birth
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ data['victimDateOfBirth'] | formatDate }}
+                {{ data['victimDateOfBirth'] }} ({{ data['victimAge'] }} years old)
               </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -671,7 +686,7 @@
                 Date of birth
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ record.dob }}
+                {{ record.dob }} ({{ record.dob | ageFromDob }} years old)
               </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -819,6 +834,10 @@
 {% endblock %}
 
 {% block pageScripts %}
+<script>
+  // Clear saved filter state so page always defaults to showing victims allocated to you (THOMPSON, Sarah)
+  try { localStorage.removeItem('vca-victims-filters'); } catch(e) {}
+</script>
 <script src="/public/javascripts/delivery/shared/filter-data.js"></script>
 <script src="/public/javascripts/delivery/shared/pagination.js"></script>
 <script src="/public/javascripts/delivery/shared/victims-pagination.js"></script>

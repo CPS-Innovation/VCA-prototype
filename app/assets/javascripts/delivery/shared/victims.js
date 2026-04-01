@@ -52,7 +52,9 @@ var initialSetupComplete = false;
             caseReferenceValue: document.getElementById('search-urn') ? document.getElementById('search-urn').value : '',
             searchUrnValue: document.getElementById('search-urn') ? document.getElementById('search-urn').value : '',
             victimNameSearchValue: document.getElementById('victim-name-search-input') ? document.getElementById('victim-name-search-input').value : '',
-            dobSearchDate: document.getElementById('dob-search-date') ? document.getElementById('dob-search-date').value : '',
+            dobSearchDay: document.getElementById('dob-search-day') ? document.getElementById('dob-search-day').value : '',
+            dobSearchMonth: document.getElementById('dob-search-month') ? document.getElementById('dob-search-month').value : '',
+            dobSearchYear: document.getElementById('dob-search-year') ? document.getElementById('dob-search-year').value : '',
             vloInput: document.querySelector('#vlo-autocomplete-input') ? document.querySelector('#vlo-autocomplete-input').value : '',
             victimInput: document.querySelector('#victim-autocomplete-input') ? document.querySelector('#victim-autocomplete-input').value : '',
             areaInput: document.querySelector('#area-autocomplete-input') ? document.querySelector('#area-autocomplete-input').value : ''
@@ -247,10 +249,18 @@ var initialSetupComplete = false;
                 victimNameSearchInput.value = state.victimNameSearchValue;
             }
             
-            // Restore DOB search field
-            var dobDate = document.getElementById('dob-search-date');
-            if (dobDate && state.dobSearchDate) {
-                dobDate.value = state.dobSearchDate;
+            // Restore DOB search fields
+            var dobDay = document.getElementById('dob-search-day');
+            if (dobDay && state.dobSearchDay) {
+                dobDay.value = state.dobSearchDay;
+            }
+            var dobMonth = document.getElementById('dob-search-month');
+            if (dobMonth && state.dobSearchMonth) {
+                dobMonth.value = state.dobSearchMonth;
+            }
+            var dobYear = document.getElementById('dob-search-year');
+            if (dobYear && state.dobSearchYear) {
+                dobYear.value = state.dobSearchYear;
             }
             
             // Return true because we had saved state to restore from
@@ -338,6 +348,15 @@ function applyVictimFilters() {
     // Combine both VLO selections
     selectedVlos = selectedVlos.concat(selectedServiceAreaVlos);
     
+    // Check if "Victims allocated to you" (vlo-only) mode is active
+    var vloOnlyRadio = document.getElementById('search-by-vlo');
+    var isVloOnlyMode = vloOnlyRadio && vloOnlyRadio.checked;
+    
+    // In vlo-only mode, force filter to THOMPSON, Sarah
+    if (isVloOnlyMode && searchFormSubmitted) {
+        selectedVlos = ['THOMPSON, Sarah (you)'];
+    }
+    
     var selectedVictims = Array.from(victimCheckboxes)
         .filter(function(cb) { return cb.checked; })
         .map(function(cb) { return cb.getAttribute('data-label'); });
@@ -360,6 +379,11 @@ function applyVictimFilters() {
     
     // Determine if search criteria filters are active (Service, Area, VLO)
     var hasSearchCriteria = selectedAreas.length > 0 || selectedServices.length > 0 || selectedVlos.length > 0;
+    
+    // In vlo-only mode, treat as having search criteria when submitted
+    if (isVloOnlyMode && searchFormSubmitted) {
+        hasSearchCriteria = true;
+    }
     
     // Show victims/filters only if: immediate filters are selected OR search form was submitted
     var shouldShowResults = hasImmediateFilters || (searchFormSubmitted && hasSearchCriteria);
@@ -719,25 +743,13 @@ var filtersRestored = window.restoreFiltersFromStorage();
 
 // Apply default filters on initial session (when no localStorage data exists)
 if (!filtersRestored) {
-    // Set default: "Search by Victim liaison officer" with "THOMPSON, Sarah (you)" selected
+    // Set default: "Victims allocated to you" selected
     var vloOnlyRadio = document.getElementById('search-by-vlo');
     if (vloOnlyRadio) {
         vloOnlyRadio.checked = true;
     }
     
-    // Show the VLO-only form section
-    var vloOnlyForm = document.getElementById('vlo-only-form');
-    if (vloOnlyForm) {
-        vloOnlyForm.style.display = '';
-    }
-    
-    // Check the "THOMPSON, Sarah (you)" VLO checkbox
-    var thompsonCheckbox = document.getElementById('vlo-only-1');
-    if (thompsonCheckbox) {
-        thompsonCheckbox.checked = true;
-    }
-    
-    // Set searchFormSubmitted to true so filters are applied
+    // Set searchFormSubmitted to true so THOMPSON, Sarah filter is applied automatically
     searchFormSubmitted = true;
     
     // Save the initial state to localStorage
@@ -836,9 +848,11 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
         
         // Show clear link if there are values
         var victimNameInput = document.getElementById('victim-name-search-input');
-        var dobDate = document.getElementById('dob-search-date');
+        var dobDay = document.getElementById('dob-search-day');
+        var dobMonth = document.getElementById('dob-search-month');
+        var dobYear = document.getElementById('dob-search-year');
         var hasValues = (victimNameInput && victimNameInput.value) ||
-                        (dobDate && dobDate.value);
+                        (dobDay && dobDay.value) || (dobMonth && dobMonth.value) || (dobYear && dobYear.value);
         var clearVictimNameDobWrapper = document.getElementById('clear-victim-name-dob-wrapper');
         if (hasValues && clearVictimNameDobWrapper) {
             clearVictimNameDobWrapper.style.display = '';
@@ -974,26 +988,22 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
                           'July', 'August', 'September', 'October', 'November', 'December'];
         
         var victimNameInput = document.getElementById('victim-name-search-input');
-        var dobDateInput = document.getElementById('dob-search-date');
+        var dobDayInput = document.getElementById('dob-search-day');
+        var dobMonthInput = document.getElementById('dob-search-month');
+        var dobYearInput = document.getElementById('dob-search-year');
         
         var searchName = victimNameInput ? victimNameInput.value.trim().toLowerCase() : '';
-        var dobDateValue = dobDateInput ? dobDateInput.value.trim() : '';
+        var dobDay = dobDayInput ? dobDayInput.value.trim() : '';
+        var dobMonth = dobMonthInput ? dobMonthInput.value.trim() : '';
+        var dobYear = dobYearInput ? dobYearInput.value.trim() : '';
         
-        // Build DOB search string for comparison (convert dd/mm/yyyy to "1 January 2000")
-        var dobSearchString = '';
-        if (dobDateValue) {
-            var parts = dobDateValue.split('/');
-            if (parts.length === 3) {
-                var day = parseInt(parts[0], 10);
-                var monthIndex = parseInt(parts[1], 10) - 1;
-                var year = parts[2];
-                if (monthIndex >= 0 && monthIndex < 12) {
-                    dobSearchString = day + ' ' + monthNames[monthIndex] + ' ' + year;
-                }
-            }
-        }
+        // Build DOB search parts for partial matching
+        var dobSearchDay = dobDay ? parseInt(dobDay, 10) : null;
+        var dobSearchMonth = dobMonth ? parseInt(dobMonth, 10) : null;
+        var dobSearchYear = dobYear || null;
+        var hasDobSearch = dobSearchDay !== null || dobSearchMonth !== null || dobSearchYear !== null;
         
-        var hasSearch = searchName !== '' || dobSearchString !== '';
+        var hasSearch = searchName !== '' || hasDobSearch;
         
         var victimContainer = document.getElementById('victims-container');
         var paginationNav = document.querySelector('nav.govuk-pagination');
@@ -1035,10 +1045,28 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
                 shouldShow = shouldShow && victimText.toLowerCase().indexOf(searchName) !== -1;
             }
             
-            // Match DOB
-            if (dobSearchString !== '') {
+            // Match DOB - supports partial matching (e.g. just year, or month and year)
+            if (hasDobSearch) {
                 var recordDob = getFieldValue('Date of birth');
-                shouldShow = shouldShow && recordDob === dobSearchString;
+                // Parse the record DOB which is in format "d/m/yyyy (age years old)"
+                var dobMatch = recordDob.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+                if (dobMatch) {
+                    var recordDay = parseInt(dobMatch[1], 10);
+                    var recordMonth = parseInt(dobMatch[2], 10);
+                    var recordYear = dobMatch[3];
+                    
+                    if (dobSearchDay !== null && recordDay !== dobSearchDay) {
+                        shouldShow = false;
+                    }
+                    if (dobSearchMonth !== null && recordMonth !== dobSearchMonth) {
+                        shouldShow = false;
+                    }
+                    if (dobSearchYear !== null && recordYear !== dobSearchYear) {
+                        shouldShow = false;
+                    }
+                } else {
+                    shouldShow = false;
+                }
             }
             
             record.setAttribute('data-filtered', shouldShow ? 'visible' : 'hidden');
@@ -1369,9 +1397,13 @@ if (clearVictimNameDobLink) {
         var victimNameInput = document.getElementById('victim-name-search-input');
         if (victimNameInput) victimNameInput.value = '';
         
-        // Clear DOB input
-        var dobDate = document.getElementById('dob-search-date');
-        if (dobDate) dobDate.value = '';
+        // Clear DOB inputs
+        var dobDay = document.getElementById('dob-search-day');
+        if (dobDay) dobDay.value = '';
+        var dobMonth = document.getElementById('dob-search-month');
+        if (dobMonth) dobMonth.value = '';
+        var dobYear = document.getElementById('dob-search-year');
+        if (dobYear) dobYear.value = '';
         
         // Reset search form submitted flag
         searchFormSubmitted = false;

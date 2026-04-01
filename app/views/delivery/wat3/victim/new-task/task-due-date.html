@@ -32,7 +32,7 @@
                         name="taskDueDate"
                         autocomplete="off"
                         aria-describedby="task-due-date-hint"
-                        value="{{ data['taskDueDate'] }}" />
+                        {% if fromCheck and data['taskDueDate'] %}value="{{ data['taskDueDate'] }}"{% endif %} />
                 </div>
             </div>
 
@@ -42,40 +42,4 @@
         </form>
     </div>
 </div>
-
-<script>
-    // Calculate today + 5 working days on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        var inputField = document.getElementById('task-due-date');
-        
-        // Only set default if no value is already present
-        if (!inputField.value) {
-            var targetDate = calculateWorkingDaysAhead(5);
-            inputField.value = formatDateForInput(targetDate);
-        }
-    });
-
-    function calculateWorkingDaysAhead(days) {
-        var date = new Date();
-        var count = 0;
-
-        while (count < days) {
-            date.setDate(date.getDate() + 1);
-            var dayOfWeek = date.getDay();
-            // 0 = Sunday, 6 = Saturday
-            if (dayOfWeek !== 0 && dayOfWeek !== 6) {
-                count++;
-            }
-        }
-
-        return date;
-    }
-
-    function formatDateForInput(date) {
-        var day = String(date.getDate()).padStart(2, '0');
-        var month = String(date.getMonth() + 1).padStart(2, '0');
-        var year = date.getFullYear();
-        return day + '/' + month + '/' + year;
-    }
-</script>
 {% endblock %}

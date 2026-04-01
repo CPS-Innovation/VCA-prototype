@@ -72,6 +72,10 @@
                 <label class="govuk-label govuk-radios__label" for="search-by-case-ref">Case reference</label>
               </div>
               <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="search-by-victim-name-dob" name="searchBy" type="radio" value="victim-name-dob" data-label="Victim name and date of birth">
+                <label class="govuk-label govuk-radios__label" for="search-by-victim-name-dob">Victim name and date of birth</label>
+              </div>
+              <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="search-by-service-area" name="searchBy" type="radio" value="service-area" data-label="Service and area">
                 <label class="govuk-label govuk-radios__label" for="search-by-service-area">Service, area and VLO</label>
               </div>
@@ -103,6 +107,41 @@
           <a class="govuk-link govuk-link--no-visited-state" href="#" id="clear-search-link">Clear search</a>
         </p>
       </div>
+
+      <form id="victim-name-dob-form" class="govuk-!-margin-bottom-0 govuk-!-padding-bottom-0" style="display: none;">
+
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="victim-name-search-input">
+            Victim name
+          </label>
+          <input type="text" class="govuk-input" id="victim-name-search-input" name="victim-name-search" autocomplete="off">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="dob-search-date">
+            Date of birth
+          </label>
+          <div class="govuk-hint" id="dob-search-date-hint">
+            Use the date picker or enter a date. For example, 17/05/2025
+          </div>
+          <div class="moj-datepicker" id="dob-search-date-picker" data-module="moj-date-picker">
+            <input type="text" class="govuk-input moj-js-datepicker-input" id="dob-search-date"
+              name="dob-search-date"
+              autocomplete="off"
+              aria-describedby="dob-search-date-hint" />
+          </div>
+        </div>
+
+        <button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button">
+          Search
+        </button>
+
+        <p class="govuk-body govuk-!-margin-top-4 govuk-!-margin-bottom-0" id="clear-victim-name-dob-wrapper" style="display: none;">
+          <a class="govuk-link govuk-link--no-visited-state" href="#" id="clear-victim-name-dob-link">Clear search</a>
+        </p>
+      </form>
 
       <form id="vlo-only-form" class="govuk-!-margin-bottom-0 govuk-!-padding-bottom-0" style="display: none;">
 
@@ -537,6 +576,14 @@
           <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
+                Date of birth
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['victimDateOfBirth'] | formatDate }}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
                 Case reference
               </dt>
               <dd class="govuk-summary-list__value">
@@ -619,6 +666,14 @@
           </h2>
           {% endif %}
           <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Date of birth
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ record.dob }}
+              </dd>
+            </div>
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                 Case reference

@@ -51,6 +51,8 @@ var initialSetupComplete = false;
             searchByValue: '',
             caseReferenceValue: document.getElementById('search-urn') ? document.getElementById('search-urn').value : '',
             searchUrnValue: document.getElementById('search-urn') ? document.getElementById('search-urn').value : '',
+            victimNameSearchValue: document.getElementById('victim-name-search-input') ? document.getElementById('victim-name-search-input').value : '',
+            dobSearchDate: document.getElementById('dob-search-date') ? document.getElementById('dob-search-date').value : '',
             vloInput: document.querySelector('#vlo-autocomplete-input') ? document.querySelector('#vlo-autocomplete-input').value : '',
             victimInput: document.querySelector('#victim-autocomplete-input') ? document.querySelector('#victim-autocomplete-input').value : '',
             areaInput: document.querySelector('#area-autocomplete-input') ? document.querySelector('#area-autocomplete-input').value : ''
@@ -237,6 +239,18 @@ var initialSetupComplete = false;
             var areaInput = document.querySelector('#area-autocomplete-input');
             if (areaInput && state.areaInput) {
                 areaInput.value = state.areaInput;
+            }
+            
+            // Restore victim name search input
+            var victimNameSearchInput = document.getElementById('victim-name-search-input');
+            if (victimNameSearchInput && state.victimNameSearchValue) {
+                victimNameSearchInput.value = state.victimNameSearchValue;
+            }
+            
+            // Restore DOB search field
+            var dobDate = document.getElementById('dob-search-date');
+            if (dobDate && state.dobSearchDate) {
+                dobDate.value = state.dobSearchDate;
             }
             
             // Return true because we had saved state to restore from
@@ -796,6 +810,8 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
         if (caseReferenceSection) caseReferenceSection.style.display = '';
         if (serviceAreaForm) serviceAreaForm.style.display = 'none';
         if (vloOnlyForm) vloOnlyForm.style.display = 'none';
+        var victimNameDobForm = document.getElementById('victim-name-dob-form');
+        if (victimNameDobForm) victimNameDobForm.style.display = 'none';
         if (selectedSearchCriteria) selectedSearchCriteria.style.display = 'none';
         
         // Also show the clear search link if there's a search value
@@ -809,11 +825,36 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
         if (searchInput && searchInput.value && window.applySearch) {
             window.applySearch();
         }
+    } else if (selectedSearchBy === 'victim-name-dob') {
+        // Show victim name and DOB form
+        if (caseReferenceSection) caseReferenceSection.style.display = 'none';
+        if (serviceAreaForm) serviceAreaForm.style.display = 'none';
+        if (vloOnlyForm) vloOnlyForm.style.display = 'none';
+        var victimNameDobForm = document.getElementById('victim-name-dob-form');
+        if (victimNameDobForm) victimNameDobForm.style.display = '';
+        if (selectedSearchCriteria) selectedSearchCriteria.style.display = 'none';
+        
+        // Show clear link if there are values
+        var victimNameInput = document.getElementById('victim-name-search-input');
+        var dobDate = document.getElementById('dob-search-date');
+        var hasValues = (victimNameInput && victimNameInput.value) ||
+                        (dobDate && dobDate.value);
+        var clearVictimNameDobWrapper = document.getElementById('clear-victim-name-dob-wrapper');
+        if (hasValues && clearVictimNameDobWrapper) {
+            clearVictimNameDobWrapper.style.display = '';
+        }
+        
+        // Apply search to show results if form was submitted
+        if (hasValues && searchFormSubmitted && window.applyVictimNameDobSearch) {
+            window.applyVictimNameDobSearch();
+        }
     } else if (selectedSearchBy === 'service-area') {
         // Show service/area form
         if (caseReferenceSection) caseReferenceSection.style.display = 'none';
         if (serviceAreaForm) serviceAreaForm.style.display = '';
         if (vloOnlyForm) vloOnlyForm.style.display = 'none';
+        var victimNameDobForm = document.getElementById('victim-name-dob-form');
+        if (victimNameDobForm) victimNameDobForm.style.display = 'none';
         var hasServiceOrAreaSelected = Array.from(document.querySelectorAll('.service-radio')).some(function(r) { return r.checked; }) ||
                                        Array.from(areaCheckboxes).some(function(cb) { return cb.checked; });
         if (hasServiceOrAreaSelected && selectedSearchCriteria) {
@@ -823,6 +864,8 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
         // Show VLO-only form
         if (caseReferenceSection) caseReferenceSection.style.display = 'none';
         if (serviceAreaForm) serviceAreaForm.style.display = 'none';
+        var victimNameDobForm = document.getElementById('victim-name-dob-form');
+        if (victimNameDobForm) victimNameDobForm.style.display = 'none';
         if (vloOnlyForm) vloOnlyForm.style.display = '';
     }
 })();
@@ -845,15 +888,28 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
                 if (caseReferenceSection) caseReferenceSection.style.display = '';
                 if (serviceAreaForm) serviceAreaForm.style.display = 'none';
                 if (vloOnlyForm) vloOnlyForm.style.display = 'none';
+                var victimNameDobForm = document.getElementById('victim-name-dob-form');
+                if (victimNameDobForm) victimNameDobForm.style.display = 'none';
+                if (selectedSearchCriteria) selectedSearchCriteria.style.display = 'none';
+            } else if (radio.value === 'victim-name-dob') {
+                if (caseReferenceSection) caseReferenceSection.style.display = 'none';
+                if (serviceAreaForm) serviceAreaForm.style.display = 'none';
+                if (vloOnlyForm) vloOnlyForm.style.display = 'none';
+                var victimNameDobForm = document.getElementById('victim-name-dob-form');
+                if (victimNameDobForm) victimNameDobForm.style.display = '';
                 if (selectedSearchCriteria) selectedSearchCriteria.style.display = 'none';
             } else if (radio.value === 'service-area') {
                 if (caseReferenceSection) caseReferenceSection.style.display = 'none';
                 if (serviceAreaForm) serviceAreaForm.style.display = '';
                 if (vloOnlyForm) vloOnlyForm.style.display = 'none';
+                var victimNameDobForm = document.getElementById('victim-name-dob-form');
+                if (victimNameDobForm) victimNameDobForm.style.display = 'none';
             } else if (radio.value === 'vlo-only') {
                 if (caseReferenceSection) caseReferenceSection.style.display = 'none';
                 if (serviceAreaForm) serviceAreaForm.style.display = 'none';
                 if (vloOnlyForm) vloOnlyForm.style.display = '';
+                var victimNameDobForm = document.getElementById('victim-name-dob-form');
+                if (victimNameDobForm) victimNameDobForm.style.display = 'none';
             }
         });
     });
@@ -912,12 +968,147 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
         }
     }
     
+    // Victim name and DOB search function
+    function applyVictimNameDobSearch() {
+        var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                          'July', 'August', 'September', 'October', 'November', 'December'];
+        
+        var victimNameInput = document.getElementById('victim-name-search-input');
+        var dobDateInput = document.getElementById('dob-search-date');
+        
+        var searchName = victimNameInput ? victimNameInput.value.trim().toLowerCase() : '';
+        var dobDateValue = dobDateInput ? dobDateInput.value.trim() : '';
+        
+        // Build DOB search string for comparison (convert dd/mm/yyyy to "1 January 2000")
+        var dobSearchString = '';
+        if (dobDateValue) {
+            var parts = dobDateValue.split('/');
+            if (parts.length === 3) {
+                var day = parseInt(parts[0], 10);
+                var monthIndex = parseInt(parts[1], 10) - 1;
+                var year = parts[2];
+                if (monthIndex >= 0 && monthIndex < 12) {
+                    dobSearchString = day + ' ' + monthNames[monthIndex] + ' ' + year;
+                }
+            }
+        }
+        
+        var hasSearch = searchName !== '' || dobSearchString !== '';
+        
+        var victimContainer = document.getElementById('victims-container');
+        var paginationNav = document.querySelector('nav.govuk-pagination');
+        
+        if (victimContainer) {
+            victimContainer.style.display = hasSearch ? '' : 'none';
+        }
+        if (paginationNav) {
+            paginationNav.style.display = hasSearch ? '' : 'none';
+        }
+        
+        var victimRecords = document.querySelectorAll('.govuk-summary-list');
+        var visibleCount = 0;
+        
+        victimRecords.forEach(function(record) {
+            var shouldShow = true;
+            
+            function getFieldValue(fieldName) {
+                var rows = record.querySelectorAll('.govuk-summary-list__row');
+                for (var i = 0; i < rows.length; i++) {
+                    var keyEl = rows[i].querySelector('.govuk-summary-list__key');
+                    if (keyEl && keyEl.textContent.trim() === fieldName) {
+                        var valueEl = rows[i].querySelector('.govuk-summary-list__value');
+                        return valueEl ? valueEl.textContent.trim() : '';
+                    }
+                }
+                return '';
+            }
+            
+            // Match victim name from the heading
+            if (searchName !== '') {
+                var parentWrapper = record.parentElement;
+                var headingEl = parentWrapper ? parentWrapper.querySelector('h2') : null;
+                var victimText = '';
+                if (headingEl) {
+                    var linkEl = headingEl.querySelector('a');
+                    victimText = linkEl ? linkEl.textContent.trim() : headingEl.textContent.trim();
+                }
+                shouldShow = shouldShow && victimText.toLowerCase().indexOf(searchName) !== -1;
+            }
+            
+            // Match DOB
+            if (dobSearchString !== '') {
+                var recordDob = getFieldValue('Date of birth');
+                shouldShow = shouldShow && recordDob === dobSearchString;
+            }
+            
+            record.setAttribute('data-filtered', shouldShow ? 'visible' : 'hidden');
+            record.style.display = shouldShow ? '' : 'none';
+            
+            var parentWrapper = record.parentElement;
+            if (parentWrapper && parentWrapper.classList.contains('govuk-!-margin-bottom-9')) {
+                parentWrapper.style.display = shouldShow ? '' : 'none';
+            }
+            
+            if (shouldShow) {
+                visibleCount++;
+            }
+        });
+        
+        // Update clear link visibility
+        var clearWrapper = document.getElementById('clear-victim-name-dob-wrapper');
+        if (clearWrapper) {
+            clearWrapper.style.display = hasSearch ? '' : 'none';
+        }
+        
+        // Show "no results" message
+        var noResultsMessage = document.getElementById('no-results-message');
+        if (visibleCount === 0 && hasSearch) {
+            if (!noResultsMessage) {
+                noResultsMessage = document.createElement('div');
+                noResultsMessage.id = 'no-results-message';
+                noResultsMessage.className = 'govuk-inset-text govuk-!-margin-top-0';
+                if (victimContainer) {
+                    victimContainer.parentNode.insertBefore(noResultsMessage, victimContainer.nextSibling);
+                }
+            }
+            noResultsMessage.textContent = 'No victims match your search.';
+            noResultsMessage.style.display = '';
+        } else if (noResultsMessage) {
+            noResultsMessage.style.display = 'none';
+        }
+        
+        if (window.recalculatePagination) {
+            window.recalculatePagination();
+        }
+    }
+    
+    // Expose globally
+    window.applyVictimNameDobSearch = applyVictimNameDobSearch;
+    
+    // Victim name and DOB form submission
+    function attachVictimNameDobFormListener() {
+        var victimNameDobForm = document.getElementById('victim-name-dob-form');
+        if (victimNameDobForm && !victimNameDobForm.dataset.listenerAttached) {
+            victimNameDobForm.dataset.listenerAttached = 'true';
+            victimNameDobForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                searchFormSubmitted = true;
+                applyVictimNameDobSearch();
+                window.saveFiltersToStorage();
+                return false;
+            }, true);
+        }
+    }
+    
     // Attach listener immediately and also on DOM ready to ensure it's set
     attachServiceAreaFormListener();
     attachVloOnlyFormListener();
+    attachVictimNameDobFormListener();
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', attachServiceAreaFormListener);
         document.addEventListener('DOMContentLoaded', attachVloOnlyFormListener);
+        document.addEventListener('DOMContentLoaded', attachVictimNameDobFormListener);
     }
     
     // Update filter storage for Service, Area, and VLO on checkbox change (but don't filter)
@@ -1164,6 +1355,57 @@ if (clearVloOnlyFiltersLink) {
         
         // Update UI and apply filters
         applyVictimFilters();
+        window.saveFiltersToStorage();
+    });
+}
+
+// Add click handler to Clear victim name and DOB search link
+var clearVictimNameDobLink = document.getElementById('clear-victim-name-dob-link');
+if (clearVictimNameDobLink) {
+    clearVictimNameDobLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        // Clear victim name input
+        var victimNameInput = document.getElementById('victim-name-search-input');
+        if (victimNameInput) victimNameInput.value = '';
+        
+        // Clear DOB input
+        var dobDate = document.getElementById('dob-search-date');
+        if (dobDate) dobDate.value = '';
+        
+        // Reset search form submitted flag
+        searchFormSubmitted = false;
+        
+        // Hide clear wrapper
+        var clearWrapper = document.getElementById('clear-victim-name-dob-wrapper');
+        if (clearWrapper) clearWrapper.style.display = 'none';
+        
+        // Hide results
+        var victimContainer = document.getElementById('victims-container');
+        if (victimContainer) victimContainer.style.display = 'none';
+        var paginationNav = document.querySelector('nav.govuk-pagination');
+        if (paginationNav) paginationNav.style.display = 'none';
+        
+        // Hide no results message
+        var noResultsMessage = document.getElementById('no-results-message');
+        if (noResultsMessage) noResultsMessage.style.display = 'none';
+        
+        // Reset all records
+        var victimRecords = document.querySelectorAll('.govuk-summary-list');
+        victimRecords.forEach(function(record) {
+            record.setAttribute('data-filtered', 'visible');
+            record.style.display = '';
+            var parentWrapper = record.parentElement;
+            if (parentWrapper && parentWrapper.classList.contains('govuk-!-margin-bottom-9')) {
+                parentWrapper.style.display = '';
+            }
+        });
+        
+        // Update results count
+        if (window.recalculatePagination) {
+            window.recalculatePagination();
+        }
+        
         window.saveFiltersToStorage();
     });
 }

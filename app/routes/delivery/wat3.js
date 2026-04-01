@@ -71,9 +71,9 @@ module.exports = router => {
 
         var nextTask = request.session.data['nextTask']
 
-        if (nextTask == "Other") {
+        if (nextTask == "other") {
             response.redirect("/delivery/wat3/onb/manual-task")
-        } else if (nextTask == "No task at this time") {
+        } else if (nextTask == "no-task") {
             response.redirect("/delivery/wat3/onb/check-task?manualTask=no")
         } else {
             response.redirect("/delivery/wat3/onb/next-task-due-date")
@@ -111,25 +111,41 @@ module.exports = router => {
         response.redirect("/delivery/wat3/onb/tasks?success=yes&successReason=assignee-updated")
     })
 
+    router.get('/delivery/wat3/victim/new-task/task-selection', function(request, response) {
+        var fromCheck = request.query.fromCheck === 'yes'
+        delete request.session.data['fromCheck']
+        response.render('delivery/wat3/victim/new-task/task-selection', {
+            fromCheck: fromCheck
+        })
+    })
+
     router.post('/delivery/wat3/victim/new-task/next-task-answer', function(request, response) {
 
         var nextTask = request.session.data['nextTask']
 
-        if (nextTask == "Inform of a decision to charge") {
+        if (nextTask == "dtc") {
             response.redirect("/delivery/wat3/victim/new-task/task-due-date?pcdType=dtc")
-        } else if (nextTask == "Inform of a no further action decision") {
+        } else if (nextTask == "nfa") {
             response.redirect("/delivery/wat3/victim/new-task/task-due-date?pcdType=nfa")
-        } else if (nextTask == "Inform of a stopped charge") {
+        } else if (nextTask == "stopped-charge") {
             response.redirect("/delivery/wat3/victim/new-task/task-due-date?vclType=stopped-charge")
-        } else if (nextTask == "Inform of a substantially altered charge") {
+        } else if (nextTask == "altered-charge") {
             response.redirect("/delivery/wat3/victim/new-task/task-due-date?vclType=altered-charge")
-        } else if (nextTask == "Other") {
+        } else if (nextTask == "other") {
             response.redirect("/delivery/wat3/victim/new-task/manual-task")
-        } else if (nextTask == "No task at this time") {
+        } else if (nextTask == "no-task") {
             response.redirect("/delivery/wat3/victim/new-task/check-task")
         } else {
             response.redirect("/delivery/wat3/victim/new-task/task-due-date")
         }
+    })
+
+    router.get('/delivery/wat3/victim/new-task/task-due-date', function(request, response) {
+        var fromCheck = request.query.fromCheck === 'yes'
+        delete request.session.data['fromCheck']
+        response.render('delivery/wat3/victim/new-task/task-due-date', {
+            fromCheck: fromCheck
+        })
     })
 
     router.post('/delivery/wat3/victim/new-task/task-due-date-answer', function(request, response) {

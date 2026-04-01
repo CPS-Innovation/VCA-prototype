@@ -82,10 +82,10 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 {% endblock %}
 
 {% block header %}
-<header class="govuk-header" data-module="govuk-header">
+<header class="govuk-header" data-module="govuk-header" style="background: var(--cps-color-theme)">
   <div class="govuk-header__container govuk-width-container">
     <div class="govuk-header__logo">
-      <a href="#" class="govuk-header__link govuk-header__link--homepage">
+      <a href="#" class="govuk-header__link govuk-header__link--homepage" style="background: var(--cps-color-theme)">
         <span class="" style="color: rgb(255, 255, 255); font-size: 28px; font-weight: bold;">CPS</span>
         <span data-expression="" class="" style="margin-left: 7px; color: rgb(255, 255, 255); font-size: 26px;">{{ serviceName }}</span>
       </a>
@@ -95,7 +95,7 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 {% endblock %}
 
 {% block footer %}
-<footer class="govuk-footer" style="border-top: 0;">
+<footer class="govuk-footer" style="border-top: 10px solid var(--cps-color-theme);">
   <div class="govuk-width-container">
     <h2 class="govuk-visually-hidden">About this website</h2>
     <ul class="govuk-footer__inline-list">

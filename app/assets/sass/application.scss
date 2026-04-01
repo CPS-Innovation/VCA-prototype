@@ -13,10 +13,30 @@
 @import "patterns/progress-tracker";
 @import "patterns/tasks-with-filters";
 
-.govuk-width-container {
-    max-width: 1320px;
-    padding-right: govuk-spacing(7);
-    padding-left: govuk-spacing(7);
+/*! ==============================================================================
+0. CPS Root - CSS Variables
+=============================================================================== */
+:root { 
+    /* Colour - GDS Brand  */
+    --gds-color-primary: #1d70b8;
+
+    /* Colour - CPS Brand */
+    --cps-color-theme: #002d9d; /* Banner, Footer */
+    --cps-color-theme-background: rgba(255, 255, 255, .1);
+    --cps-color-primary: var(--gds-color-primary);
+    --cps-color-neutral: #0b0c0c;
+}
+
+.cps-template .govuk-header {
+    background: var(--cps-color-theme);
+}
+
+@media (min-width: 40.0625em) {
+  .govuk-width-container {
+      max-width: 1320px;
+      padding-right: govuk-spacing(7);
+      padding-left: govuk-spacing(7);
+  }
 }
 
 .govuk-main-wrapper {

@@ -583,24 +583,23 @@
               </dd>
               {% if data['onboardedStatus'] != 'Yes' %}
               <dd class="govuk-summary-list__actions">
-                <a href="/delivery/wat3/onb/service-lead?detailChange=no" class="govuk-link">Onboard<span class="govuk-visually-hidden"> {{ data['victimSurname'] | upper }}, {{ data['victimForename'] }}</span></a>
+                <a href="/delivery/wat3/onb/service-lead?detailChange=no" class="govuk-link govuk-link--no-visited-state">Onboard<span class="govuk-visually-hidden"> {{ data['victimSurname'] | upper }}, {{ data['victimForename'] }}</span></a>
               </dd>
               {% endif %}
             </div>
-            {% if data['onboardedStatus'] == 'Yes' %}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Victim liaison officer
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ data['vlo'] or "Unassigned" }}
-              </dd>
-              {% elif data['onboardedStatus'] != 'Yes' %}
-              <dd class="govuk-summary-list__actions">
-                <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat3/vlo">Change<span class="govuk-visually-hidden"> vlo</span></a>
-              </dd>
+              {% if data['onboardedStatus'] == 'Yes' %}
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Victim liaison officer
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['vlo'] or "Unassigned" }}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat3/vlo">Change<span class="govuk-visually-hidden"> vlo</span></a>
+                </dd>
+              {% endif %}
             </div>
-            {% endif %}
           </dl>
         </div>
         {% endif %}

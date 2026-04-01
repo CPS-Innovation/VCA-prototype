@@ -80,5 +80,36 @@ window.FilterData = {
         { label: 'BROWN, Susan', value: 'brown-susan' },
         { label: 'DAVIES, Elizabeth', value: 'davies-elizabeth' },
         { label: 'MILLER, Jennifer', value: 'miller-jennifer' }
+    ],
+
+    victimSearchNames: [
+        'ADAMS, Helen',
+        'ANDREWS, Robert',
+        'BENNETT, Karen',
+        'CLARK, Margaret',
+        'COLLOCINI, Emiliano',
+        'COOPER, Tracey',
+        'EVANS, Gareth',
+        'GARCIA, Manuel',
+        'GREEN, Anthony',
+        'HARRIS, Richard',
+        'JONES, Oliver A',
+        'KELLY, Paul',
+        'KING, Wendy',
+        'LEWIS, Paul',
+        'MILLER, Catherine',
+        'MOORE, Margaret',
+        'MORRISON, Jennifer',
+        'OBERON, Shelly',
+        'PALMER, Susan',
+        'PHILLIPS, Sarah',
+        'PRICE, Vincent',
+        'RICHARDSON, David',
+        'ROSS, Elizabeth',
+        'RYAN, Nancy',
+        'STEWART, Angela',
+        'WALKER, Jessica',
+        'WHITE, Barbara',
+        'WOODLEY, Alfred'
     ]
 };

@@ -450,7 +450,8 @@
                   {{ data['manualTaskName'] }}
                 {% else %}
                   {{ data['nextTask'] }}
-                {% endif %}</span>
+                {% endif %}
+              </span>
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -541,7 +542,7 @@
                     <a href="/delivery/wat3/vcl/send/letter-details" class="govuk-link govuk-link--no-visited-state">Log letter details</a>
                   {% endif %}
                 {% endif %}
-              {% elif (data['nextTask'] == "Other") %}
+              {% elif (data['nextTask'] == "other") %}
                 <a href="/delivery/wat3/update-manual-task" class="govuk-link govuk-link--no-visited-state">Update task</a>
               {% endif %}
             </dd>

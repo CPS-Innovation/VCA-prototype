@@ -26,10 +26,28 @@
                 </dt>
                 {% if data['nextTask'] %}
                     <dd class="govuk-summary-list__value">
-                        {{ data['nextTask'] }}
+                        {% if data['nextTask'] == "dtc" %}
+                            Inform of a decision to charge
+                        {% elif data['nextTask'] == "nfa" %}
+                            Inform of a no further action decision
+                        {% elif data['nextTask'] == "stopped-charge" %}
+                            Inform of a stopped charge
+                        {% elif data['nextTask'] == "altered-charge" %}
+                            Inform of a substantially altered charge
+                        {% elif data['nextTask'] == "meeting-offer" %}
+                            Log offered meeting
+                        {% elif data['nextTask'] == "meeting-arranged" %}
+                            Log arranged meeting
+                        {% elif data['nextTask'] == "meeting-outcome" %}
+                            Log meeting outcome
+                        {% elif data['nextTask'] == "other" %}
+                            Another task (not listed)
+                        {% else %}
+                            {{ data['nextTask'] }}
+                        {% endif %}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat3/victim/new-task/task-selection">
+                        <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat3/victim/new-task/task-selection?fromCheck=yes">
                             Change<span class="govuk-visually-hidden"> next task</span>
                         </a>
                     </dd>
@@ -107,7 +125,7 @@
                             {{ data['taskDueDate'] | formatDate }}
                         </dd>
                         <dd class="govuk-summary-list__actions">
-                            <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat3/victim/new-task/task-due-date">
+                            <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat3/victim/new-task/task-due-date?fromCheck=yes">
                                 Change<span class="govuk-visually-hidden"> task due date</span>
                             </a>
                         </dd>

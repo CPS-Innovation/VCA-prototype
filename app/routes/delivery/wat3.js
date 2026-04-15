@@ -75,9 +75,16 @@ module.exports = router => {
             response.redirect("/delivery/wat3/onb/manual-task")
         } else if (nextTask == "no-task") {
             response.redirect("/delivery/wat3/onb/check-task?manualTask=no")
+        } else if (nextTask == "meeting-offer" || nextTask == "meeting-arranged" || nextTask == "meeting-outcome") {
+            response.redirect("/delivery/wat3/onb/meeting-purpose")
         } else {
             response.redirect("/delivery/wat3/onb/next-task-due-date")
         }
+    })
+
+    router.post('/delivery/wat3/onb/meeting-purpose-answer', function(request, response) {
+
+        response.redirect("/delivery/wat3/onb/next-task-due-date")
     })
 
     router.post('/delivery/wat3/onb/next-task-due-date-answer', function(request, response) {
@@ -135,9 +142,16 @@ module.exports = router => {
             response.redirect("/delivery/wat3/victim/new-task/manual-task")
         } else if (nextTask == "no-task") {
             response.redirect("/delivery/wat3/victim/new-task/check-task")
+        } else if (nextTask == "meeting-offer" || nextTask == "meeting-arranged" || nextTask == "meeting-outcome") {
+            response.redirect("/delivery/wat3/victim/new-task/meeting-purpose")
         } else {
             response.redirect("/delivery/wat3/victim/new-task/task-due-date")
         }
+    })
+
+    router.post('/delivery/wat3/victim/new-task/meeting-purpose-answer', function(request, response) {
+
+        response.redirect("/delivery/wat3/victim/new-task/task-due-date")
     })
 
     router.get('/delivery/wat3/victim/new-task/task-due-date', function(request, response) {

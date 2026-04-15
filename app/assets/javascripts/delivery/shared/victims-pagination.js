@@ -153,10 +153,12 @@
         if (resultsCountTop) resultsCountTop.textContent = resultsText;
         if (resultsCountBottom) resultsCountBottom.textContent = resultsText;
 
-        // Scroll to top of results
-        var container = document.getElementById('victims-container');
-        if (container) {
-            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Scroll to top of results (skip during initial page setup)
+        if (initialSetupComplete) {
+            var container = document.getElementById('victims-container');
+            if (container) {
+                container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
     }
 

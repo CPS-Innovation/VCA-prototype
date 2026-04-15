@@ -454,6 +454,28 @@
               </span>
             </dd>
           </div>
+          {% if (data['nextTask'] == "meeting-offer") or (data['nextTask'] == "meeting-arranged") or (data['nextTask'] == "meeting-outcome") %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Purpose
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if data['meetingPurpose'] == "pre-trial" %}
+                CPS pre-trial meeting
+              {% elif data['meetingPurpose'] == "charging-decision" %}
+                Inform victim about charging decision
+              {% elif data['meetingPurpose'] == "stopped-altered" %}
+                Stopped or substantially altered charge (VCL Scheme)
+              {% elif data['meetingPurpose'] == "vrr" %}
+                Victims' Right to Review (VRR)
+              {% elif data['meetingPurpose'] == "complaint" %}
+                Complaint about victim care
+              {% else %}
+                {{ data['meetingPurposeDetails'] }}
+              {% endif %}
+            </dd>
+          </div>
+          {% endif %}
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Due date
@@ -564,6 +586,16 @@
             <span class="govuk-!-font-weight-bold">{{ record.task }}</span>
           </dd>
         </div>
+        {% if record.purpose %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Purpose
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ record.purpose }}
+          </dd>
+        </div>
+        {% endif %}
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Due date

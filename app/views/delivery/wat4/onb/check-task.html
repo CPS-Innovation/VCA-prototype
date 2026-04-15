@@ -61,6 +61,33 @@
             </div>
             {% if data['nextTask'] == "no-task" %}
             {% else %}
+                {% if data['nextTask'] == "meeting-offer" or data['nextTask'] == "meeting-arranged" or data['nextTask'] == "meeting-outcome" %}
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Purpose
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {% if data['meetingPurpose'] == "pre-trial" %}
+                                CPS pre-trial meeting
+                            {% elif data['meetingPurpose'] == "charging-decision" %}
+                                Inform victim about charging decision
+                            {% elif data['meetingPurpose'] == "stopped-altered" %}
+                                Stopped or substantially altered charge (VCL Scheme)
+                            {% elif data['meetingPurpose'] == "vrr" %}
+                                Victims' Right to Review (VRR)
+                            {% elif data['meetingPurpose'] == "complaint" %}
+                                Victim complaint
+                            {% else %}
+                                {{ data['meetingPurposeDetails'] }}
+                            {% endif %}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat4/onb/meeting-purpose">
+                                Change<span class="govuk-visually-hidden"> meeting purpose</span>
+                            </a>
+                        </dd>
+                    </div>
+                {% endif %}
                 {% if data['manualTask'] == "yes" %}
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">

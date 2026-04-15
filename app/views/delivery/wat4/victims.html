@@ -45,6 +45,16 @@
   </div>
 </div>
 
+<div class="govuk-error-summary" id="error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary" style="display: none;">
+  <h2 class="govuk-error-summary__title" id="error-summary-title">
+    There is a problem
+  </h2>
+  <div class="govuk-error-summary__body">
+    <ul class="govuk-list govuk-error-summary__list" id="error-summary-list">
+    </ul>
+  </div>
+</div>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
 
@@ -113,10 +123,22 @@
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
         <div class="govuk-form-group">
-          <label class="govuk-label govuk-label--s" for="victim-name-search-input">
-            Victim name
-          </label>
-          <input type="text" class="govuk-input" id="victim-name-search-input" name="victim-name-search" autocomplete="off">
+          <fieldset class="govuk-fieldset" role="group">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              Victim name
+            </legend>
+            <div class="govuk-form-group" id="victim-family-name-form-group">
+              <label class="govuk-label" for="victim-family-name-search-input">Family or company name</label>
+              <p id="victim-family-name-error" class="govuk-error-message" style="display: none;">
+                <span class="govuk-visually-hidden">Error:</span> Enter a family name or company name
+              </p>
+              <input type="text" class="govuk-input" id="victim-family-name-search-input" name="victim-family-name-search" autocomplete="off">
+            </div>
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="victim-given-names-search-input">Given name(s)</label>
+              <input type="text" class="govuk-input" id="victim-given-names-search-input" name="victim-given-names-search" autocomplete="off">
+            </div>
+          </fieldset>
         </div>
 
         <div class="govuk-form-group">

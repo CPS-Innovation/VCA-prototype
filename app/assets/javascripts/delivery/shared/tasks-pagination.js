@@ -129,10 +129,12 @@
         var resultsText = 'Showing results ' + firstResult + ' to ' + lastResult + ' of ' + visibleRecords.length + ' total results';
         if (resultsCountTop) resultsCountTop.textContent = resultsText;
 
-        // Scroll to top of results
-        var heading = document.getElementById('main-heading');
-        if (heading) {
-            heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Scroll to top of results (skip during initial page setup)
+        if (initialSetupComplete) {
+            var heading = document.getElementById('main-heading');
+            if (heading) {
+                heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
     }
 

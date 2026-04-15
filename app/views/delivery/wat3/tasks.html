@@ -454,6 +454,28 @@
               </span>
             </dd>
           </div>
+          {% if (data['nextTask'] == "meeting-offer") or (data['nextTask'] == "meeting-arranged") or (data['nextTask'] == "meeting-outcome") %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Purpose
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if data['meetingPurpose'] == "pre-trial" %}
+                CPS pre-trial meeting
+              {% elif data['meetingPurpose'] == "charging-decision" %}
+                Inform victim about charging decision
+              {% elif data['meetingPurpose'] == "stopped-altered" %}
+                Stopped or substantially altered charge (VCL Scheme)
+              {% elif data['meetingPurpose'] == "vrr" %}
+                Victims' Right to Review (VRR)
+              {% elif data['meetingPurpose'] == "complaint" %}
+                Complaint about victim care
+              {% else %}
+                {{ data['meetingPurposeDetails'] }}
+              {% endif %}
+            </dd>
+          </div>
+          {% endif %}
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Due date
@@ -517,9 +539,9 @@
                 {% elif (data['pcdStatus'] == "select-fumoc") %}
                   <a href="/delivery/wat3/pcd/call/follow-up-moc" class="govuk-link govuk-link--no-visited-state">Select letter dispatch method</a>
                 {% elif (data['pcdStatus'] == "informed-after-call-1") or (data['pcdStatus'] == "informed-after-call-2") or (data['pcdStatus'] == "informed-after-call-3") %}
-                  {% if (data['pcdFumoc'] == "email") %}
+                  {% if (data['pcdFumoc'] == "Email") %}
                     <a href="/delivery/wat3/pcd/send/email-details" class="govuk-link govuk-link--no-visited-state">Log email details</a>
-                  {% elif (data['pcdFumoc'] == "post") %}
+                  {% elif (data['pcdFumoc'] == "Post") %}
                     <a href="/delivery/wat3/pcd/send/letter-details" class="govuk-link govuk-link--no-visited-state">Log letter details</a>
                   {% endif %}
                 {% endif %}
@@ -536,9 +558,9 @@
                 {% elif (data['vclStatus'] == "select-fumoc") %}
                   <a href="/delivery/wat3/vcl/call/follow-up-moc" class="govuk-link govuk-link--no-visited-state">Select letter dispatch method</a>
                 {% elif (data['vclStatus'] == "informed-after-call-1") or (data['vclStatus'] == "informed-after-call-2") or (data['vclStatus'] == "informed-after-call-3") %}
-                  {% if (data['vclFumoc'] == "email") %}
+                  {% if (data['vclFumoc'] == "Email") %}
                     <a href="/delivery/wat3/vcl/send/email-details" class="govuk-link govuk-link--no-visited-state">Log email details</a>
-                  {% elif (data['vclFumoc'] == "post") %}
+                  {% elif (data['vclFumoc'] == "Post") %}
                     <a href="/delivery/wat3/vcl/send/letter-details" class="govuk-link govuk-link--no-visited-state">Log letter details</a>
                   {% endif %}
                 {% endif %}
@@ -564,6 +586,16 @@
             <span class="govuk-!-font-weight-bold">{{ record.task }}</span>
           </dd>
         </div>
+        {% if record.purpose %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Purpose
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ record.purpose }}
+          </dd>
+        </div>
+        {% endif %}
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Due date

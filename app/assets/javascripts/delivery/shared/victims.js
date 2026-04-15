@@ -52,6 +52,8 @@ var initialSetupComplete = false;
             caseReferenceValue: document.getElementById('search-urn') ? document.getElementById('search-urn').value : '',
             searchUrnValue: document.getElementById('search-urn') ? document.getElementById('search-urn').value : '',
             victimNameSearchValue: document.getElementById('victim-name-search-input') ? document.getElementById('victim-name-search-input').value : '',
+            victimFamilyNameSearchValue: document.getElementById('victim-family-name-search-input') ? document.getElementById('victim-family-name-search-input').value : '',
+            victimGivenNamesSearchValue: document.getElementById('victim-given-names-search-input') ? document.getElementById('victim-given-names-search-input').value : '',
             dobSearchDay: document.getElementById('dob-search-day') ? document.getElementById('dob-search-day').value : '',
             dobSearchMonth: document.getElementById('dob-search-month') ? document.getElementById('dob-search-month').value : '',
             dobSearchYear: document.getElementById('dob-search-year') ? document.getElementById('dob-search-year').value : '',
@@ -249,6 +251,16 @@ var initialSetupComplete = false;
                 victimNameSearchInput.value = state.victimNameSearchValue;
             }
             
+            // Restore split victim name search inputs
+            var victimFamilyNameInput = document.getElementById('victim-family-name-search-input');
+            if (victimFamilyNameInput && state.victimFamilyNameSearchValue) {
+                victimFamilyNameInput.value = state.victimFamilyNameSearchValue;
+            }
+            var victimGivenNamesInput = document.getElementById('victim-given-names-search-input');
+            if (victimGivenNamesInput && state.victimGivenNamesSearchValue) {
+                victimGivenNamesInput.value = state.victimGivenNamesSearchValue;
+            }
+            
             // Restore DOB search fields
             var dobDay = document.getElementById('dob-search-day');
             if (dobDay && state.dobSearchDay) {
@@ -373,6 +385,10 @@ function applyVictimFilters() {
         .filter(function(cb) { return cb.checked; })
         .map(function(cb) { return cb.value; });
     
+    // Check if "Service, area and victim liaison officer" mode is active
+    var serviceAreaRadio = document.getElementById('search-by-service-area');
+    var isServiceAreaMode = serviceAreaRadio && serviceAreaRadio.checked;
+    
     // Determine if any immediate filters are active (Victim, Category)
     var hasImmediateFilters = selectedVictims.length > 0 || 
                               selectedVictimCategories.length > 0;
@@ -424,6 +440,14 @@ function applyVictimFilters() {
                 }
             }
             return '';
+        }
+        
+        // In service-area mode, only show onboarded victims
+        if (isServiceAreaMode && searchFormSubmitted) {
+            var recordServiceValue = getFieldValue('Service');
+            if (recordServiceValue.indexOf('Not onboarded') !== -1) {
+                shouldShow = false;
+            }
         }
         
         // Check Victim liaison officer filter (only apply if search form has been submitted)
@@ -848,10 +872,14 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
         
         // Show clear link if there are values
         var victimNameInput = document.getElementById('victim-name-search-input');
+        var victimFamilyNameInput = document.getElementById('victim-family-name-search-input');
+        var victimGivenNamesInput = document.getElementById('victim-given-names-search-input');
         var dobDay = document.getElementById('dob-search-day');
         var dobMonth = document.getElementById('dob-search-month');
         var dobYear = document.getElementById('dob-search-year');
         var hasValues = (victimNameInput && victimNameInput.value) ||
+                        (victimFamilyNameInput && victimFamilyNameInput.value) ||
+                        (victimGivenNamesInput && victimGivenNamesInput.value) ||
                         (dobDay && dobDay.value) || (dobMonth && dobMonth.value) || (dobYear && dobYear.value);
         var clearVictimNameDobWrapper = document.getElementById('clear-victim-name-dob-wrapper');
         if (hasValues && clearVictimNameDobWrapper) {
@@ -988,11 +1016,15 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
                           'July', 'August', 'September', 'October', 'November', 'December'];
         
         var victimNameInput = document.getElementById('victim-name-search-input');
+        var victimFamilyNameInput = document.getElementById('victim-family-name-search-input');
+        var victimGivenNamesInput = document.getElementById('victim-given-names-search-input');
         var dobDayInput = document.getElementById('dob-search-day');
         var dobMonthInput = document.getElementById('dob-search-month');
         var dobYearInput = document.getElementById('dob-search-year');
         
         var searchName = victimNameInput ? victimNameInput.value.trim().toLowerCase() : '';
+        var searchFamilyName = victimFamilyNameInput ? victimFamilyNameInput.value.trim().toLowerCase() : '';
+        var searchGivenNames = victimGivenNamesInput ? victimGivenNamesInput.value.trim().toLowerCase() : '';
         var dobDay = dobDayInput ? dobDayInput.value.trim() : '';
         var dobMonth = dobMonthInput ? dobMonthInput.value.trim() : '';
         var dobYear = dobYearInput ? dobYearInput.value.trim() : '';
@@ -1003,7 +1035,7 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
         var dobSearchYear = dobYear || null;
         var hasDobSearch = dobSearchDay !== null || dobSearchMonth !== null || dobSearchYear !== null;
         
-        var hasSearch = searchName !== '' || hasDobSearch;
+        var hasSearch = searchName !== '' || searchFamilyName !== '' || searchGivenNames !== '' || hasDobSearch;
         
         var victimContainer = document.getElementById('victims-container');
         var paginationNav = document.querySelector('nav.govuk-pagination');
@@ -1034,15 +1066,39 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
             }
             
             // Match victim name from the heading
+            var parentWrapper = record.parentElement;
+            var headingEl = parentWrapper ? parentWrapper.querySelector('h2') : null;
+            var victimText = '';
+            if (headingEl) {
+                var linkEl = headingEl.querySelector('a');
+                victimText = linkEl ? linkEl.textContent.trim() : headingEl.textContent.trim();
+            }
+            var victimTextLower = victimText.toLowerCase();
+            
+            // Single field search (legacy)
             if (searchName !== '') {
-                var parentWrapper = record.parentElement;
-                var headingEl = parentWrapper ? parentWrapper.querySelector('h2') : null;
-                var victimText = '';
-                if (headingEl) {
-                    var linkEl = headingEl.querySelector('a');
-                    victimText = linkEl ? linkEl.textContent.trim() : headingEl.textContent.trim();
+                shouldShow = shouldShow && victimTextLower.indexOf(searchName) !== -1;
+            }
+            
+            // Split field search - match family name against surname part and given names against forename part
+            if (searchFamilyName !== '' || searchGivenNames !== '') {
+                // Heading format is "SURNAME, Forename" - split on comma
+                var nameParts = victimText.split(',');
+                var surnameText = nameParts[0] ? nameParts[0].trim().toLowerCase() : '';
+                var forenameText = nameParts[1] ? nameParts[1].trim().toLowerCase() : '';
+                
+                if (searchFamilyName !== '') {
+                    shouldShow = shouldShow && surnameText.indexOf(searchFamilyName) !== -1;
                 }
-                shouldShow = shouldShow && victimText.toLowerCase().indexOf(searchName) !== -1;
+                if (searchGivenNames !== '') {
+                    shouldShow = shouldShow && forenameText.indexOf(searchGivenNames) !== -1;
+                }
+            }
+            
+            // Only show onboarded victims
+            var recordService = getFieldValue('Service');
+            if (recordService.indexOf('Not onboarded') !== -1) {
+                shouldShow = false;
             }
             
             // Match DOB - supports partial matching (e.g. just year, or month and year)
@@ -1113,6 +1169,40 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
     // Expose globally
     window.applyVictimNameDobSearch = applyVictimNameDobSearch;
     
+    // Validation: show/clear error for family name field
+    function showFamilyNameError() {
+        var formGroup = document.getElementById('victim-family-name-form-group');
+        var errorMessage = document.getElementById('victim-family-name-error');
+        var input = document.getElementById('victim-family-name-search-input');
+        var errorSummary = document.getElementById('error-summary');
+        var errorSummaryList = document.getElementById('error-summary-list');
+
+        if (formGroup) formGroup.classList.add('govuk-form-group--error');
+        if (errorMessage) errorMessage.style.display = '';
+        if (input) input.classList.add('govuk-input--error');
+
+        if (errorSummary && errorSummaryList) {
+            errorSummaryList.innerHTML = '<li><a href="#victim-family-name-search-input">Enter a family name or company name</a></li>';
+            errorSummary.style.display = '';
+            errorSummary.focus();
+        }
+    }
+
+    function clearFamilyNameError() {
+        var formGroup = document.getElementById('victim-family-name-form-group');
+        var errorMessage = document.getElementById('victim-family-name-error');
+        var input = document.getElementById('victim-family-name-search-input');
+        var errorSummary = document.getElementById('error-summary');
+        var errorSummaryList = document.getElementById('error-summary-list');
+
+        if (formGroup) formGroup.classList.remove('govuk-form-group--error');
+        if (errorMessage) errorMessage.style.display = 'none';
+        if (input) input.classList.remove('govuk-input--error');
+
+        if (errorSummary) errorSummary.style.display = 'none';
+        if (errorSummaryList) errorSummaryList.innerHTML = '';
+    }
+
     // Victim name and DOB form submission
     function attachVictimNameDobFormListener() {
         var victimNameDobForm = document.getElementById('victim-name-dob-form');
@@ -1121,6 +1211,16 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
             victimNameDobForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
+
+                var familyNameInput = document.getElementById('victim-family-name-search-input');
+                var familyNameValue = familyNameInput ? familyNameInput.value.trim() : '';
+
+                if (familyNameValue === '') {
+                    showFamilyNameError();
+                    return false;
+                }
+
+                clearFamilyNameError();
                 searchFormSubmitted = true;
                 applyVictimNameDobSearch();
                 window.saveFiltersToStorage();
@@ -1396,6 +1496,12 @@ if (clearVictimNameDobLink) {
         // Clear victim name input
         var victimNameInput = document.getElementById('victim-name-search-input');
         if (victimNameInput) victimNameInput.value = '';
+        
+        // Clear split victim name inputs
+        var victimFamilyNameInput = document.getElementById('victim-family-name-search-input');
+        if (victimFamilyNameInput) victimFamilyNameInput.value = '';
+        var victimGivenNamesInput = document.getElementById('victim-given-names-search-input');
+        if (victimGivenNamesInput) victimGivenNamesInput.value = '';
         
         // Clear DOB inputs
         var dobDay = document.getElementById('dob-search-day');

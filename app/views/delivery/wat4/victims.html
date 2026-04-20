@@ -83,7 +83,7 @@
               </div>
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="search-by-victim-name-dob" name="searchBy" type="radio" value="victim-name-dob" data-label="Victim name and date of birth">
-                <label class="govuk-label govuk-radios__label" for="search-by-victim-name-dob">Victim name and date of birth</label>
+                <label class="govuk-label govuk-radios__label" for="search-by-victim-name-dob">Victim name</label>
               </div>
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="search-by-service-area" name="searchBy" type="radio" value="service-area" data-label="Service and area">
@@ -128,14 +128,14 @@
               Victim name
             </legend>
             <div class="govuk-form-group" id="victim-family-name-form-group">
-              <label class="govuk-label" for="victim-family-name-search-input">Family or company name</label>
+              <label class="govuk-label" for="victim-family-name-search-input">Last name</label>
               <p id="victim-family-name-error" class="govuk-error-message" style="display: none;">
-                <span class="govuk-visually-hidden">Error:</span> Enter a family name or company name
+                <span class="govuk-visually-hidden">Error:</span> Enter a last name
               </p>
               <input type="text" class="govuk-input" id="victim-family-name-search-input" name="victim-family-name-search" autocomplete="off">
             </div>
             <div class="govuk-form-group">
-              <label class="govuk-label" for="victim-given-names-search-input">Given name(s)</label>
+              <label class="govuk-label" for="victim-given-names-search-input">First name (optional)</label>
               <input type="text" class="govuk-input" id="victim-given-names-search-input" name="victim-given-names-search" autocomplete="off">
             </div>
           </fieldset>
@@ -144,7 +144,7 @@
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset" role="group" aria-describedby="dob-search-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-              Date of birth
+              Date of birth (optional)
             </legend>
             <!-- <div id="dob-search-hint" class="govuk-hint">
               For example, 27 3 2007

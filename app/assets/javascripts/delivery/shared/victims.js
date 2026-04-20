@@ -1182,7 +1182,7 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
         if (input) input.classList.add('govuk-input--error');
 
         if (errorSummary && errorSummaryList) {
-            errorSummaryList.innerHTML = '<li><a href="#victim-family-name-search-input">Enter a family name or company name</a></li>';
+            errorSummaryList.innerHTML = '<li><a href="#victim-family-name-search-input">Enter a last name</a></li>';
             errorSummary.style.display = '';
             errorSummary.focus();
         }

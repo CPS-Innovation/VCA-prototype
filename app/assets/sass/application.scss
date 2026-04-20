@@ -4,6 +4,7 @@
 // 
 
 // Add extra styles here
+@import "settings";
 @import "patterns/accessible-autocomplete";
 @import "patterns/content-editor";
 @import "patterns/filter-panel";
@@ -12,6 +13,14 @@
 @import "patterns/overview-cards";
 @import "patterns/progress-tracker";
 @import "patterns/tasks-with-filters";
+
+@font-face {
+    font-family: 'New Transport';
+    src: url('../fonts/NewTransportCPS-Regular.woff2') format('woff2'),
+         url('../fonts/NewTransportCPS-Regular.woff') format('woff'),
+         url('../fonts/NewTransportCPS-Bold.woff2') format('woff2'),
+         url('../fonts/NewTransportCPS-Bold.woff') format('woff');
+}
 
 /*! ==============================================================================
 0. CPS Root - CSS Variables

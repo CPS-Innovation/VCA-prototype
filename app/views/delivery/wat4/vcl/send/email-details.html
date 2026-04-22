@@ -36,6 +36,28 @@
                 </div>
             </div>
 
+            <div class="govuk-form-group" id="error-form-group-2">
+                <fieldset class="govuk-fieldset" aria-describedby="info-pack-sent-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Was the information pack sent to the victim?
+                    </legend>
+                    <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="info-pack-sent" name="infoPackSent" type="radio" value="Yes">
+                            <label class="govuk-label govuk-radios__label" for="info-pack-sent">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="info-pack-sent-2" name="infoPackSent" type="radio" value="No">
+                            <label class="govuk-label govuk-radios__label" for="info-pack-sent-2">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
             <div class="govuk-form-group">
                 <h1 class="govuk-label-wrapper">
                     <label class="govuk-label govuk-label--m" for="email-dispatch-notes">
@@ -55,5 +77,5 @@
 {% endblock %}
 
 {% block pageScripts %}
-<script src="/public/javascripts/delivery/shared/pcd/send/email-details.js"></script>
+<script src="/public/javascripts/delivery/shared/vcl/send/email-details.js"></script>
 {% endblock %}

@@ -1170,7 +1170,8 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
     window.applyVictimNameDobSearch = applyVictimNameDobSearch;
     
     // Validation: show/clear error for family name field
-    function showFamilyNameError() {
+    function showFamilyNameError(message) {
+        var errorText = message || 'Enter a last name';
         var formGroup = document.getElementById('victim-family-name-form-group');
         var errorMessage = document.getElementById('victim-family-name-error');
         var input = document.getElementById('victim-family-name-search-input');
@@ -1178,11 +1179,14 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
         var errorSummaryList = document.getElementById('error-summary-list');
 
         if (formGroup) formGroup.classList.add('govuk-form-group--error');
-        if (errorMessage) errorMessage.style.display = '';
+        if (errorMessage) {
+            errorMessage.innerHTML = '<span class="govuk-visually-hidden">Error:</span> ' + errorText;
+            errorMessage.style.display = '';
+        }
         if (input) input.classList.add('govuk-input--error');
 
         if (errorSummary && errorSummaryList) {
-            errorSummaryList.innerHTML = '<li><a href="#victim-family-name-search-input">Enter a last name</a></li>';
+            errorSummaryList.innerHTML = '<li><a href="#victim-family-name-search-input">' + errorText + '</a></li>';
             errorSummary.style.display = '';
             errorSummary.focus();
         }
@@ -1216,7 +1220,12 @@ if (Array.from(victimCheckboxes).some(function (cb) { return cb.checked; })) {
                 var familyNameValue = familyNameInput ? familyNameInput.value.trim() : '';
 
                 if (familyNameValue === '') {
-                    showFamilyNameError();
+                    showFamilyNameError('Enter a last name');
+                    return false;
+                }
+
+                if (familyNameValue.length < 2) {
+                    showFamilyNameError('Last name must be 2 characters or more');
                     return false;
                 }
 

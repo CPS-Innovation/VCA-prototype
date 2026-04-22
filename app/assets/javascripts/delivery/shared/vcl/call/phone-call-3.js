@@ -4,6 +4,8 @@ function validateForm() {
   $('#error-form-group-2').removeClass('govuk-form-group--error');
   $('#error-form-group-3').removeClass('govuk-form-group--error');
   $('#error-form-group-4').removeClass('govuk-form-group--error');
+  $('#error-form-group-5').removeClass('govuk-form-group--error');
+  $('#error-form-group-6').removeClass('govuk-form-group--error');
   $('#phone-call-date-3').removeClass('govuk-input--error');
   $('#call-hour-3').removeClass('govuk-input--error');
   $('#call-minutes-3').removeClass('govuk-input--error');
@@ -13,22 +15,29 @@ function validateForm() {
   $('#error-message-2').remove();
   $('#error-message-3').remove();
   $('#error-message-4').remove();
+  $('#error-message-5').remove();
+  $('#error-message-6').remove();
   $('#error-message-1').html('');
   $('#error-message-2').html('');
   $('#error-message-3').html('');
   $('#error-message-4').html('');
+  $('#error-message-5').html('');
+  $('#error-message-6').html('');
   $('#error-summary').remove();
   $('#error-summary-list').html('');
   $('#error-list-item-1').html('');
   $('#error-list-item-2').html('');
   $('#error-list-item-3').html('');
   $('#error-list-item-4').html('');
+  $('#error-list-item-5').html('');
+  $('#error-list-item-6').html('');
   
   var vclCallDate3 = document.forms["myForm"]["vclCallDate3"].value;
   var vclCallHour3 = document.forms["myForm"]["vclCallHour3"].value;
   var vclCallMinutes3 = document.forms["myForm"]["vclCallMinutes3"].value;
   var vclVictimInformed3 = $('[name=vclVictimInformed3]');
   var vclCallType3 = $('[name=vclCallType3]');
+  var vclSurveyInterviewDiscussed3 = $('[name=vclSurveyInterviewDiscussed3]');
 
   const callDate3Array = vclCallDate3.split("/");
   var callDay3 = callDate3Array[0];
@@ -37,11 +46,11 @@ function validateForm() {
   var newFormat = callYear3 + '-' + callMonth3 + '-' + callDay3;
   //alert('New format is ' + newFormat);
 
-  if (vclCallDate3 == "" || vclCallDate3 == null || vclCallHour3 == "" || vclCallHour3 == null || vclCallMinutes3 == "" || vclCallMinutes3 == null ||vclVictimInformed3 == "" || vclVictimInformed3 == null || vclCallType3 == "" || vclCallType3 == null) {
+  if (vclCallDate3 == "" || vclCallDate3 == null || vclCallHour3 == "" || vclCallHour3 == null || vclCallMinutes3 == "" || vclCallMinutes3 == null ||vclVictimInformed3 == "" || vclVictimInformed3 == null || vclCallType3 == "" || vclCallType3 == null || !$('[name=vclSupportSignposted3]').is(':checked') || !vclSurveyInterviewDiscussed3.is(':checked')) {
 
     // Error summary
     $('#myForm').before(
-      '<div id="error-summary" class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary"><h2 class="govuk-error-summary__title" id="error-summary-title">There is a problem</h2><div class="govuk-error-summary__body"><ul class="govuk-list govuk-error-summary__list"><li id="error-list-item-1"></li><li id="error-list-item-2"></li><li id="error-list-item-3"></li><li id="error-list-item-4"></li></ul></div></div>'
+      '<div id="error-summary" class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary"><h2 class="govuk-error-summary__title" id="error-summary-title">There is a problem</h2><div class="govuk-error-summary__body"><ul class="govuk-list govuk-error-summary__list"><li id="error-list-item-1"></li><li id="error-list-item-2"></li><li id="error-list-item-3"></li><li id="error-list-item-4"></li><li id="error-list-item-5"></li><li id="error-list-item-6"></li></ul></div></div>'
     );
     $('#error-summary').focus();
   
@@ -136,6 +145,32 @@ function validateForm() {
 
       // Error summary
       $('#error-list-item-4').html('<a href="#error-message-4">Select yes if the victim has been informed</a>');
+    }
+
+    if ($('[name=vclSupportSignposted3]').is(':checked')) {
+    } else {
+      // Error form group styling
+      $('#error-form-group-5').addClass('govuk-form-group--error');
+
+      // Error message
+      $('#support-signposted-checkboxes').before('<p id="error-message-5" class="govuk-error-message"></p>');
+      $('#error-message-5').html('<span id="error-message-5"><span class="govuk-visually-hidden">Error:</span> Select the support you signposted to victim</span>');
+
+      // Error summary
+      $('#error-list-item-5').html('<a href="#error-message-5">Select the support you signposted to victim</a>');
+    }
+
+    if (vclSurveyInterviewDiscussed3.is(":checked")) {
+    } else {
+      // Error form group styling
+      $('#error-form-group-6').addClass('govuk-form-group--error');
+
+      // Error message
+      $('#survey-interview-radios').before('<p id="error-message-6" class="govuk-error-message"></p>');
+      $('#error-message-6').html('<span id="error-message-6"><span class="govuk-visually-hidden">Error:</span> Select yes if the survey interview was discussed with the victim</span>');
+
+      // Error summary
+      $('#error-list-item-6').html('<a href="#error-message-6">Select yes if the survey interview was discussed with the victim</a>');
     }
 
     return false;

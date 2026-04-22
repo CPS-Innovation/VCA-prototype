@@ -22,7 +22,7 @@
     </div>
 
     <p class="govuk-body">
-      The {% if (data['vclType'] == "dtc") %}decision to charge{% elif (data['vclType'] == "nfa") %}no further action decision{% else %}charging decision{% endif %} email was successfully logged for the victim, {{ data['victimForename'] }} {{ data['victimSurname'] }}.
+      The {% if (data['vclType'] == "stopped-charge") %}stopped charge{% elif (data['vclType'] == "altered-charge") %}substantially altered charge{% else %}VCL decision{% endif %} email was successfully logged for the victim, {{ data['victimForename'] }} {{ data['victimSurname'] }}.
     </p>
 
     <!-- <h2 class="govuk-heading-m">Further information</h2>

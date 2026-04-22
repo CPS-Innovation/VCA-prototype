@@ -141,6 +141,87 @@
                 </fieldset>
             </div>
 
+            <div class="govuk-form-group" id="error-form-group-5">
+                <fieldset class="govuk-fieldset">
+
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Which support did you signpost to the victim?
+                    </legend>
+
+                    <div class="govuk-checkboxes" data-module="govuk-checkboxes" id="support-signposted-checkboxes">
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="support-signposted-idva" name="vclSupportSignposted1" type="checkbox" value="Independent Domestic Violence Adviser (IDVA)">
+                            <label class="govuk-label govuk-checkboxes__label" for="support-signposted-idva">
+                                Independent Domestic Violence Adviser (IDVA)
+                            </label>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="support-signposted-local" name="vclSupportSignposted1" type="checkbox" value="Local support">
+                            <label class="govuk-label govuk-checkboxes__label" for="support-signposted-local">
+                                Local support
+                            </label>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="support-signposted-witness" name="vclSupportSignposted1" type="checkbox" value="Witness care">
+                            <label class="govuk-label govuk-checkboxes__label" for="support-signposted-witness">
+                                Witness care
+                            </label>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="support-signposted-officer" name="vclSupportSignposted1" type="checkbox" value="Officer on the case">
+                            <label class="govuk-label govuk-checkboxes__label" for="support-signposted-officer">
+                                Officer on the case
+                            </label>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="support-signposted-other" name="vclSupportSignposted1" type="checkbox" value="Other" data-aria-controls="conditional-support-signposted-other">
+                            <label class="govuk-label govuk-checkboxes__label" for="support-signposted-other">
+                                Other
+                            </label>
+                        </div>
+                        <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-support-signposted-other">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label" for="support-signposted-other-detail">
+                                    Details
+                                </label>
+                                <input class="govuk-input" id="support-signposted-other-detail" name="vclSupportSignpostedOtherDetail1" type="text">
+                            </div>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="support-signposted-none" name="vclSupportSignposted1" type="checkbox" value="None" data-behaviour="exclusive">
+                            <label class="govuk-label govuk-checkboxes__label" for="support-signposted-none">
+                                None
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="govuk-form-group" id="error-form-group-6">
+                <fieldset class="govuk-fieldset">
+
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Was the survey interview discussed with the victim?
+                    </legend>
+
+                    <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios" id="survey-interview-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="survey-interview-yes" name="vclSurveyInterviewDiscussed1" type="radio" value="Yes" {{ checked('vclSurveyInterviewDiscussed1','Yes') }}>
+                            <label class="govuk-label govuk-radios__label" for="survey-interview-yes">
+                                Yes
+                            </label>
+                        </div>
+                        
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="survey-interview-no" name="vclSurveyInterviewDiscussed1" type="radio" value="No" {{ checked('vclSurveyInterviewDiscussed1','No') }}>
+                            <label class="govuk-label govuk-radios__label" for="survey-interview-no">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
             <div class="govuk-form-group">
                 <label class="govuk-label govuk-label--m" for="call-notes-1">
                     Notes (optional)

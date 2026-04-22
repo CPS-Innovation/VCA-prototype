@@ -34,6 +34,28 @@
     </div>
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
+            Signposted support
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {% if data['vclSupportSignposted1'] is string %}
+                {% if data['vclSupportSignposted1'] == 'Other' %}{{ data['vclSupportSignpostedOtherDetail1'] }}{% else %}{{ data['vclSupportSignposted1'] }}{% endif %}
+            {% elif data['vclSupportSignposted1'] %}
+                {% for item in data['vclSupportSignposted1'] %}
+                    {% if item == 'Other' %}{{ data['vclSupportSignpostedOtherDetail1'] }}{% else %}{{ item }}{% endif %}{% if not loop.last %}<br>{% endif %}
+                {% endfor %}
+            {% endif %}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Survey interview discussed
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ data['vclSurveyInterviewDiscussed1'] }}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
             Notes
         </dt>
         <dd class="govuk-summary-list__value">

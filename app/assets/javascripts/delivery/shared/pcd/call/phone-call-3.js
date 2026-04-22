@@ -4,6 +4,8 @@ function validateForm() {
   $('#error-form-group-2').removeClass('govuk-form-group--error');
   $('#error-form-group-3').removeClass('govuk-form-group--error');
   $('#error-form-group-4').removeClass('govuk-form-group--error');
+  $('#error-form-group-5').removeClass('govuk-form-group--error');
+  $('#error-form-group-6').removeClass('govuk-form-group--error');
   $('#phone-call-date-3').removeClass('govuk-input--error');
   $('#call-hour-3').removeClass('govuk-input--error');
   $('#call-minutes-3').removeClass('govuk-input--error');
@@ -13,22 +15,29 @@ function validateForm() {
   $('#error-message-2').remove();
   $('#error-message-3').remove();
   $('#error-message-4').remove();
+  $('#error-message-5').remove();
+  $('#error-message-6').remove();
   $('#error-message-1').html('');
   $('#error-message-2').html('');
   $('#error-message-3').html('');
   $('#error-message-4').html('');
+  $('#error-message-5').html('');
+  $('#error-message-6').html('');
   $('#error-summary').remove();
   $('#error-summary-list').html('');
   $('#error-list-item-1').html('');
   $('#error-list-item-2').html('');
   $('#error-list-item-3').html('');
   $('#error-list-item-4').html('');
+  $('#error-list-item-5').html('');
+  $('#error-list-item-6').html('');
   
   var pcdCallDate3 = document.forms["myForm"]["pcdCallDate3"].value;
   var pcdCallHour3 = document.forms["myForm"]["pcdCallHour3"].value;
   var pcdCallMinutes3 = document.forms["myForm"]["pcdCallMinutes3"].value;
   var pcdVictimInformed3 = $('[name=pcdVictimInformed3]');
   var pcdCallType3 = $('[name=pcdCallType3]');
+  var pcdSurveyInterviewDiscussed3 = $('[name=pcdSurveyInterviewDiscussed3]');
 
   const callDate3Array = pcdCallDate3.split("/");
   var callDay3 = callDate3Array[0];
@@ -37,11 +46,11 @@ function validateForm() {
   var newFormat = callYear3 + '-' + callMonth3 + '-' + callDay3;
   //alert('New format is ' + newFormat);
 
-  if (pcdCallDate3 == "" || pcdCallDate3 == null || pcdCallHour3 == "" || pcdCallHour3 == null || pcdCallMinutes3 == "" || pcdCallMinutes3 == null ||pcdVictimInformed3 == "" || pcdVictimInformed3 == null || pcdCallType3 == "" || pcdCallType3 == null) {
+  if (pcdCallDate3 == "" || pcdCallDate3 == null || pcdCallHour3 == "" || pcdCallHour3 == null || pcdCallMinutes3 == "" || pcdCallMinutes3 == null ||pcdVictimInformed3 == "" || pcdVictimInformed3 == null || pcdCallType3 == "" || pcdCallType3 == null || !$('[name=pcdSupportSignposted3]').is(':checked') || !pcdSurveyInterviewDiscussed3.is(':checked')) {
 
     // Error summary
     $('#myForm').before(
-      '<div id="error-summary" class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary"><h2 class="govuk-error-summary__title" id="error-summary-title">There is a problem</h2><div class="govuk-error-summary__body"><ul class="govuk-list govuk-error-summary__list"><li id="error-list-item-1"></li><li id="error-list-item-2"></li><li id="error-list-item-3"></li><li id="error-list-item-4"></li></ul></div></div>'
+      '<div id="error-summary" class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary"><h2 class="govuk-error-summary__title" id="error-summary-title">There is a problem</h2><div class="govuk-error-summary__body"><ul class="govuk-list govuk-error-summary__list"><li id="error-list-item-1"></li><li id="error-list-item-2"></li><li id="error-list-item-3"></li><li id="error-list-item-4"></li><li id="error-list-item-5"></li><li id="error-list-item-6"></li></ul></div></div>'
     );
     $('#error-summary').focus();
   
@@ -136,6 +145,32 @@ function validateForm() {
 
       // Error summary
       $('#error-list-item-4').html('<a href="#error-message-4">Select yes if the victim has been informed</a>');
+    }
+
+    if ($('[name=pcdSupportSignposted3]').is(':checked')) {
+    } else {
+      // Error form group styling
+      $('#error-form-group-5').addClass('govuk-form-group--error');
+
+      // Error message
+      $('#support-signposted-checkboxes').before('<p id="error-message-5" class="govuk-error-message"></p>');
+      $('#error-message-5').html('<span id="error-message-5"><span class="govuk-visually-hidden">Error:</span> Select the support you signposted to victim</span>');
+
+      // Error summary
+      $('#error-list-item-5').html('<a href="#error-message-5">Select the support you signposted to victim</a>');
+    }
+
+    if (pcdSurveyInterviewDiscussed3.is(":checked")) {
+    } else {
+      // Error form group styling
+      $('#error-form-group-6').addClass('govuk-form-group--error');
+
+      // Error message
+      $('#survey-interview-radios').before('<p id="error-message-6" class="govuk-error-message"></p>');
+      $('#error-message-6').html('<span id="error-message-6"><span class="govuk-visually-hidden">Error:</span> Select yes if the survey interview was discussed with the victim</span>');
+
+      // Error summary
+      $('#error-list-item-6').html('<a href="#error-message-6">Select yes if the survey interview was discussed with the victim</a>');
     }
 
     return false;

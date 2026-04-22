@@ -63,6 +63,9 @@
                         <!-- Pre-draft -->
                         {% if (data['vclStatus'] == "check-details") %}
                             {% include "/delivery/wat4/victim/vcl/pre-draft/check-details.html" %}
+
+                        {% elif (data['vclStatus'] == "log-not-started") %}
+                            {% include "/delivery/wat4/victim/vcl/pre-draft/log-not-started.html" %}
                 
                         <!-- Draft -->
                         {% elif (data['vclStatus'] == "draft-not-started") %}

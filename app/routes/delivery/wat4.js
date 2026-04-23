@@ -62,6 +62,154 @@ module.exports = router => {
         response.redirect("/delivery/wat4/onb/check-details?successNotification=yes")
     })
 
+    // Victim details change pages
+
+    router.post('/delivery/wat4/victim-details/risk-level-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=risk-level-updated#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/translator-needed-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=translator-needed-updated#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/vps-status-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=vps-status-updated#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/service-answer', function(request, response) {
+
+        request.session.data['serviceLead'] = request.body['serviceLead'] || ''
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=service-updated#victim-details")
+    })
+
+    // Victim details - new change routes
+
+    router.post('/delivery/wat4/victim-details/name-and-title-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=name-and-title-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/preferred-name-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=preferred-name-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/date-of-birth-answer', function(request, response) {
+
+        var day = request.body['victimDobDay'] || ''
+        var month = request.body['victimDobMonth'] || ''
+        var year = request.body['victimDobYear'] || ''
+        if (day && month && year) {
+            request.session.data['victimDateOfBirth'] = day + '/' + month + '/' + year
+        }
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=date-of-birth-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/sex-and-gender-identity-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=sex-and-gender-identity-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/previous-convictions-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=previous-convictions-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/health-conditions-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=health-conditions-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/ethnic-group-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=ethnic-group-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/ethnic-background-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=ethnic-background-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/religion-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=religion-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/categories-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=categories-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/special-measures-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=special-measures-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/wants-to-be-contacted-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=wants-to-be-contacted-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/preferred-correspondence-language-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=preferred-correspondence-language-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/preferred-contact-times-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=preferred-contact-times-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/telephone-numbers-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=telephone-numbers-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/email-address-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=email-address-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/address-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=address-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/victim-rep-name-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=victim-rep-name-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/victim-rep-phone-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=victim-rep-phone-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/victim-rep-email-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=victim-rep-email-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/poa-name-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=poa-name-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/poa-phone-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=poa-phone-updated&secondaryNav=victim-details#victim-details")
+    })
+
+    router.post('/delivery/wat4/victim-details/poa-email-answer', function(request, response) {
+
+        response.redirect("/delivery/wat4/victim?success=yes&successReason=poa-email-updated&secondaryNav=victim-details#victim-details")
+    })
+
     router.post('/delivery/wat4/onb/check-details-answer', function(request, response) {
 
         response.redirect("/delivery/wat4/onb/next-task?successNotification=false")
@@ -173,6 +321,10 @@ module.exports = router => {
     })
 
     router.post('/delivery/wat4/victim/new-task/check-task-answer', function(request, response) {
+
+        // Update existing task tracking when a task is confirmed
+        request.session.data['existingTask'] = request.session.data['nextTask'] || ''
+        request.session.data['existingMeetingPurpose'] = request.session.data['meetingPurpose'] || ''
 
         response.redirect("/delivery/wat4/victim/new-task/task-created")
     })

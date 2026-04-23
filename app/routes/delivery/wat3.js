@@ -174,6 +174,10 @@ module.exports = router => {
 
     router.post('/delivery/wat3/victim/new-task/check-task-answer', function(request, response) {
 
+        // Update existing task tracking when a task is confirmed
+        request.session.data['existingTask'] = request.session.data['nextTask'] || ''
+        request.session.data['existingMeetingPurpose'] = request.session.data['meetingPurpose'] || ''
+
         response.redirect("/delivery/wat3/victim/new-task/task-created")
     })
 

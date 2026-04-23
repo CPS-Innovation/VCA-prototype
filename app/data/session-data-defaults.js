@@ -12,6 +12,9 @@ module.exports = {
 
   'nfaStatus': 'draft-not-started',
 
+  'existingTask': 'nfa',
+  'existingMeetingPurpose': '',
+
   'victimSurname': 'Phillips',
   'victimForename': 'Sarah',
   'victimTitle': 'Ms',

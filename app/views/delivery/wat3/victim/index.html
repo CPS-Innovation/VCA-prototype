@@ -269,9 +269,53 @@
       <div class="govuk-notification-banner__content">
         <h3 class="govuk-notification-banner__heading">
           {% if (data['successReason'] == "email-address-updated") %}
-            Victim email address updated
+            You changed the email address for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['victimEmailAddress'] }}
           {% elif (data['successReason'] == "pmoc-updated") %}
-            Victim's preferred method of contact updated
+            You changed the preferred method of contact for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['pmoc'] }}
+          {% elif (data['successReason'] == "full-name-updated") %}
+            You changed the victim's name and title to {{ data['victimTitle'] }} {{ data['victimForename'] }} {{ data['victimSurname'] }}
+          {% elif (data['successReason'] == "preferred-name-updated") %}
+            You changed the preferred name for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['victimPreferredName'] }}
+          {% elif (data['successReason'] == "date-of-birth-updated") %}
+            You changed the date of birth for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['victimDateOfBirth'] }}
+          {% elif (data['successReason'] == "category-updated") %}
+            You changed the categories for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['victimCategory'] }}
+          {% elif (data['successReason'] == "gender-updated") %}
+            You changed the gender for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['victimGender'] }}
+          {% elif (data['successReason'] == "ethnicity-updated") %}
+            You changed the ethnicity for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['victimEthnicity'] }}
+          {% elif (data['successReason'] == "disability-updated") %}
+            You changed the disability for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['victimDisability'] }}
+          {% elif (data['successReason'] == "religion-updated") %}
+            You changed the religion or belief for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['victimReligion'] }}
+          {% elif (data['successReason'] == "previous-convictions-updated") %}
+            You changed the previous convictions for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['victimPreviousConvictions'] }}
+          {% elif (data['successReason'] == "address-updated") %}
+            You changed the address for {{ data['victimForename'] }} {{ data['victimSurname'] }}
+          {% elif (data['successReason'] == "telephone-number-updated") %}
+            You changed the telephone number for {{ data['victimForename'] }} {{ data['victimSurname'] }}
+          {% elif (data['successReason'] == "correspondence-language-updated") %}
+            You changed the preferred correspondence language for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['victimCorrespondenceLanguage'] }}
+          {% elif (data['successReason'] == "wants-contact-updated") %}
+            You changed the contact preference for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['victimWantsContact'] }}
+          {% elif (data['successReason'] == "pmoc-police-updated") %}
+            You changed the preferred method of contact for police for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['pmocPolice'] }}
+          {% elif (data['successReason'] == "contact-times-updated") %}
+            You changed the preferred contact times for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['preferredContactTimes'] }}
+          {% elif (data['successReason'] == "victim-representative-updated") %}
+            You changed the victim representative details for {{ data['victimForename'] }} {{ data['victimSurname'] }}
+          {% elif (data['successReason'] == "power-of-attorney-updated") %}
+            You changed the power of attorney details for {{ data['victimForename'] }} {{ data['victimSurname'] }}
+          {% elif (data['successReason'] == "risk-level-updated") %}
+            You changed the domestic abuse risk level for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['riskLevel'] }}
+          {% elif (data['successReason'] == "service-updated") %}
+            You changed the service for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['serviceLead'] }}
+          {% elif (data['successReason'] == "translator-needed-updated") %}
+            You changed the translator needed for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['translatorNeeded'] }}
+          {% elif (data['successReason'] == "vps-status-updated") %}
+            You changed the Victim Personal Statement status for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['vpsStatus'] }}
+          {% elif (data['successReason'] == "reasonable-adjustments-updated") %}
+            You changed the reasonable adjustments for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['reasonableAdjustments'] }}
           {% elif (data['successReason'] == "not-informed-after-call-1") or (data['successReason'] == "informed-after-call-1") %}
             Telephone call 1 logged
           {% elif (data['successReason'] == "not-informed-after-call-2") or (data['successReason'] == "informed-after-call-2") %}

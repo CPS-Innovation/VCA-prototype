@@ -213,6 +213,9 @@
                 {% if data['translatorNeeded'] %}
                     <dd class="govuk-summary-list__value">
                         {{ data['translatorNeeded'] }}
+                        {% if data['translatorNeeded'] == 'Yes' and data['translatorNeededDetails'] %}
+                            <br>{{ data['translatorNeededDetails'] }}
+                        {% endif %}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link govuk-link--no-visited-state" href="/delivery/wat3/victim/victim-details/translator-needed">Change<span class="govuk-visually-hidden"> translator needed</span></a>

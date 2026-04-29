@@ -13,7 +13,7 @@
     "@ministryofjustice/frontend": "9.0.0",
     "@x-govuk/govuk-prototype-components": "^5.0.2",
     "@x-govuk/govuk-prototype-filters": "^2.1.0",
-    "govuk-frontend": "5.14.0",
+    "govuk-frontend": "6.1.0",
     "govuk-prototype-kit": "13.20.0",
     "jquery": "3.7.1",
     "xlsx": "^0.18.5"

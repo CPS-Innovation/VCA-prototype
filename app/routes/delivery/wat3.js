@@ -794,7 +794,7 @@ module.exports = router => {
                     }
                 }
             }
-            response.redirect('/delivery/wat3/victim?secondaryNav=victim-details&success=yes&successReason=' + slug + '-updated')
+            response.redirect('/delivery/wat3/victim?secondaryNav=victim-details&success=yes&successReason=' + slug + '-updated#victim-details')
         })
     })
 

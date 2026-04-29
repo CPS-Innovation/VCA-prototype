@@ -581,7 +581,11 @@
                   Not onboarded
                 {% endif %}
               </dd>
-              {% if data['onboardedStatus'] != 'Yes' %}
+              {% if data['onboardedStatus'] == 'Yes' %}
+              <dd class="govuk-summary-list__actions">
+                <a href="/delivery/wat3/change-service" class="govuk-link govuk-link--no-visited-state">Change<span class="govuk-visually-hidden"> service for {{ data['victimSurname'] | upper }}, {{ data['victimForename'] }}</span></a>
+              </dd>
+              {% elif data['onboardedStatus'] != 'Yes' %}
               <dd class="govuk-summary-list__actions">
                 <a href="/delivery/wat3/onb/service-lead?detailChange=no" class="govuk-link govuk-link--no-visited-state">Onboard<span class="govuk-visually-hidden"> {{ data['victimSurname'] | upper }}, {{ data['victimForename'] }}</span></a>
               </dd>
@@ -774,6 +778,15 @@
         banner.style.display = 'block';
       }
       // Remove params from URL so banner doesn't show on back/refresh
+      url.searchParams.delete('success');
+      url.searchParams.delete('successReason');
+      window.history.replaceState({}, document.title, url.pathname + url.search);
+    }
+    if (url.searchParams.get('success') === 'yes' && url.searchParams.get('successReason') === 'service-updated') {
+      var banner = document.getElementById('service-success-banner');
+      if (banner) {
+        banner.style.display = 'block';
+      }
       url.searchParams.delete('success');
       url.searchParams.delete('successReason');
       window.history.replaceState({}, document.title, url.pathname + url.search);

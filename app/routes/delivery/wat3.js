@@ -240,9 +240,16 @@ module.exports = router => {
             response.redirect("/delivery/wat3/pcd/send/email-details")
         } else if (contactedBy == "post") {
             response.redirect("/delivery/wat3/pcd/send/letter-details")
+        } else if (contactedBy == "not-contacted") {
+            response.redirect("/delivery/wat3/pcd/pre-draft/not-contacted-reason")
         } else {
             response.redirect("/delivery/wat3/pcd/pre-draft/contact-details?contactMethod=other")
         }
+    })
+
+    router.post('/delivery/wat3/pcd/pre-draft/not-contacted-reason-answer', function(request, response) {
+
+        response.redirect("/delivery/wat3/victim?secondaryNav=pcd")
     })
 
     router.post('/delivery/wat3/pcd/draft/cd-modal/request-review-answer', function(request, response) {

@@ -1,140 +1,44 @@
 {% block content %}
 <h2 class="govuk-heading-l govuk-!-margin-top-6">
-    Case overview
+    Summary
 </h2>
 
-<!-- <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-half">
-
-        {% if (data['pmoc'] == "home-phone") or (data['pmoc'] == "mobile") %}
-            <div class="govuk-warning-text">
-                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                <strong class="govuk-warning-text__text">
-                    <span class="govuk-visually-hidden">Warning</span>
-                    Only share case information with {{ data['victimForename'] }} {{ data['victimSurname'] }} if they can correctly answer the security questions.
-                </strong>
-            </div>
-        {% endif %}
-
-    </div>
-</div> -->
-
 <div class="govuk-grid-row">
-    <!-- <div class="govuk-grid-column-one-third">
+    <div class="govuk-grid-column-one-third">
 
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
                 <h2 class="govuk-summary-card__title">
-                    Victim details
+                    Victim Details
                 </h2>
-                
+
                 <ul class="govuk-summary-card__actions">
                     <li class="govuk-summary-card__action">
                         <a class="govuk-link" href="#">
-                            View all<span class="govuk-visually-hidden"> victim details</span>
+                            View<span class="govuk-visually-hidden"> victim details</span>
                         </a>
                     </li>
                 </ul>
             </div>
 
             <div class="govuk-summary-card__content">
-                <dl class="govuk-summary-list">
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Name
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['victimSurname'] | upper }}, {{ data['victimForename'] }}
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Age
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['victimAge'] }} ({{ data['victimDateOfBirth'] }})
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Categories
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            <p class="govuk-body">
-                                Victim
-                            </p>
-                            <p class="govuk-body">
-                                Vulnerable
-                            </p>
-                            <p class="govuk-body">
-                                Intimidated
-                            </p>
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Disability or access need
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            Yes
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Address
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['victimAddressLine1'] }}<br>{{ data['victimAddressLine2'] }}<br>{{ data['victimAddressLine3'] }}<br>{{ data['victimPostCode'] }}
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Telephone number
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['victimPhoneNumber'] }}
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Email address
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['victimEmailAddress'] }}
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Want to be contacted
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            Yes
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Preferred method of contact
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['pmoc'] | capitalize }}
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Preferred contact times
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['preferredContactTimes'] }}
-                        </dd>
-                    </div>
-                </dl>
+                <p class="govuk-body govuk-!-margin-bottom-0">Name: {{ data['victimSurname'] | upper }}, {{ data['victimForename'] }}</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Age: {{ data['victimAge'] }} ({{ data['victimDateOfBirth'] }})</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Category: Victim</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Disability or access needs: Yes</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Address: {{ data['victimAddressLine1'] }}, {{ data['victimAddressLine2'] }}, {{ data['victimAddressLine3'] }}, {{ data['victimPostCode'] }}</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Phone: {{ data['victimPhoneNumber'] }}</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Email: {{ data['victimEmailAddress'] }}</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Do they want to be contacted:</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Preferred method of contact: {{ data['pmoc'] | capitalize }}</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Preferred contact times: {{ data['preferredContactTimes'] }}</p>
             </div>
         </div>
 
-    </div> -->
-    <div class="govuk-grid-column-one-half">
+    </div>
+    <div class="govuk-grid-column-one-third">
 
-        <!-- <div class="govuk-summary-card">
+        <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
                 <h2 class="govuk-summary-card__title">
                     Case contacts
@@ -150,58 +54,10 @@
             </div>
 
             <div class="govuk-summary-card__content">
-                <dl class="govuk-summary-list">
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Family Liaison Officer
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['familyLiaisonOfficerSurname'] | upper }}, {{ data['familyLiaisonOfficerForename'] }}
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            IDVA
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['idvaSurname'] | upper }}, {{ data['idvaForename'] }}
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Counsel
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['counselSurname'] | upper }}, {{ data['counselForename'] }}
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Defence solicitor
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['defenceSolicitorSurname'] | upper }}, {{ data['defenceSolicitorForename'] }}
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            High court advocate
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['highCourtAdvocateSurname'] | upper }}, {{ data['highCourtAdvocateForename'] }}
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Officer in charge
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['oicRank'] }} {{ data['oicSurname'] | upper }}, {{ data['oicForename'] }}
-                        </dd>
-                    </div>
-                </dl>
+                <p class="govuk-body govuk-!-margin-bottom-0">Officer in the case: {{ data['oicCollarNumber'] }} {{ data['oicSurname'] | upper }}, {{ data['oicForename'] }}</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Victim liaison officer: {{ data['vlo'] | default('Unassigned') }}</p>
             </div>
-        </div> -->
+        </div>
 
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
@@ -211,59 +67,17 @@
             </div>
 
             <div class="govuk-summary-card__content">
-                <dl class="govuk-summary-list">
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Case status
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            Pending
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Monitoring codes
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            <p class="govuk-body">
-                                Mental health
-                            </p>
-                            <p class="govuk-body">
-                                Domestic violence
-                            </p>
-                            <p class="govuk-body">
-                                Prohibited weapons
-                            </p>
-                            <p class="govuk-body">
-                                Human trafficking
-                            </p>
-                            <p class="govuk-body">
-                                Media interest
-                            </p>
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Next hearing
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            <p class="govuk-body">
-                                First hearing
-                            </p>
-                            <p class="govuk-body">
-                                Thursday, 27 November 2025
-                            </p>
-                            <p class="govuk-body">
-                                Southend Court House: County Court and Family Court and Magistrates Court
-                            </p>
-                        </dd>
-                    </div>
-                </dl>
+                <p class="govuk-body govuk-!-margin-bottom-0">Case status: Pending</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Charging type: {{ data['caseType'] or 'Green' }}</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Monitoring codes: Mental health, Domestic violence, Prohibited weapons, Human trafficking, Media interest</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Area: {{ data['area'] }}</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Police force:</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Next hearing:</p>
             </div>
         </div>
 
     </div>
-    <div class="govuk-grid-column-one-half">
+    <div class="govuk-grid-column-one-third">
 
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
@@ -273,95 +87,11 @@
             </div>
 
             <div class="govuk-summary-card__content">
-                <h3 class="govuk-heading-s">
-                    DAVIES, Bella
-                </h3>
-                <dl class="govuk-summary-list govuk-!-margin-bottom-6">
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Age
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            34 (15/9/1990)
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Charge
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            Grievous bodily harm
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Custody
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            In police custody, 15 days
-                        </dd>
-                    </div>
-                </dl>
-
-                <h3 class="govuk-heading-s">
-                    SIMPSON, Bart
-                </h3>
-                <dl class="govuk-summary-list govuk-!-margin-bottom-6">
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Age
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            15 (8/8/2010)
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Charge
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            Actual bodily harm
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Custody
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            On police bail, 6 days
-                        </dd>
-                    </div>
-                </dl>
-
-                <h3 class="govuk-heading-s">
-                    JONES, Vince
-                </h3>
-                <dl class="govuk-summary-list">
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Age
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            45 (15/9/1979)
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Charge
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            Actual bodily harm
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Custody
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            On police bail, 5 days
-                        </dd>
-                    </div>
-                </dl>
+                <p class="govuk-body govuk-!-margin-bottom-0">Name: DAVIES, Bella</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Age: 34 (15/9/1990)</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Charge: Grievous bodily harm</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Custody: In police custody, 15 days</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">Custody time limit:</p>
             </div>
         </div>
     </div>

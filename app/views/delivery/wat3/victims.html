@@ -41,9 +41,9 @@
   <div class="govuk-notification-banner__content">
     <h3 class="govuk-notification-banner__heading">
       {% if data['serviceLead'] == 'None' %}
-        You changed the service to Not aligned.
+        You changed the service lead for {{ data['victimForename'] }} {{ data['victimSurname'] }} to Not aligned.
       {% else %}
-        You changed the service to {{ data['serviceLead'] }}.
+        You changed the service lead for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['serviceLead'] }}.
       {% endif %}
     </h3>
   </div>
@@ -76,8 +76,8 @@
                 <label class="govuk-label govuk-radios__label" for="search-by-case-ref">Case reference</label>
               </div>
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="search-by-service-area" name="searchBy" type="radio" value="service-area" data-label="Service and area">
-                <label class="govuk-label govuk-radios__label" for="search-by-service-area">Service, area and VLO</label>
+                <input class="govuk-radios__input" id="search-by-service-area" name="searchBy" type="radio" value="service-area" data-label="Service lead, area and VLO">
+                <label class="govuk-label govuk-radios__label" for="search-by-service-area">Service lead, area and VLO</label>
               </div>
             </div>
           </fieldset>
@@ -228,7 +228,7 @@
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-              Service
+              Service lead
             </legend>
             <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
               <div class="govuk-radios__item">
@@ -568,7 +568,7 @@
             </div>
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Service
+                Service lead
               </dt>
               <dd class="govuk-summary-list__value">
                 {% if data['onboardedStatus'] == 'Yes' %}
@@ -654,7 +654,7 @@
             {% endif %}
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Service
+                Service lead
               </dt>
               <dd class="govuk-summary-list__value">
                 {{ record.service }}

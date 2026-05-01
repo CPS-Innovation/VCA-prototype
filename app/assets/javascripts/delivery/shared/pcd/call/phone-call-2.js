@@ -46,7 +46,7 @@ function validateForm() {
   var newFormat = callYear2 + '-' + callMonth2 + '-' + callDay2;
   //alert('New format is ' + newFormat);
 
-  if (pcdCallDate2 == "" || pcdCallDate2 == null || pcdCallHour2 == "" || pcdCallHour2 == null || pcdCallMinutes2 == "" || pcdCallMinutes2 == null ||pcdVictimInformed2 == "" || pcdVictimInformed2 == null || pcdCallType2 == "" || pcdCallType2 == null || !$('[name=pcdSupportSignposted2]').is(':checked') || !pcdSurveyInterviewDiscussed2.is(':checked')) {
+  if (pcdCallDate2 == "" || pcdCallDate2 == null || pcdCallHour2 == "" || pcdCallHour2 == null || pcdCallMinutes2 == "" || pcdCallMinutes2 == null ||pcdVictimInformed2 == "" || pcdVictimInformed2 == null || pcdCallType2 == "" || pcdCallType2 == null || ($('#support-signposted-checkboxes').length && !$('[name=pcdSupportSignposted2]').is(':checked')) || ($('#survey-interview-radios').length && !pcdSurveyInterviewDiscussed2.is(':checked'))) {
 
     // Error summary
     $('#myForm').before(
@@ -147,8 +147,7 @@ function validateForm() {
       $('#error-list-item-4').html('<a href="#error-message-4">Select yes if the victim has been informed</a>');
     }
 
-    if ($('[name=pcdSupportSignposted2]').is(':checked')) {
-    } else {
+    if ($('#support-signposted-checkboxes').length && !$('[name=pcdSupportSignposted2]').is(':checked')) {
       // Error form group styling
       $('#error-form-group-5').addClass('govuk-form-group--error');
 
@@ -160,8 +159,7 @@ function validateForm() {
       $('#error-list-item-5').html('<a href="#error-message-5">Select the support you signposted to victim</a>');
     }
 
-    if (pcdSurveyInterviewDiscussed2.is(":checked")) {
-    } else {
+    if ($('#survey-interview-radios').length && !pcdSurveyInterviewDiscussed2.is(":checked")) {
       // Error form group styling
       $('#error-form-group-6').addClass('govuk-form-group--error');
 

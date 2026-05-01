@@ -14,6 +14,7 @@ function validateForm() {
   $('#error-list-item-2').html('');
 
   var emailDispatchDate = document.forms["myForm"]["email-dispatch-date"].value;
+  var infoPackSentExists = document.querySelector('input[name="infoPackSent"]');
   var infoPackSent = document.querySelector('input[name="infoPackSent"]:checked');
 
   var hasErrors = false;
@@ -29,7 +30,7 @@ function validateForm() {
     hasErrors = true;
   }
 
-  if (!infoPackSent) {
+  if (infoPackSentExists && !infoPackSent) {
     $('#error-form-group-2').addClass('govuk-form-group--error');
     $('#error-form-group-2 .govuk-radios').before(
       '<p class="govuk-error-message" id="error-message-2"><span class="govuk-visually-hidden">Error:</span> Select yes if the information pack was sent to the victim</p>'

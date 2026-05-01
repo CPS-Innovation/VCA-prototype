@@ -14,6 +14,7 @@ function validateForm() {
   $('#error-list-item-2').html('');
 
   var letterDispatchDate = document.forms["myForm"]["letter-dispatch-date"].value;
+  var infoPackSentExists = document.querySelector('input[name="infoPackSent"]');
   var infoPackSent = document.querySelector('input[name="infoPackSent"]:checked');
 
   var hasErrors = false;
@@ -22,14 +23,14 @@ function validateForm() {
   if (letterDispatchDate == "" || letterDispatchDate == null) {
     $('#error-form-group-1').addClass('govuk-form-group--error');
     $('#letter-dispatch-date-picker').before(
-      '<p class="govuk-error-message" id="error-message-1"><span class="govuk-visually-hidden">Error:</span> Select or enter the date sent to print</p>'
+      '<p class="govuk-error-message" id="error-message-1"><span class="govuk-visually-hidden">Error:</span> Select or enter the date sent</p>'
     );
     $('#letter-dispatch-date').addClass('govuk-input--error');
-    errorItems.push({ id: 'error-message-1', text: 'Select or enter the date sent to print' });
+    errorItems.push({ id: 'error-message-1', text: 'Select or enter the date sent' });
     hasErrors = true;
   }
 
-  if (!infoPackSent) {
+  if (infoPackSentExists && !infoPackSent) {
     $('#error-form-group-2').addClass('govuk-form-group--error');
     $('#error-form-group-2 .govuk-radios').before(
       '<p class="govuk-error-message" id="error-message-2"><span class="govuk-visually-hidden">Error:</span> Select yes if the information pack was sent to the victim</p>'

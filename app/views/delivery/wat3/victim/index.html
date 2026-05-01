@@ -95,7 +95,7 @@
                 {% elif (data['successReason'] == "risk-level-updated") %}
                   You changed the domestic abuse risk level for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['riskLevel'] }}
                 {% elif (data['successReason'] == "service-updated") %}
-                  You changed the service for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['serviceLead'] }}
+                  You changed the service lead for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['serviceLead'] }}
                 {% elif (data['successReason'] == "translator-needed-updated") %}
                   You changed the translator needed for {{ data['victimForename'] }} {{ data['victimSurname'] }} to {{ data['translatorNeeded'] }}
                 {% elif (data['successReason'] == "vps-status-updated") %}

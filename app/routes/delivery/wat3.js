@@ -275,13 +275,13 @@ module.exports = router => {
         if (pcdWasTextMessageSent == "Yes"){
             response.redirect("/delivery/wat3/pcd/call/text-message-details")
         } else {
-            response.redirect("/delivery/wat3/victim?pmoc=mobile&pcdStatus=after-call-attempt-1&secondaryNav=pcd")
+            response.redirect("/delivery/wat3/victim?pmoc=mobile&pcdStatus=after-call-attempt-1&secondaryNav=pcd#communications")
         }
     })
 
     router.post('/delivery/wat3/pcd/call/text-message-details-answer', function(request, response) {
 
-        response.redirect("/delivery/wat3/victim?pcdStatus=after-call-attempt-1&secondaryNav=pcd")
+        response.redirect("/delivery/wat3/victim?pcdStatus=after-call-attempt-1&secondaryNav=pcd#communications")
     })
 
     router.post('/delivery/wat3/pcd/call/next-attempt-moc-answer', function(request, response) {
@@ -441,13 +441,13 @@ module.exports = router => {
         if (vclWasTextMessageSent == "Yes"){
             response.redirect("/delivery/wat3/vcl/call/text-message-details")
         } else {
-            response.redirect("/delivery/wat3/victim?pmoc=mobile&vclStatus=after-call-attempt-1&secondaryNav=vcl")
+            response.redirect("/delivery/wat3/victim?pmoc=mobile&vclStatus=after-call-attempt-1&secondaryNav=vcl#communications")
         }
     })
 
     router.post('/delivery/wat3/vcl/call/text-message-details-answer', function(request, response) {
 
-        response.redirect("/delivery/wat3/victim?vclStatus=after-call-attempt-1&secondaryNav=vcl")
+        response.redirect("/delivery/wat3/victim?vclStatus=after-call-attempt-1&secondaryNav=vcl#communications")
     })
 
     router.post('/delivery/wat3/vcl/call/next-attempt-moc-answer', function(request, response) {

@@ -46,7 +46,7 @@ function validateForm() {
   var newFormat = callYear1 + '-' + callMonth1 + '-' + callDay1;
   //alert('New format is ' + newFormat);
 
-  if (vclCallDate1 == "" || vclCallDate1 == null || vclCallHour1 == "" || vclCallHour1 == null || vclCallMinutes1 == "" || vclCallMinutes1 == null ||vclVictimInformed1 == "" || vclVictimInformed1 == null || vclCallType1 == "" || vclCallType1 == null || !$('[name=vclSupportSignposted1]').is(':checked') || !vclSurveyInterviewDiscussed1.is(':checked')) {
+  if (vclCallDate1 == "" || vclCallDate1 == null || vclCallHour1 == "" || vclCallHour1 == null || vclCallMinutes1 == "" || vclCallMinutes1 == null ||vclVictimInformed1 == "" || vclVictimInformed1 == null || vclCallType1 == "" || vclCallType1 == null || ($('#support-signposted-checkboxes').length && !$('[name=vclSupportSignposted1]').is(':checked')) || ($('#survey-interview-radios').length && !vclSurveyInterviewDiscussed1.is(':checked'))) {
 
     // Error summary
     $('#myForm').before(
@@ -147,8 +147,7 @@ function validateForm() {
       $('#error-list-item-4').html('<a href="#error-message-4">Select yes if the victim has been informed</a>');
     }
 
-    if ($('[name=vclSupportSignposted1]').is(':checked')) {
-    } else {
+    if ($('#support-signposted-checkboxes').length && !$('[name=vclSupportSignposted1]').is(':checked')) {
       // Error form group styling
       $('#error-form-group-5').addClass('govuk-form-group--error');
 
@@ -160,8 +159,7 @@ function validateForm() {
       $('#error-list-item-5').html('<a href="#error-message-5">Select the support you signposted to victim</a>');
     }
 
-    if (vclSurveyInterviewDiscussed1.is(":checked")) {
-    } else {
+    if ($('#survey-interview-radios').length && !vclSurveyInterviewDiscussed1.is(":checked")) {
       // Error form group styling
       $('#error-form-group-6').addClass('govuk-form-group--error');
 

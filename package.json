@@ -15,7 +15,7 @@
     "@x-govuk/govuk-prototype-filters": "^2.1.0",
     "govuk-frontend": "5.14.0",
     "govuk-prototype-kit": "13.20.0",
-    "jquery": "3.7.1",
+    "jquery": "4.0.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

@@ -1,10 +1,6 @@
 {% block content %}
-<h2 class="govuk-heading-l govuk-!-margin-top-6">
-    Summary
-</h2>
-
 <div class="govuk-grid-row">
-    <!-- <div class="govuk-grid-column-one-third">
+    <div class="govuk-grid-column-one-third">
 
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
@@ -35,10 +31,10 @@
             </div>
         </div>
 
-    </div> -->
-    <div class="govuk-grid-column-one-half">
+    </div>
+    <div class="govuk-grid-column-one-third">
 
-        <!-- <div class="govuk-summary-card">
+        <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
                 <h2 class="govuk-summary-card__title">
                     Case contacts
@@ -57,7 +53,7 @@
                 <p class="govuk-body govuk-!-margin-bottom-0">Officer in the case: {{ data['oicCollarNumber'] }} {{ data['oicSurname'] | upper }}, {{ data['oicForename'] }}</p>
                 <p class="govuk-body govuk-!-margin-bottom-0">Victim liaison officer: {{ data['vlo'] | default('Unassigned') }}</p>
             </div>
-        </div> -->
+        </div>
 
         <!-- <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
@@ -101,7 +97,7 @@
                             Police force
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['policeForce'] or 'Metropolitan (London)' }}
+                            {{ data['policeForce'] or 'Metropolitan Police' }}
                         </dd>
                         <dd class="govuk-summary-list__actions"></dd>
                     </div>
@@ -153,6 +149,7 @@
                         </dt>
                         <dd class="govuk-summary-list__value">
                             {{ data['nextHearing'] }}
+                            <p class="govuk-body">First hearing</p><p class="govuk-body">Westminster Magistrates' Court</p><p class="govuk-body">Thursday, 25 June 2026 at 10:30am</p>
                         </dd>
                     </div>
                 </dl>
@@ -160,7 +157,7 @@
         </div>
 
     </div>
-    <div class="govuk-grid-column-one-half">
+    <div class="govuk-grid-column-one-third">
 
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">

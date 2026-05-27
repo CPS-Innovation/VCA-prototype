@@ -33,29 +33,6 @@ assigneeFormatted = assigneeName %} {% endif %}
 </div>
 
 <div
-  id="due-date-removed-banner"
-  class="govuk-notification-banner govuk-notification-banner--success govuk-!-margin-bottom-4"
-  role="alert"
-  aria-labelledby="govuk-notification-banner-title-removed"
-  data-module="govuk-notification-banner"
-  style="display: none"
->
-  <div class="govuk-notification-banner__header">
-    <h2
-      class="govuk-notification-banner__title"
-      id="govuk-notification-banner-title-removed"
-    >
-      Success
-    </h2>
-  </div>
-  <div class="govuk-notification-banner__content">
-    <h3 class="govuk-notification-banner__heading">
-      You removed the task due date.
-    </h3>
-  </div>
-</div>
-
-<div
   id="assignee-success-banner"
   class="govuk-notification-banner govuk-notification-banner--success govuk-!-margin-bottom-4"
   role="alert"
@@ -451,10 +428,6 @@ assigneeFormatted = assigneeName %} {% endif %}
             </div>
           </fieldset>
         </div>
-
-        <hr
-          class="govuk-section-break govuk-section-break--m govuk-section-break--visible"
-        />
 
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset">
@@ -1111,10 +1084,8 @@ assigneeFormatted = assigneeName %} {% endif %}
         </button>
 
         <p class="govuk-body" id="clear-filters-wrapper" style="display: none">
-          <a
-            class="govuk-link govuk-link--no-visited-state"
-            href="/delivery/wat3/onb/tasks/clear-filters"
-            >Clear search</a
+          <a class="govuk-link govuk-link--no-visited-state"
+            href="/delivery/wat3/onb/tasks/clear-filters">Clear search</a
           >
         </p>
       </form>
@@ -1142,10 +1113,11 @@ assigneeFormatted = assigneeName %} {% endif %}
       class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-margin-bottom-6"
     />
 
-    {% for record in taskRecords %} {% if loop.index == 5 %} {# Insert
-    session-data record (PHILLIPS) between JOHNSON and JONES, maintaining
-    original order #} {% if (data['pcdSent'] == "yes") or (data['pcdFumoc'] ==
-    "None") %} {% else %}
+    {% for record in taskRecords %}
+    {% if loop.index == 5 %}
+    {# Insert session-data record (PHILLIPS) between JOHNSON and JONES, maintaining original order #}
+    {% if (data['pcdSent'] == "yes") or (data['pcdFumoc'] == "None") or (data['nextTask'] == "") or (data['nextTask'] == "no-task") %}
+    {% else %}
     <div class="govuk-!-margin-bottom-9" id="manual-task-container">
       <dl class="govuk-summary-list">
         <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
@@ -1161,19 +1133,24 @@ assigneeFormatted = assigneeName %} {% endif %}
           <dt class="govuk-summary-list__key">Task</dt>
           <dd class="govuk-summary-list__value">
             <span class="govuk-!-font-weight-bold">
-              {% if (data['nextTask'] == "dtc") %} Inform of a decision to
-              charge {% elif (data['nextTask'] == "nfa") %} Inform of a no
-              further action decision {% elif (data['nextTask'] ==
-              "stopped-charge") %} Inform of a stopped charge {% elif
-              (data['nextTask'] == "altered-charge") %} Inform of a
-              substantially altered charge {% elif (data['nextTask'] ==
-              "meeting-offer") %} Log offered meeting {% elif (data['nextTask']
-              == "meeting-arranged") %} Log arranged meeting {% elif
-              (data['nextTask'] == "meeting-outcome") %} Log meeting outcome {%
-              elif (data['nextTask'] == "other") %}
-              {{ data['manualTaskName'] }}
+              {% if (data['nextTask'] == "dtc") %}
+                Inform of a decision to charge
+              {% elif (data['nextTask'] == "nfa") %}
+                Inform of a no further action decision
+              {% elif (data['nextTask'] == "stopped-charge") %}
+                Inform of a stopped charge
+              {% elif (data['nextTask'] == "altered-charge") %}
+                Inform of a substantially altered charge
+              {% elif (data['nextTask'] == "meeting-offer") %}
+                Log offered meeting
+              {% elif (data['nextTask'] == "meeting-arranged") %}
+                Log arranged meeting
+              {% elif (data['nextTask'] == "meeting-outcome") %}
+                Log meeting outcome
+              {% elif (data['nextTask'] == "other") %}
+                {{ data['manualTaskName'] }}
               {% else %}
-              {{ data['nextTask'] }}
+                {{ data['nextTask'] }}
               {% endif %}
             </span>
           </dd>
@@ -1370,7 +1347,8 @@ assigneeFormatted = assigneeName %} {% endif %}
         </div>
       </dl>
     </div>
-    {% endif %} {% endif %}
+    {% endif %}
+    {% endif %}
     <div class="govuk-!-margin-bottom-9">
       <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
         <a

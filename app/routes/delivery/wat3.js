@@ -248,7 +248,7 @@ module.exports = router => {
 
     router.post('/delivery/wat3/victim/new-task/task-created-answer', function(request, response) {
 
-        response.redirect("/delivery/wat3/victim/tasks")
+        response.redirect("/delivery/wat3/victim")
     })
 
     router.post('/delivery/wat3/task-assignee-answer', function(request, response) {
@@ -263,11 +263,8 @@ module.exports = router => {
         var previousDueDate = request.body['previousTaskDueDate'] || ''
         var newDueDate = request.body['taskDueDate'] || ''
 
-        console.log('DEBUG due date change:', JSON.stringify({ body: request.body, previousDueDate: previousDueDate, newDueDate: newDueDate }))
 
-        if (!newDueDate && previousDueDate) {
-            response.redirect("/delivery/wat3/tasks?success=yes&successReason=due-date-removed")
-        } else if (newDueDate === previousDueDate) {
+        if (newDueDate === previousDueDate) {
             response.redirect("/delivery/wat3/tasks")
         } else {
             response.redirect("/delivery/wat3/tasks?success=yes&successReason=due-date-updated")
@@ -303,6 +300,18 @@ module.exports = router => {
     router.get('/delivery/wat3/pcd/pre-draft/check-details-answer', function(request, response) {
 
         response.redirect("/delivery/wat3/pcd/pre-draft/contacted-by?pcdStatus=log-not-started")
+    })
+
+    router.post('/delivery/wat3/pcd/draft/pcd-type-answer', function(request, response) {
+
+        var pcdType = request.session.data['pcdType']
+        if (pcdType == "dtc"){
+            response.redirect("/delivery/wat3/pcd/pre-draft/contacted-by?pcdStatus=log-not-started&pcdType=dtc&nextTask=dtc&existingTask=dtc")
+        } else if (pcdType == "nfa") {
+            response.redirect("/delivery/wat3/pcd/pre-draft/contacted-by?pcdStatus=log-not-started&pcdType=nfa&nextTask=nfa&existingTask=nfa")
+        } else {
+            response.redirect("#")
+        }
     })
 
     router.post('/delivery/wat3/pcd/pre-draft/contacted-by-answer', function(request, response) {

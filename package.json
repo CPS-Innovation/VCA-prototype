@@ -16,7 +16,7 @@
     "govuk-frontend": "^6.5.1",
     "govuk-prototype-kit": "13.20.5",
     "hmrc-frontend": "7.38.0",
-    "jquery": "3.7.1",
+    "jquery": "4.0.0",
     "marked": "4.3.0",
     "moment": "^2.31.0",
     "xlsx": "^0.18.5"
